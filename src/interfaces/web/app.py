@@ -2158,6 +2158,15 @@ async def speech_engine_web_sync(websocket: WebSocket, session_id: str):
     finally:
         speech_engine.unregister_web_subscriber(session_id, websocket)
 
+@app.websocket("/api/live/stream/{session_id}")
+async def gemini_live_stream_ws(websocket: WebSocket, session_id: str):
+    """
+    Canal WebSocket en tiempo real de voz (Speech-to-Speech nativo)
+    conectando el widget web con Gemini Live API (~300ms de latencia).
+    """
+    from src.core.gemini_live_bridge import gemini_live_bridge
+    await gemini_live_bridge.handle_live_session(websocket, session_id)
+
 @app.post("/api/speech-engine/tts-stream")
 async def speech_engine_tts_stream(request: Request):
     """
