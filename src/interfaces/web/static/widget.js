@@ -3913,6 +3913,7 @@
 
   function openLiveVoiceMode() {
     if (!liveVoiceOverlay) return;
+    openChat();
     unlockAudioPlayback();
     isLiveVoiceActive = true;
     isLiveVoiceMuted = false;
