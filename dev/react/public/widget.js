@@ -198,30 +198,79 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Sierra AI Typography & Structured List Items */
+    /* GitHub / LobeChat Native Prose & Structured Markdown */
+    .firby-msg-agent {
+      line-height: 1.62 !important;
+    }
+    .firby-msg-agent p.firby-prose-p {
+      margin: 0 0 0.75em 0;
+      line-height: 1.62;
+    }
+    .firby-msg-agent p.firby-prose-p:last-child {
+      margin-bottom: 0;
+    }
     .firby-msg-agent strong {
-      color: #111827;
-      font-weight: 700;
+      color: #09090b !important;
+      font-weight: 650 !important;
     }
     html.dark .firby-msg-agent strong,
     html[data-theme="dark"] .firby-msg-agent strong {
-      color: #f3f4f6;
+      color: #f4f4f5 !important;
+    }
+    .firby-list-group {
+      margin: 0.5em 0;
     }
     .firby-bullet-item {
       display: flex;
       align-items: baseline;
       gap: 8px;
-      margin: 5px 0;
-      line-height: 1.5;
+      margin: 0.35em 0;
+      line-height: 1.58;
     }
     .firby-bullet-dot {
       display: inline-block;
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background-color: #b0f550;
+      background-color: #86ce00;
       flex-shrink: 0;
       transform: translateY(-2px);
+    }
+    .firby-numbered-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 0.35em 0;
+      line-height: 1.58;
+    }
+    .firby-num-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: #86ce00;
+      flex-shrink: 0;
+      min-width: 14px;
+    }
+    .firby-md-h3 {
+      font-weight: 650;
+      font-size: 13.5px;
+      margin: 0.6em 0 0.25em 0;
+      color: #09090b;
+    }
+    html.dark .firby-md-h3,
+    html[data-theme="dark"] .firby-md-h3 {
+      color: #f4f4f5;
+    }
+    .firby-inline-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      background: rgba(0, 0, 0, 0.06);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    html.dark .firby-inline-code,
+    html[data-theme="dark"] .firby-inline-code {
+      background: rgba(255, 255, 255, 0.1);
+      color: #b9fa01;
     }
 
     @font-face {
@@ -3810,6 +3859,15 @@
                 targetSec = '#canales';
               } else if (/\b(contacto|probar|empezar|agenda|agendar|demo)\b/.test(lowerQ)) {
                 targetSec = '#contacto';
+              } else if (/\b(escrolea|escrolear|scroll|scrolea|scrollea|baja|bajar|despl[aá]zate|desplazar|recorre|mu[eé]strame(\s+la)?\s+p[aá]gina)\b/.test(lowerQ)) {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                if (currentScroll < 450) {
+                  targetSec = '#como-funciona';
+                } else if (currentScroll < 1700) {
+                  targetSec = '#equipo-digital';
+                } else {
+                  targetSec = '#planes';
+                }
               }
               if (targetSec) {
                 try { executeUiAction({ type: 'navigate_to_section', target: targetSec }); } catch(_) {}
@@ -3823,6 +3881,13 @@
               if (lvoStatusText) lvoStatusText.textContent = 'Firby hablando...';
               if (lvoOrb) lvoOrb.className = 'firby-lvo-orb speaking';
               appendMessage(agentText, false, null, false);
+
+              const lowerAgent = agentText.toLowerCase();
+              if (/\b(desplazamos|mostrando|recorremos|bajamos)\b/.test(lowerAgent)) {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                const nextSec = currentScroll < 450 ? '#como-funciona' : (currentScroll < 1700 ? '#equipo-digital' : '#planes');
+                try { executeUiAction({ type: 'navigate_to_section', target: nextSec }); } catch(_) {}
+              }
             }
           } else if (mtype === 'interruption') {
             console.log('[ElevenLabs ConvAI] Interrupción de voz detectada (barge-in).');
@@ -4948,30 +5013,83 @@
 
   function formatMarkdown(text) {
     if (!text) return '';
-    let html = text
+    let raw = text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
-    
-    // Bold y Cursiva: Regla inquebrantable de CERO BOLD (Santiago)
-    html = html.replace(/\*\*(.*?)\*\*/g, '$1');
-    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-    // Procesar líneas con viñetas "-" o "•" para estructura limpia estilo Sierra AI
-    const lines = html.split('\n');
-    const formattedLines = lines.map(line => {
-      const trimmed = line.trim();
-      if (trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
-        const itemContent = trimmed.substring(2).trim();
-        return `<div class="firby-bullet-item"><span class="firby-bullet-dot"></span><span>${itemContent}</span></div>`;
+    // Headings (### Titulo)
+    raw = raw.replace(/^###\s+(.*$)/gim, '<div class="firby-md-h3">$1</div>');
+    raw = raw.replace(/^##\s+(.*$)/gim, '<div class="firby-md-h2">$1</div>');
+
+    // Bold y Cursiva: Estándar GitHub / Linear (Negritas de alto contraste)
+    raw = raw.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    raw = raw.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+    // Inline code (`codigo`)
+    raw = raw.replace(/`([^`]+)`/g, '<code class="firby-inline-code">$1</code>');
+
+    // Procesar bloques de párrafos separados por doble salto de línea (\n\n)
+    const blocks = raw.split(/\n\s*\n/);
+    const htmlBlocks = blocks.map(block => {
+      const lines = block.split('\n');
+
+      // Detectar si el bloque completo es una lista de viñetas
+      const isBulletList = lines.every(l => {
+        const t = l.trim();
+        return t === '' || t.startsWith('- ') || t.startsWith('• ') || t.startsWith('* ');
+      });
+
+      // Detectar si es lista numerada
+      const isNumberedList = lines.every(l => {
+        const t = l.trim();
+        return t === '' || /^\d+\.\s+/.test(t);
+      });
+
+      if (isBulletList && lines.some(l => l.trim().length > 0)) {
+        const listItems = lines
+          .map(l => l.trim())
+          .filter(l => l.length > 0)
+          .map(l => {
+            const content = l.replace(/^[-•*]\s+/, '').trim();
+            return `<div class="firby-bullet-item"><span class="firby-bullet-dot"></span><span class="firby-bullet-text">${content}</span></div>`;
+          })
+          .join('');
+        return `<div class="firby-list-group">${listItems}</div>`;
       }
-      return line;
+
+      if (isNumberedList && lines.some(l => l.trim().length > 0)) {
+        const listItems = lines
+          .map(l => l.trim())
+          .filter(l => l.length > 0)
+          .map(l => {
+            const match = l.match(/^(\d+)\.\s+(.*)/);
+            const num = match ? match[1] : '1';
+            const content = match ? match[2] : l;
+            return `<div class="firby-numbered-item"><span class="firby-num-badge">${num}</span><span class="firby-bullet-text">${content}</span></div>`;
+          })
+          .join('');
+        return `<div class="firby-list-group">${listItems}</div>`;
+      }
+
+      // Procesar viñetas individuales dentro del párrafo
+      const parsedLines = lines.map(line => {
+        const t = line.trim();
+        if (t.startsWith('- ') || t.startsWith('• ') || t.startsWith('* ')) {
+          const content = t.replace(/^[-•*]\s+/, '').trim();
+          return `<div class="firby-bullet-item"><span class="firby-bullet-dot"></span><span class="firby-bullet-text">${content}</span></div>`;
+        }
+        return line;
+      });
+
+      const joined = parsedLines.join('<br/>')
+        .replace(/(<\/div>)<br\/>/g, '$1')
+        .replace(/<br\/>(<div class="firby-bullet-item">)/g, '$1');
+
+      return `<p class="firby-prose-p">${joined}</p>`;
     });
 
-    html = formattedLines.join('<br/>');
-    html = html.replace(/(<\/div>)<br\/>/g, '$1');
-    html = html.replace(/<br\/>(<div class="firby-bullet-item">)/g, '$1');
-    return html;
+    return htmlBlocks.join('');
   }
 
   // ── Copilot UI Actions & Spotlight Engine ──
