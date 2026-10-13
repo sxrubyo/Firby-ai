@@ -1699,6 +1699,86 @@
       display: block !important;
     }
 
+    /* ── MARCO PERIMETRAL VIVO DE PANTALLA COMPLETA (LIVE VOICE PERIMETER BORDER) ── */
+    @property --firby-border-angle {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
+
+    .firby-live-page-border {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s ease;
+      box-sizing: border-box;
+    }
+
+    .firby-live-page-border.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .firby-live-page-border-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: 
+        inset 0 0 16px rgba(185, 250, 1, 0.45),
+        inset 0 0 32px rgba(250, 204, 21, 0.28),
+        inset 0 0 54px rgba(56, 189, 248, 0.18);
+      animation: firbyBorderGlowPulse 3.5s ease-in-out infinite alternate;
+    }
+
+    .firby-live-page-border-line {
+      position: absolute;
+      inset: 0;
+      box-sizing: border-box;
+      padding: 3.5px;
+      background: conic-gradient(
+        from var(--firby-border-angle, 0deg),
+        #facc15 0%,
+        #b9fa01 22%,
+        #09090b 42%,
+        #38bdf8 62%,
+        #09090b 78%,
+        #b9fa01 90%,
+        #facc15 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: firbyRotateBorderAngle 7s linear infinite;
+    }
+
+    @keyframes firbyRotateBorderAngle {
+      0% {
+        --firby-border-angle: 0deg;
+        filter: hue-rotate(0deg);
+      }
+      50% {
+        filter: hue-rotate(180deg);
+      }
+      100% {
+        --firby-border-angle: 360deg;
+        filter: hue-rotate(360deg);
+      }
+    }
+
+    @keyframes firbyBorderGlowPulse {
+      0% {
+        opacity: 0.65;
+        filter: brightness(0.95);
+      }
+      100% {
+        opacity: 1;
+        filter: brightness(1.2);
+      }
+    }
+
     /* ── MODO VOZ 1 A 1 EN VIVO (LIVE VOICE OVERLAY) ── */
     .firby-live-voice-overlay {
       position: absolute;
@@ -3183,6 +3263,20 @@
   `;
   document.body.appendChild(container);
 
+  // Marco perimetral vivo de pantalla completa (Estilo Comet / Gemini Live)
+  let livePageBorder = document.getElementById('firby-live-page-border');
+  if (!livePageBorder) {
+    livePageBorder = document.createElement('div');
+    livePageBorder.id = 'firby-live-page-border';
+    livePageBorder.className = 'firby-live-page-border';
+    livePageBorder.setAttribute('aria-hidden', 'true');
+    livePageBorder.innerHTML = `
+      <div class="firby-live-page-border-glow"></div>
+      <div class="firby-live-page-border-line"></div>
+    `;
+    document.body.appendChild(livePageBorder);
+  }
+
   // Live Dark Theme Observer for Launcher Button
   const updateWidgetTheme = () => {
     try {
@@ -3277,6 +3371,9 @@
   }
 
   function closeChat() {
+    if (isLiveVoiceActive) {
+      closeLiveVoiceMode();
+    }
     windowEl.classList.remove('open');
     launcherBtn.classList.remove('is-open');
     bwsHW.classList.remove('chat-open');
@@ -3784,6 +3881,9 @@
     isLiveVoiceActive = true;
     isLiveVoiceMuted = false;
     liveVoiceOverlay.style.display = 'flex';
+    if (livePageBorder) {
+      livePageBorder.classList.add('active');
+    }
     if (lvoStatusText) lvoStatusText.textContent = 'Conectando con Firby...';
     if (lvoUserText) lvoUserText.textContent = '';
     if (lvoAgentText) lvoAgentText.textContent = '';
@@ -3795,6 +3895,9 @@
 
   function closeLiveVoiceMode() {
     isLiveVoiceActive = false;
+    if (livePageBorder) {
+      livePageBorder.classList.remove('active');
+    }
     if (liveVisualizerAnimId) {
       cancelAnimationFrame(liveVisualizerAnimId);
       liveVisualizerAnimId = null;

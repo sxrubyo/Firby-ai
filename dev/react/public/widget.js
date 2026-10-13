@@ -1699,6 +1699,86 @@
       display: block !important;
     }
 
+    /* ── MARCO PERIMETRAL VIVO DE PANTALLA COMPLETA (LIVE VOICE PERIMETER BORDER) ── */
+    @property --firby-border-angle {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
+
+    .firby-live-page-border {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s ease;
+      box-sizing: border-box;
+    }
+
+    .firby-live-page-border.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .firby-live-page-border-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: 
+        inset 0 0 16px rgba(185, 250, 1, 0.45),
+        inset 0 0 32px rgba(250, 204, 21, 0.28),
+        inset 0 0 54px rgba(56, 189, 248, 0.18);
+      animation: firbyBorderGlowPulse 3.5s ease-in-out infinite alternate;
+    }
+
+    .firby-live-page-border-line {
+      position: absolute;
+      inset: 0;
+      box-sizing: border-box;
+      padding: 3.5px;
+      background: conic-gradient(
+        from var(--firby-border-angle, 0deg),
+        #facc15 0%,
+        #b9fa01 22%,
+        #09090b 42%,
+        #38bdf8 62%,
+        #09090b 78%,
+        #b9fa01 90%,
+        #facc15 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: firbyRotateBorderAngle 7s linear infinite;
+    }
+
+    @keyframes firbyRotateBorderAngle {
+      0% {
+        --firby-border-angle: 0deg;
+        filter: hue-rotate(0deg);
+      }
+      50% {
+        filter: hue-rotate(180deg);
+      }
+      100% {
+        --firby-border-angle: 360deg;
+        filter: hue-rotate(360deg);
+      }
+    }
+
+    @keyframes firbyBorderGlowPulse {
+      0% {
+        opacity: 0.65;
+        filter: brightness(0.95);
+      }
+      100% {
+        opacity: 1;
+        filter: brightness(1.2);
+      }
+    }
+
     /* ── MODO VOZ 1 A 1 EN VIVO (LIVE VOICE OVERLAY) ── */
     .firby-live-voice-overlay {
       position: absolute;
@@ -2970,8 +3050,8 @@
               <div class="firby-policy-title">Aceptas términos y condiciones</div>
               <div class="firby-policy-text">Para continuar y brindarte atención personalizada, acepta nuestros términos y condiciones y política de tratamiento de datos.</div>
               <div class="firby-policy-link-row">
-                <a href="https://firbyai.lat/terms" target="_blank" rel="noopener noreferrer" class="firby-policy-link">Términos y condiciones</a> · 
-                <a href="https://firbyai.lat/politica-de-privacidad" target="_blank" rel="noopener noreferrer" class="firby-policy-link">Política de privacidad</a>
+                <a href="/terms" target="_blank" rel="noopener noreferrer" class="firby-policy-link">Términos y condiciones</a> · 
+                <a href="/privacidad" target="_blank" rel="noopener noreferrer" class="firby-policy-link">Política de privacidad</a>
               </div>
             </div>
             <div class="firby-consent-container" id="firby-consent-container">
@@ -3183,6 +3263,20 @@
   `;
   document.body.appendChild(container);
 
+  // Marco perimetral vivo de pantalla completa (Estilo Comet / Gemini Live)
+  let livePageBorder = document.getElementById('firby-live-page-border');
+  if (!livePageBorder) {
+    livePageBorder = document.createElement('div');
+    livePageBorder.id = 'firby-live-page-border';
+    livePageBorder.className = 'firby-live-page-border';
+    livePageBorder.setAttribute('aria-hidden', 'true');
+    livePageBorder.innerHTML = `
+      <div class="firby-live-page-border-glow"></div>
+      <div class="firby-live-page-border-line"></div>
+    `;
+    document.body.appendChild(livePageBorder);
+  }
+
   // Live Dark Theme Observer for Launcher Button
   const updateWidgetTheme = () => {
     try {
@@ -3277,6 +3371,9 @@
   }
 
   function closeChat() {
+    if (isLiveVoiceActive) {
+      closeLiveVoiceMode();
+    }
     windowEl.classList.remove('open');
     launcherBtn.classList.remove('is-open');
     bwsHW.classList.remove('chat-open');
@@ -3347,7 +3444,32 @@
 
   // ── VOZ EN TIEMPO REAL CON ELEVENLABS SPEECH ENGINE ──
   let currentVoiceAudio = null;
-  let firbyVoiceEnabled = false;
+  let sharedVoiceAudio = null;
+  let currentPlayingSourceNode = null;
+  let firbyVoiceEnabled = true;
+
+  function unlockAudioPlayback() {
+    try {
+      if (!sharedVoiceAudio) {
+        sharedVoiceAudio = new Audio();
+        sharedVoiceAudio.preload = 'auto';
+      }
+      sharedVoiceAudio.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAP8A';
+      sharedVoiceAudio.play().then(() => {
+        try { sharedVoiceAudio.pause(); } catch(_) {}
+      }).catch(() => {});
+
+      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtxClass) {
+        if (!liveAudioCtx || liveAudioCtx.state === 'closed') {
+          liveAudioCtx = new AudioCtxClass();
+        }
+        if (liveAudioCtx.state === 'suspended') {
+          liveAudioCtx.resume().catch(() => {});
+        }
+      }
+    } catch (_) {}
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MODO VOZ 1 A 1 EN TIEMPO REAL (LIVE VOICE MODE - CHATGPT / GEMINI LIVE)
@@ -3496,7 +3618,8 @@
         smoothedBass += (currentBass - smoothedBass) * 0.28;
 
         // VAD: Si el volumen supera el umbral mientras el usuario habla y Firby está en silencio
-        if (currentVolume > 14 && (!liveVoiceAudio || liveVoiceAudio.paused)) {
+        const isFirbySpeaking = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused);
+        if (currentVolume > 14 && !isFirbySpeaking) {
           isVADSpeaking = true;
           handleDetectedSpeechTurn();
         }
@@ -3526,7 +3649,6 @@
         const speed = 0.05 + normVol * 0.14;
         phase += speed;
 
-        const isFirbySpeaking = (liveVoiceAudio && !liveVoiceAudio.paused);
         const baseAmp = 3.5 + Math.sin(phase * 0.5) * 1.5;
         const voiceAmp = normVol * (cssH * 0.44);
         const totalAmp = isFirbySpeaking ? (13 + Math.sin(phase * 1.6) * 9) : (baseAmp + voiceAmp);
@@ -3607,28 +3729,56 @@
 
   function handleDetectedSpeechTurn(isFinal = false) {
     if (!isLiveVoiceActive || isLiveVoiceMuted) return;
-    if (liveVoiceAudio && !liveVoiceAudio.paused) return;
+    if (currentPlayingSourceNode || (liveVoiceAudio && !liveVoiceAudio.paused)) return;
 
     clearTimeout(speechSilenceTimeout);
     const silenceDelay = isFinal ? 380 : 680;
     speechSilenceTimeout = setTimeout(async () => {
-      if (isLiveVoiceActive && !isLiveVoiceMuted && (!liveVoiceAudio || liveVoiceAudio.paused)) {
+      if (isLiveVoiceActive && !isLiveVoiceMuted && !currentPlayingSourceNode && (!liveVoiceAudio || liveVoiceAudio.paused)) {
         let textToSend = (currentTurnTranscript || '').trim();
         currentTurnTranscript = '';
 
         if (textToSend && textToSend.length > 1) {
           console.log('[Live Voice] Turno detectado por Web Speech API:', textToSend);
-          handleLiveVoiceTurn(textToSend);
+          if (liveMediaRecorder && liveMediaRecorder.state !== 'inactive') {
+            try { liveMediaRecorder.stop(); } catch(_) {}
+          }
           liveRecordedChunks = [];
+          if (liveAudioStream) {
+            setTimeout(() => { if (isLiveVoiceActive && !isLiveVoiceMuted) startLiveMediaRecorder(liveAudioStream); }, 80);
+          }
+          handleLiveVoiceTurn(textToSend);
         } else if (liveRecordedChunks.length > 0 && isVADSpeaking) {
           console.log('[Live Voice] Fallback: Enviando audio capturado al backend para transcripción...');
           isVADSpeaking = false;
           const mime = liveMediaRecorder ? (liveMediaRecorder.mimeType || 'audio/webm') : 'audio/webm';
-          const blob = new Blob(liveRecordedChunks, { type: mime });
-          liveRecordedChunks = [];
+          let recordedBlob = null;
+          if (liveMediaRecorder && liveMediaRecorder.state !== 'inactive') {
+            recordedBlob = await new Promise((resolve) => {
+              liveMediaRecorder.onstop = () => {
+                const b = new Blob(liveRecordedChunks, { type: mime });
+                liveRecordedChunks = [];
+                resolve(b);
+              };
+              try {
+                if (liveMediaRecorder.state === 'recording') {
+                  liveMediaRecorder.requestData();
+                }
+                liveMediaRecorder.stop();
+              } catch (_) {
+                resolve(new Blob(liveRecordedChunks, { type: mime }));
+              }
+            });
+            if (liveAudioStream) {
+              setTimeout(() => { if (isLiveVoiceActive && !isLiveVoiceMuted) startLiveMediaRecorder(liveAudioStream); }, 150);
+            }
+          } else {
+            recordedBlob = new Blob(liveRecordedChunks, { type: mime });
+            liveRecordedChunks = [];
+          }
 
-          if (blob.size > 800) {
-            const b64 = await blobToBase64(blob);
+          if (recordedBlob && recordedBlob.size > 500) {
+            const b64 = await blobToBase64(recordedBlob);
             handleLiveVoiceTurn('', b64, mime);
           }
         }
@@ -3727,9 +3877,13 @@
 
   function openLiveVoiceMode() {
     if (!liveVoiceOverlay) return;
+    unlockAudioPlayback();
     isLiveVoiceActive = true;
     isLiveVoiceMuted = false;
     liveVoiceOverlay.style.display = 'flex';
+    if (livePageBorder) {
+      livePageBorder.classList.add('active');
+    }
     if (lvoStatusText) lvoStatusText.textContent = 'Conectando con Firby...';
     if (lvoUserText) lvoUserText.textContent = '';
     if (lvoAgentText) lvoAgentText.textContent = '';
@@ -3741,12 +3895,19 @@
 
   function closeLiveVoiceMode() {
     isLiveVoiceActive = false;
+    if (livePageBorder) {
+      livePageBorder.classList.remove('active');
+    }
     if (liveVisualizerAnimId) {
       cancelAnimationFrame(liveVisualizerAnimId);
       liveVisualizerAnimId = null;
     }
     if (liveVoiceOverlay) liveVoiceOverlay.style.display = 'none';
     stopLiveVoiceRecognition();
+    if (currentPlayingSourceNode) {
+      try { currentPlayingSourceNode.stop(); } catch(_) {}
+      currentPlayingSourceNode = null;
+    }
     if (liveVoiceAudio) {
       try { liveVoiceAudio.pause(); } catch(e){}
       liveVoiceAudio = null;
@@ -3785,6 +3946,7 @@
   if (lvoPermBtn) {
     lvoPermBtn.addEventListener('click', (e) => {
       e.stopPropagation();
+      unlockAudioPlayback();
       requestMicAccess();
     });
   }
@@ -3792,13 +3954,21 @@
   // Barge-in / Interrupt y reintento de conexión
   if (lvoOrb) {
     lvoOrb.addEventListener('click', () => {
-      if (liveVoiceAudio && !liveVoiceAudio.paused) {
-        try { liveVoiceAudio.pause(); } catch(e){}
-        liveVoiceAudio = null;
+      const isSpeaking = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused);
+      if (isSpeaking) {
+        if (currentPlayingSourceNode) {
+          try { currentPlayingSourceNode.stop(); } catch(_) {}
+          currentPlayingSourceNode = null;
+        }
+        if (liveVoiceAudio) {
+          try { liveVoiceAudio.pause(); } catch(e){}
+          liveVoiceAudio = null;
+        }
         if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
         if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
         startLiveVoiceRecognition();
       } else if (!liveAudioStream) {
+        unlockAudioPlayback();
         requestMicAccess();
       }
     });
@@ -3807,6 +3977,7 @@
   if (lvoStatusText) {
     lvoStatusText.addEventListener('click', () => {
       if (!liveAudioStream) {
+        unlockAudioPlayback();
         requestMicAccess();
       }
     });
@@ -3876,7 +4047,11 @@
       }
 
       const bubbles = data.bubbles || [];
-      const replyText = bubbles.length > 0 ? bubbles.join(' ') : (data.response || 'Entendido.');
+      let replyText = bubbles.length > 0 ? bubbles.join(' ') : (data.response || 'Entendido.');
+      replyText = replyText
+        .replace(/^(?:thought|thinking|pensamiento)[\s\S]*?(?:\n\n|\n[¿¡\[A-Z]|\b(?:profesionalismo|directo|calma)\.\s*(?=[A-Z¿¡\[]))/i, '')
+        .replace(/^thought\s+/i, '')
+        .trim() || replyText.replace(/^thought\s*/i, '').trim();
 
       const displayUserText = recognizedQuery || 'Mensaje de voz';
       if (lvoUserText) lvoUserText.textContent = `Tú: "${displayUserText}"`;
@@ -3913,35 +4088,22 @@
         .replace(/\s+/g, ' ')
         .trim();
 
-      // REPRODUCCIÓN ULTRA RÁPIDA VÍA STREAMING DIRECTO (CERO ESPERA DE BLOB COMPLETO)
+      // REPRODUCCIÓN ULTRA FIABLE Y SIN BLOQUEOS DE AUTOPLAY (WEB AUDIO API + BLOB AUDIO)
+      if (currentPlayingSourceNode) {
+        try { currentPlayingSourceNode.stop(); } catch(_) {}
+        currentPlayingSourceNode = null;
+      }
       if (liveVoiceAudio) {
         try { liveVoiceAudio.pause(); } catch(_) {}
         liveVoiceAudio = null;
       }
 
-      const streamUrl = `/api/speech-engine/tts-stream?text=${encodeURIComponent(cleanVoiceText)}&voice_id=4LrktOMtQ8IXUJhTLQIX&t=${Date.now()}`;
-      liveVoiceAudio = new Audio(streamUrl);
+      await playLiveVoiceAudio(cleanVoiceText);
 
-      liveVoiceAudio.onended = () => {
-        liveVoiceAudio = null;
-        if (isLiveVoiceActive) {
-          if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
-          if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-          startLiveVoiceRecognition();
-        }
-      };
-
-      liveVoiceAudio.onerror = (e) => {
-        console.warn('[Live Voice] Stream error:', e);
-        liveVoiceAudio = null;
-        if (isLiveVoiceActive) startLiveVoiceRecognition();
-      };
-
-      try {
-        await liveVoiceAudio.play();
-      } catch (e) {
-        console.warn('[Live Voice] Autoplay block:', e);
-        if (isLiveVoiceActive) startLiveVoiceRecognition();
+      if (isLiveVoiceActive) {
+        if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
+        if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
+        startLiveVoiceRecognition();
       }
 
     } catch(err) {
@@ -3949,6 +4111,87 @@
       if (isLiveVoiceActive) {
         setTimeout(startLiveVoiceRecognition, 1000);
       }
+    }
+  }
+
+  async function playLiveVoiceAudio(textToSpeak) {
+    if (!textToSpeak) return false;
+    try {
+      const resp = await fetch('/api/speech-engine/tts-stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: textToSpeak,
+          voice_id: 'cjVigY5qzO86Huf0OWal'
+        })
+      });
+
+      if (!resp.ok) {
+        console.warn('[Live Voice] TTS error HTTP:', resp.status);
+        return false;
+      }
+
+      const arrayBuffer = await resp.arrayBuffer();
+      if (!arrayBuffer || arrayBuffer.byteLength < 250) {
+        return false;
+      }
+
+      // 1. Primario: Web Audio API (Cero bloqueos de autoplay y sincronizado con el visualizador)
+      if (liveAudioCtx && liveAudioCtx.state !== 'closed') {
+        try {
+          if (liveAudioCtx.state === 'suspended') {
+            await liveAudioCtx.resume();
+          }
+          const audioBuffer = await liveAudioCtx.decodeAudioData(arrayBuffer.slice(0));
+          const sourceNode = liveAudioCtx.createBufferSource();
+          sourceNode.buffer = audioBuffer;
+
+          if (liveAnalyser) {
+            sourceNode.connect(liveAnalyser);
+          }
+          sourceNode.connect(liveAudioCtx.destination);
+          currentPlayingSourceNode = sourceNode;
+
+          return await new Promise((resolve) => {
+            sourceNode.onended = () => {
+              currentPlayingSourceNode = null;
+              resolve(true);
+            };
+            sourceNode.start(0);
+          });
+        } catch (ctxErr) {
+          console.warn('[Live Voice] Web Audio decode fallback:', ctxErr);
+        }
+      }
+
+      // 2. Secundario: HTML5 Audio con Blob URL y elemento pre-activado
+      const blob = new Blob([arrayBuffer], { type: 'audio/mpeg' });
+      const blobUrl = URL.createObjectURL(blob);
+      const audioEl = sharedVoiceAudio || new Audio();
+      liveVoiceAudio = audioEl;
+      audioEl.src = blobUrl;
+
+      return await new Promise((resolve) => {
+        audioEl.onended = () => {
+          URL.revokeObjectURL(blobUrl);
+          liveVoiceAudio = null;
+          resolve(true);
+        };
+        audioEl.onerror = () => {
+          URL.revokeObjectURL(blobUrl);
+          liveVoiceAudio = null;
+          resolve(false);
+        };
+        audioEl.play().catch((e) => {
+          console.warn('[Live Voice] HTML5 play blocked:', e);
+          URL.revokeObjectURL(blobUrl);
+          liveVoiceAudio = null;
+          resolve(false);
+        });
+      });
+    } catch (err) {
+      console.warn('[Live Voice] Error reproduciendo voz:', err);
+      return false;
     }
   }
 
@@ -3960,9 +4203,16 @@
   };
 
   async function playFirbyVoice(text) {
-    if (!firbyVoiceEnabled || !text) return;
+    if (!text) return;
     const cleanText = text
+      .replace(/\[(?:chuckles|laughs|risas?)\]/gi, '')
+      .replace(/\[(?:pauses?|pausa|silence)\]/gi, '...')
+      .replace(/\[(?:deep breath|respiraci[oó]n|sighs?|suspiro)\]/gi, '')
+      .replace(/\[(?:clears throat|carraspeo)\]/gi, '')
+      .replace(/\[(?:thinking|pensando|thoughtful pause)\]/gi, '')
+      .replace(/\[(?:CHIPS|ACTION)[^\]]*\]/gi, '')
       .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/\[[^\]]*\]/g, '')
       .replace(/[#*_`~]/g, '')
       .replace(/\s+/g, ' ')
       .trim();
@@ -3978,7 +4228,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           text: cleanText,
-          voice_id: '4LrktOMtQ8IXUJhTLQIX'
+          voice_id: 'cjVigY5qzO86Huf0OWal'
         })
       });
       if (!response.ok) return;
@@ -4327,6 +4577,12 @@
   }
 
   function appendMessage(text, isUser = false, attachment = null, skipPersist = false) {
+    if (!isUser && typeof text === 'string') {
+      text = text
+        .replace(/^(?:thought|thinking|pensamiento)[\s\S]*?(?:\n\n|\n[¿¡\[A-Z]|\b(?:profesionalismo|directo|calma)\.\s*(?=[A-Z¿¡\[]))/i, '')
+        .replace(/^thought\s+/i, '')
+        .trim() || text.replace(/^thought\s*/i, '').trim();
+    }
     if (!skipPersist) {
       chatHistoryState.push({
         type: 'message',
@@ -5198,6 +5454,10 @@
             appendMessage(voiceText, false);
           }
 
+          if (attachment && attachment.isAudio && voiceText) {
+            playFirbyVoice(voiceText);
+          }
+
           if (verifiedData.intent === 'terms_consent') {
             try { localStorage.setItem('firby_privacy_accepted', 'true'); } catch (_) {}
             const initConsent = document.getElementById('firby-consent-container');
@@ -5252,6 +5512,10 @@
         } else {
           voiceText = 'Acción procesada con éxito.';
           appendMessage(voiceText, false);
+        }
+
+        if (attachment && attachment.isAudio && voiceText) {
+          playFirbyVoice(voiceText);
         }
 
         if (data.intent === 'terms_consent') {
@@ -5568,6 +5832,7 @@
     voiceBtn.addEventListener('pointerdown', (e) => {
       if (e.button !== undefined && e.button !== 0) return;
       e.preventDefault();
+      unlockAudioPlayback();
       
       pointerPressStartTime = Date.now();
       isPointerHeld = true;
