@@ -176,7 +176,7 @@ class SiteKnowledgeGraph:
     Representa todo lo que Firby ha descubierto y entendido del negocio.
     """
 
-    def __init__(self, base_domain: str = "firbyai.lat"):
+    def __init__(self, base_domain: str = "firbyai.com"):
         self.base_domain = base_domain
         self.pages: Dict[str, DiscoveredPage] = {}
         self.sections_by_id: Dict[str, Tuple[str, DiscoveredSection]] = {}  # sec_id -> (page_path, section)
@@ -355,7 +355,7 @@ class SiteDiscoveryEngine:
         Descubre e indexa las páginas HTML del sitio web local.
         Permite que el agente conozca al 100% las rutas, secciones y contenido.
         """
-        graph = SiteKnowledgeGraph(base_domain="firbyai.lat")
+        graph = SiteKnowledgeGraph(base_domain="firbyai.com")
 
         route_mapping = {
             "firby-landing.html": "/",
@@ -377,7 +377,7 @@ class SiteDiscoveryEngine:
                 with open(full_path, "r", encoding="utf-8", errors="ignore") as f:
                     html_content = f.read()
 
-                discovered_page = cls._parse_html(html_content, route_path, base_domain="firbyai.lat")
+                discovered_page = cls._parse_html(html_content, route_path, base_domain="firbyai.com")
                 graph.add_page(discovered_page)
 
                 # Extraer servicios y políticas detectadas
@@ -438,7 +438,7 @@ class SiteDiscoveryEngine:
         return graph
 
     @classmethod
-    def _parse_html(cls, html: str, path: str, base_domain: str = "firbyai.lat") -> DiscoveredPage:
+    def _parse_html(cls, html: str, path: str, base_domain: str = "firbyai.com") -> DiscoveredPage:
         """Parsea el HTML usando BeautifulSoup para extraer títulos, secciones, links y CTAs."""
         soup = bs4.BeautifulSoup(html, "html.parser")
 

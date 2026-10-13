@@ -8,7 +8,7 @@
  * 
  * Usage:
  * <script 
- *   src="https://dev.firbyai.lat/firby-embed.js" 
+ *   src="https://dev.firbyai.com/firby-embed.js" 
  *   data-firby-id="default" 
  *   async>
  * </script>
@@ -33,7 +33,7 @@
   })();
 
   const scriptSrc = currentScript ? currentScript.src : '';
-  let hostUrl = 'https://dev.firbyai.lat';
+  let hostUrl = 'https://dev.firbyai.com';
   try {
     if (scriptSrc) {
       const parsed = new URL(scriptSrc);

@@ -42,7 +42,7 @@ class AdminIntentEngine:
             "entrar a la pagina", "entrar a la página", "ver la pagina", "ver la página", "link de la web"
         ]):
             import os
-            base_url = os.getenv("BASE_URL", "https://firbyai.lat")
+            base_url = os.getenv("BASE_URL", "https://firbyai.com")
             return f"Claro que sí! Aquí tienes el acceso a tu panel web oficial:\n\n🌐 {base_url}/sign-in\n\nPuedes ingresar directamente con tu correo y contraseña."
 
         # 1. RESUMEN FORMAL / MÉTRICAS DEL DÍA ("resumen de hoy", "cómo van las cosas hoy?", "reporte del día")

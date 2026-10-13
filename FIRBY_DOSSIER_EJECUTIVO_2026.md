@@ -183,8 +183,8 @@ graph TD
 
 ## 📞 CONTACTO INSTITUCIONAL & ACCESO
 
-* **Sitio Web Oficial**: [https://firbyai.lat](https://firbyai.lat)
-* **Especificación Técnica Completa**: [https://firbyai.lat/master-spec](https://firbyai.lat/master-spec)
+* **Sitio Web Oficial**: [https://firbyai.com](https://firbyai.com)
+* **Especificación Técnica Completa**: [https://firbyai.com/master-spec](https://firbyai.com/master-spec)
 * **Documento en Google Drive**: [Abrir en Google Docs](https://docs.google.com/document/d/1_1ZLBQMSuEwRS4fH5tAmgVfKg2OiRZ0W7Lb3kgG52_A/edit)
 * **Línea de Demostración Telefónica**: `+1 (279) 213-9140`
 * **Línea de WhatsApp Demostración**: `+57 (324) 369-9856`

@@ -3,13 +3,13 @@
  * ============================================
  * Permite instalar el agente autónomo de Firby en cualquier sitio web con 1 sola línea:
  * 
- * <script src="https://cdn.firbyai.lat/firby.js"></script>
+ * <script src="https://cdn.firbyai.com/firby.js"></script>
  * <script>
  *   Firby.init({ agent: "agt_firby_demo" });
  * </script>
  * 
  * O directamente:
- * <script src="https://cdn.firbyai.lat/firby.js" data-agent="agt_firby_demo"></script>
+ * <script src="https://cdn.firbyai.com/firby.js" data-agent="agt_firby_demo"></script>
  * 
  * Arquitectura Segura:
  * - El cliente NUNCA recibe claves de API ni secretos de integración.

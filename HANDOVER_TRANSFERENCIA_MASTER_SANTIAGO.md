@@ -48,8 +48,8 @@
   cd /home/ubuntu/firby/dev/react && npm run build
   ```
 - **Procesos PM2 en ejecución:**
-  - **PM2 0 (`firby`):** Entorno DEV en puerto `8001` (`dev.firbyai.lat`). Directorio `/home/ubuntu/bublee/run.sh`.
-  - **PM2 6 (`firby-production`):** Entorno PROD en puerto `8003` (`firbyai.lat`). Directorio `/home/ubuntu/firby/instances/production/run.sh`.
+  - **PM2 0 (`firby`):** Entorno DEV en puerto `8001` (`dev.firbyai.com`). Directorio `/home/ubuntu/bublee/run.sh`.
+  - **PM2 6 (`firby-production`):** Entorno PROD en puerto `8003` (`firbyai.com`). Directorio `/home/ubuntu/firby/instances/production/run.sh`.
   - **PM2 3 (`n8n`):** Instancia local nativa de n8n corriendo en puerto `5678`.
 - **Comando de reinicio tras compilación:**
   ```bash

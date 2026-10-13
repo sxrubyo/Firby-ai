@@ -201,7 +201,7 @@ class ControlledSiteCrawler:
                     import urllib.request
                     req = urllib.request.Request(
                         current_url,
-                        headers={"User-Agent": "FirbyDiscoveryAgent/1.0 (+https://firbyai.lat)"}
+                        headers={"User-Agent": "FirbyDiscoveryAgent/1.0 (+https://firbyai.com)"}
                     )
                     with urllib.request.urlopen(req, timeout=8.0) as resp:
                         content_type = resp.headers.get("content-type", "")

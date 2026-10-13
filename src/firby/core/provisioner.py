@@ -147,7 +147,7 @@ def provision_tenant_instance(
         f"CLINIC_NAME=\"{business_name}\"",
         f"SECTOR={sector}",
         f"PLATFORM=whatsapp",
-        f"BASE_URL=https://firbyai.lat",
+        f"BASE_URL=https://firbyai.com",
         f"WHATSAPP_BRIDGE_URL=http://127.0.0.1:8002",
         f"WEBHOOK_SECRET={webhook_secret}",
         f"MASTER_API_KEY={master_key}",

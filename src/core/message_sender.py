@@ -547,7 +547,7 @@ class MessageSender:
             if suffix in ('.ogg', '.oga', '.opus', '.mp3', '.m4a', '.wav'):
                 await self._send_audio(chat_id, str(media_path), route=route)
             else:
-                hosted_url = f"https://firbyai.lat{rel_url}"
+                hosted_url = f"https://firbyai.com{rel_url}"
                 await self._send_message(chat_id, hosted_url, route=route)
 
     async def _send_bubbles(

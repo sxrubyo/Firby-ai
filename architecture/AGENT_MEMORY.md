@@ -50,8 +50,8 @@ Fecha: 2026-06-24
 ### Cambios Aplicados
 
 - Produccion registra Telegram en `https://firby.nexusys.duckdns.org/webhook/firby_production_2ed44661cb56cd55`.
-- Ovni registra Telegram en `https://firbyai.lat/webhook/firby_ovni_019d2bbd1d0b135b`.
-- `melissa-x` queda desactivada, sin token, con `BASE_URL=https://firbyai.lat` y `WEBHOOK_SECRET=firby_melissa-x_019d2bbd1d0b135b`.
+- Ovni registra Telegram en `https://firbyai.com/webhook/firby_ovni_019d2bbd1d0b135b`.
+- `melissa-x` queda desactivada, sin token, con `BASE_URL=https://firbyai.com` y `WEBHOOK_SECRET=firby_melissa-x_019d2bbd1d0b135b`.
 - Caddy efectivo (`/etc/caddy/Caddyfile`) y copia de trabajo (`/home/ubuntu/Caddyfile`) ya no tienen rutas `conny_` ni alias `connyai`.
 - La base legacy `/home/ubuntu/firby-instances/melissa-x/conny.db` se movio a `legacy/2026-06-24-conny-db-quarantine/` con manifiesto. El runtime usa `firby.db`.
 - `scripts/audit_agents.py` ahora falla si vuelve un `WEBHOOK_SECRET` legacy, un `DB_PATH` legacy o `conny_`/`connyai` en Caddy.

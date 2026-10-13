@@ -928,7 +928,7 @@ async def list_vault_credentials(tenant_id: str = "default"):
         {"id": "google_sheets", "name": "Google Sheets", "docs": "https://developers.google.com/sheets", "category": "Hojas de cálculo"},
         {"id": "google_calendar", "name": "Google Calendar", "docs": "https://developers.google.com/calendar", "category": "Agenda y Citas"},
         {"id": "hubspot", "name": "HubSpot CRM", "docs": "https://developers.hubspot.com", "category": "Gestión de Leads"},
-        {"id": "custom_webhook", "name": "Webhook Seguro Firby", "docs": "https://firbyai.lat/docs", "category": "Automatizaciones Web"}
+        {"id": "custom_webhook", "name": "Webhook Seguro Firby", "docs": "https://firbyai.com/docs", "category": "Automatizaciones Web"}
     ]
 
     try:

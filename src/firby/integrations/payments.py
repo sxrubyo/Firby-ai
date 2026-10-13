@@ -127,7 +127,7 @@ class PaymentBridge:
                     "collect_shipping": False,
                     "currency": "COP",
                     "amount_in_cents": amount_cents,
-                    "redirect_url": f"https://firbyai.lat/payment/success?apt_id={appointment_id}"
+                    "redirect_url": f"https://firbyai.com/payment/success?apt_id={appointment_id}"
                 }
                 async with httpx.AsyncClient() as client:
                     resp = await client.post(url, headers=headers, json=payload, timeout=10.0)
@@ -140,4 +140,4 @@ class PaymentBridge:
                 log.error(f"[payments] Error calling Wompi: {e}")
 
         # Link seguro de pago por defecto
-        return f"https://firbyai.lat/pay/apt_{appointment_id}?monto={amount}&servicio={service.replace(' ', '+')}"
+        return f"https://firbyai.com/pay/apt_{appointment_id}?monto={amount}&servicio={service.replace(' ', '+')}"

@@ -1,6 +1,6 @@
 # Carpeta Oficial de Diseños y Assets — Firby AI (disenos_pagina)
 
-Esta es la carpeta central y organizada donde el diseñador / creador deposita los recursos gráficos, logotipos, videos y elementos vectoriales para la página web (firbyai.lat) y la aplicación.
+Esta es la carpeta central y organizada donde el diseñador / creador deposita los recursos gráficos, logotipos, videos y elementos vectoriales para la página web (firbyai.com) y la aplicación.
 
 ---
 

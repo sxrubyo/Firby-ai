@@ -436,12 +436,12 @@ FIRBY_LANDING_CONFIG = BusinessConfig(
             "Vive en el sitio web para atender visitantes 24/7, resolver dudas con políticas oficiales "
             "y operar la navegación del sitio, mientras mantiene una línea privada por WhatsApp con el dueño."
         ),
-        website_url="https://firbyai.lat",
+        website_url="https://firbyai.com",
         tone_and_voice="ejecutivo, preciso, sin clichés corporativos, estructurado, limpio y directo estilo Sierra AI"
     ),
     official_info=OfficialInfo(
         locations=["Medellín, Colombia (Sede principal, Operación cloud global)"],
-        contact_email="soporte@firbyai.lat",
+        contact_email="soporte@firbyai.com",
         executive_phone="+57 324 369 9856",
         operating_hours="Operador web: 24/7. Atención ejecutiva: lunes a viernes 8:00 AM – 6:00 PM COT.",
         team_overview=(

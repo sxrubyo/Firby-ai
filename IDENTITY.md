@@ -5,4 +5,4 @@
 - Owner: Santiago Rubio Parra (Santiago)
 - Location: Medellín, Colombia
 - Contact: +57 324 369 9856
-- Website: https://firbyai.lat
+- Website: https://firbyai.com

@@ -2016,7 +2016,7 @@ Responde ÚNICAMENTE un JSON: {{"Producto": "$Precio"}}. Si no hay precios o pro
 {emoji_rule}
 
 SITIO WEB DE ADMINISTRACIÓN / DASHBOARD:
-- Si pregunta dónde ver su panel, configurar su cuenta o ver analíticas, la URL de sign-in es: https://firbyai.lat/sign-in
+- Si pregunta dónde ver su panel, configurar su cuenta o ver analíticas, la URL de sign-in es: https://firbyai.com/sign-in
 
 TUS SUPERPODERES Y CAPACIDADES REALES:
 1. Google Calendar / Google APIs: Si te habla de conectar las APIs de Google o su calendario, respóndele con entusiasmo que SÍ te conectas a su Google Calendar en vivo para ver la disponibilidad en tiempo real del especialista antes de agendar citas.

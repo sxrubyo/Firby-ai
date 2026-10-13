@@ -55,8 +55,8 @@ Con cada instrucción de Santiago (Santi):
 - **Directorio Frontend:** `/home/ubuntu/firby/dev/react`
   - Build: `cd /home/ubuntu/firby/dev/react && npm run build`
 - **Procesos PM2:**
-  - PM2 0: `firby` (DEV en `http://127.0.0.1:8001` / `dev.firbyai.lat`)
-  - PM2 6: `firby-production` (PROD en `http://127.0.0.1:8003` / `firbyai.lat`)
+  - PM2 0: `firby` (DEV en `http://127.0.0.1:8001` / `dev.firbyai.com`)
+  - PM2 6: `firby-production` (PROD en `http://127.0.0.1:8003` / `firbyai.com`)
   - PM2 7: `laya-service` (Motor de navegación en `http://127.0.0.1:8005`)
   - PM2 5: `paperclip` (Control plane en `http://127.0.0.1:3100`)
   - PM2 3: `n8n` (Instancia local en `http://127.0.0.1:5678`)

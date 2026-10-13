@@ -231,7 +231,7 @@ class MembershipManager:
                             if billing_phone:
                                 import httpx
                                 tier_name = mem.get("tier", "pro").upper()
-                                checkout_url = f"https://firbyai.lat/pay/sub_{mem.get('tenant_id')}?monto={mem.get('monthly_price')}"
+                                checkout_url = f"https://firbyai.com/pay/sub_{mem.get('tenant_id')}?monto={mem.get('monthly_price')}"
                                 alert_msg = (
                                     f"Hola! Le recordamos que su membresía {tier_name} de Firby vence en 3 días ({exp_str[:10]}) ||| "
                                     f"Para mantener a su equipo de empleados digitales activo 24/7 sin interrupciones, puede renovar aquí: {checkout_url}"

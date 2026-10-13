@@ -101,7 +101,7 @@
 - [x] **Día 1 (Gobernanza y Dashboard)**:
   - Implementar el software de Guardrails (Lista blanca de herramientas en backend `src/core/guardrails.py`).
   - Diseñar la **Consola de Operaciones** en `dashboard.tsx` con la Matriz de Permisos visual y endpoints `/api/governance/*`.
-  - Sección de "Instalación en 1 Clic" con el snippet `<script src="https://firbyai.lat/widget.js" ...>` y el script estático compilado y sirviendo en port 8003.
+  - Sección de "Instalación en 1 Clic" con el snippet `<script src="https://firbyai.com/widget.js" ...>` y el script estático compilado y sirviendo en port 8003.
 
 - [ ] **Día 2 (Bucle Telegram & Aprobaciones)**:
   - Conectar el bot de Telegram con botones inline de `[✓ Aprobar]` y `[✕ Rechazar]`.
@@ -111,7 +111,7 @@
   - Script automatizado de reporte ejecutivo diario (resumen de acciones y horas ahorradas).
 
 - [ ] **Día 4 y 5 (Landing Page de Conversión & Oferta de 7 Días)**:
-  - Adaptar la página principal (`firbyai.lat`) con el nuevo copy y el widget embebido para prueba inmediata.
+  - Adaptar la página principal (`firbyai.com`) con el nuevo copy y el widget embebido para prueba inmediata.
 
 - [ ] **Día 6 y 7 (Lanzamiento & Campaña de $600.000 COP)**:
   - Configurar campaña en Meta Ads segmentada a tomadores de decisión.

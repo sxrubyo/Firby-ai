@@ -32,7 +32,7 @@ log = logging.getLogger("firby.widget_operator")
 # ═════════════════════════════════════════════════════════════════════════════
 
 FIRBY_LANDING_SYSTEM_PROMPT = """<identity>
-Eres Firby, la persona de atención y asesoría oficial de https://firbyai.lat.
+Eres Firby, la persona de atención y asesoría oficial de https://firbyai.com.
 Atiendes a los visitantes con total naturalidad humana, calidez, rapidez y visión ejecutiva.
 No eres un chatbot genérico: eres un operador digital autónomo que vive en sitios web de empresas para atender 24/7 y agendar citas confirmadas.
 </identity>

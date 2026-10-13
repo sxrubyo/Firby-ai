@@ -1038,7 +1038,7 @@ class AuthEngine:
                     first_name = tmp.get("first_name") or (full_name.split()[0].title() if full_name else "Santiago")
                     email = tmp.get("email", "")
                     import json, os
-                    base_url = os.getenv("BASE_URL", "https://firbyai.lat")
+                    base_url = os.getenv("BASE_URL", "https://firbyai.com")
                     login_url = f"{base_url}/sign-in"
                     db.update_clinic(setup_step="name", setup_buffer=json.dumps({"owner_name": first_name, "owner_full_name": full_name}))
                     try:
@@ -1054,7 +1054,7 @@ class AuthEngine:
                 elif role == "admin_pro":
                     email = tmp.get("email", "")
                     import os
-                    base_url = os.getenv("BASE_URL", "https://firbyai.lat")
+                    base_url = os.getenv("BASE_URL", "https://firbyai.com")
                     login_url = f"{base_url}/sign-in"
                     return [
                         "Listo. Firby Pro Admin quedó activado para este chat.",

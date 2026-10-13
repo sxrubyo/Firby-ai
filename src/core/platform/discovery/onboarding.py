@@ -283,7 +283,7 @@ class OnboardingEngine:
 
             # 6. Generar snippet de instalación en 1 línea
             session.embed_snippet = (
-                f'<script src="https://firbyai.lat/firby.js"></script>\n'
+                f'<script src="https://firbyai.com/firby.js"></script>\n'
                 f'<script>\n'
                 f'  Firby.init({{\n'
                 f'    agent: "{session.public_id}"\n'

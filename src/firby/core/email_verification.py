@@ -1,6 +1,6 @@
 """
 Módulo de Verificación de Seguridad por Correo Electrónico (OTP 6 Dígitos)
-Integración con Resend API para Firby AI (firbyai.lat)
+Integración con Resend API para Firby AI (firbyai.com)
 """
 import os
 import re
@@ -18,8 +18,8 @@ log = logging.getLogger("firby.email_verification")
 
 # Configuración por defecto
 RESEND_API_URL = "https://api.resend.com/emails"
-DEFAULT_FROM_EMAIL = "Firby <contacto@firbyai.lat>"
-FALLBACK_FROM_EMAIL = "Firby <noreply@firbyai.lat>"
+DEFAULT_FROM_EMAIL = "Firby <contacto@firbyai.com>"
+FALLBACK_FROM_EMAIL = "Firby <noreply@firbyai.com>"
 OTP_EXPIRATION_MINUTES = 10
 MAX_VERIFICATION_ATTEMPTS = 5
 MAX_REQUESTS_PER_EMAIL_HOUR = 3
@@ -191,16 +191,16 @@ def render_otp_email_html(code: str, email: str, purpose_label: str = "acceder a
 
         <!-- Isotipo original abajo sin fondo para no dañar el tema de color -->
         <div style="margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(156, 163, 175, 0.25);">
-            <a href="https://firbyai.lat" target="_blank" style="text-decoration: none; display: inline-block; margin: 0; padding: 0;">
-                <img src="https://firbyai.lat/firby_logo_flush.png" width="110" height="auto" alt="Firby" style="display: block; width: 110px; height: auto; border: 0; outline: none; margin: 0 0 16px 0; padding: 0;" />
+            <a href="https://firbyai.com" target="_blank" style="text-decoration: none; display: inline-block; margin: 0; padding: 0;">
+                <img src="https://firbyai.com/firby_logo_flush.png" width="110" height="auto" alt="Firby" style="display: block; width: 110px; height: auto; border: 0; outline: none; margin: 0 0 16px 0; padding: 0;" />
             </a>
 
             <!-- Datos de pie de página -->
             <div class="firby-footer" style="font-size: 12px; line-height: 1.6; color: #9ca3af;">
                 <span style="font-weight: 600; color: inherit;">Firby AI</span><br>
-                Firby AI Inc. &middot; <a href="https://firbyai.lat" target="_blank" class="firby-link" style="color: #6b7280; text-decoration: none;">firbyai.lat</a><br>
-                <a href="https://firbyai.lat/privacy" target="_blank" class="firby-link" style="color: #6b7280; text-decoration: underline; margin-right: 8px;">Política de Privacidad</a>
-                <a href="https://firbyai.lat/terms" target="_blank" class="firby-link" style="color: #6b7280; text-decoration: underline;">Términos de Servicio</a>
+                Firby AI Inc. &middot; <a href="https://firbyai.com" target="_blank" class="firby-link" style="color: #6b7280; text-decoration: none;">firbyai.com</a><br>
+                <a href="https://firbyai.com/privacy" target="_blank" class="firby-link" style="color: #6b7280; text-decoration: underline; margin-right: 8px;">Política de Privacidad</a>
+                <a href="https://firbyai.com/terms" target="_blank" class="firby-link" style="color: #6b7280; text-decoration: underline;">Términos de Servicio</a>
             </div>
         </div>
     </div>
@@ -222,8 +222,8 @@ def render_otp_email_text(code: str, email: str, purpose_label: str = "acceder a
         f"{code}\n\n"
         f"Recibes este correo porque tienes una cuenta en Firby. Este no es un correo publicitario ni promocional, por lo que no incluye un enlace para cancelar la suscripcion. Recibiras este correo incluso si te has dado de baja de los correos comerciales de Firby.\n\n"
         f"Firby AI\n"
-        f"Firby AI Inc. - firbyai.lat\n"
-        f"https://firbyai.lat/privacy | https://firbyai.lat/terms"
+        f"Firby AI Inc. - firbyai.com\n"
+        f"https://firbyai.com/privacy | https://firbyai.com/terms"
     )
 
 

@@ -43,7 +43,7 @@ async def twilio_incoming_call(request: Request):
     call_sid = params.get("CallSid", "")
     log.info(f"[Twilio Voice] Llamada entrante de {caller} a {called} (CallSid: {call_sid})")
 
-    base_ws_host = request.headers.get("host", "firbyai.lat")
+    base_ws_host = request.headers.get("host", "firbyai.com")
     ws_url = f"wss://{base_ws_host}/api/voice/stream"
 
     twiml_response = f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -266,7 +266,7 @@ REGLAS DE LLAMADA TELEFÓNICA HUMANA:
         }
     ]
 
-    host = request.headers.get("host", "firbyai.lat")
+    host = request.headers.get("host", "firbyai.com")
     return {
         "assistant_name": assistant_name,
         "clinic_name": clinic_name,

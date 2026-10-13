@@ -59,7 +59,7 @@ async def create_membership_checkout(req: SubscribeRequest):
     price = plan["price_cop"] if req.currency == "COP" else plan["price_usd"]
 
     # Generar link de pago Wompi / Stripe
-    checkout_url = f"https://firbyai.lat/pay/sub_{req.tenant_id}?tier={tier_enum.value}&monto={price}"
+    checkout_url = f"https://firbyai.com/pay/sub_{req.tenant_id}?tier={tier_enum.value}&monto={price}"
 
     try:
         from src.firby.integrations.payments import PaymentBridge
@@ -75,7 +75,7 @@ async def create_membership_checkout(req: SubscribeRequest):
                 "single_use": False,
                 "currency": "COP",
                 "amount_in_cents": int(price) * 100,
-                "redirect_url": f"https://firbyai.lat/workspace?subscribed=true"
+                "redirect_url": f"https://firbyai.com/workspace?subscribed=true"
             }
             async with httpx.AsyncClient() as client:
                 res = await client.post(url, headers=headers, json=payload, timeout=10.0)

@@ -14,7 +14,7 @@ Instancia de control. Debe responder unicamente por su bot de Telegram y no debe
 ## Telegram
 
 - Bot ID esperado: `8749260201`
-- Base URL: `https://firbyai.lat`
+- Base URL: `https://firbyai.com`
 - Webhook: `firby_ovni_019d2bbd1d0b135b`
 
 ## Reglas

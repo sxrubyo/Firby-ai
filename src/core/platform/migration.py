@@ -74,7 +74,7 @@ def run_platform_migrations(store: Optional[PlatformStore] = None):
             tenant_id="tenant_demo",
             name="Firby AI",
             status=TenantStatus.ACTIVE,
-            metadata={"domain": "firbyai.lat", "plan": "enterprise"}
+            metadata={"domain": "firbyai.com", "plan": "enterprise"}
         )
         st.save_tenant(demo_tenant)
         log.info("[Migration] Creado tenant_demo")
@@ -90,7 +90,7 @@ def run_platform_migrations(store: Optional[PlatformStore] = None):
             published_version=1,
             public_id="agt_firby_demo",
             allowed_channels=["web", "whatsapp"],
-            metadata={"description": "Operador oficial del sitio firbyai.lat"}
+            metadata={"description": "Operador oficial del sitio firbyai.com"}
         )
         st.save_agent_instance(demo_agent)
 

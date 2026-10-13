@@ -163,7 +163,7 @@ class SalesCloserEngine:
                 log.error(f"[SalesEngine] Error creando payment link: {e}")
 
         if not link_url:
-            link_url = f"https://firbyai.lat/pay/apt_{appointment_id}?monto={amount}"
+            link_url = f"https://firbyai.com/pay/apt_{appointment_id}?monto={amount}"
 
         formatted_amount = f"${amount:,.0f} COP".replace(",", ".")
         message = (

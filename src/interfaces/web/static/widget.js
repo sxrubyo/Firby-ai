@@ -3,7 +3,7 @@
  * High-Craft Minimalist Interface (Linear / Vercel style)
  * Native WebGL 3D Liquid Orb Thinking Engine (100% Transparent, Zero-Latency)
  * Multi-Model Rotation: Gemini 3.1, 3.5, 3.8 & 2.5
- * https://firbyai.lat
+ * https://firbyai.com
  */
 (function () {
   if (window.__FIRBY_WIDGET_LOADED__) return;
@@ -3222,7 +3222,7 @@
         <img src="/assets/chat/icon-preguntas.svg" alt="Preguntas frecuentes" />
         <span class="bws-hw-text">Preguntas frecuentes</span>
       </a>
-      <a class="bws-hw-item" href="mailto:contacto@firbyai.lat" aria-label="Escríbenos">
+      <a class="bws-hw-item" href="mailto:contacto@firbyai.com" aria-label="Escríbenos">
         <img src="/assets/chat/icon-escribenos.svg" alt="Escríbenos" />
         <span class="bws-hw-text">Escríbenos</span>
       </a>

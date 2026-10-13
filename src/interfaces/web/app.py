@@ -291,15 +291,15 @@ class InMemoryRateLimiter:
 auth_rate_limiter = InMemoryRateLimiter(max_requests=5, window_seconds=60, block_seconds=180)
 chat_rate_limiter = InMemoryRateLimiter(max_requests=25, window_seconds=60, block_seconds=60)
 
-# CORS (Soporte completo para firbyai.lat, subdominios, entornos locales y widgets embebidos)
+# CORS (Soporte completo para firbyai.com, subdominios, entornos locales y widgets embebidos)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://firbyai.lat",
-        "https://dev.firbyai.lat",
-        "https://www.firbyai.lat",
-        "https://api.firbyai.lat",
-        "https://app.firbyai.lat",
+        "https://firbyai.com",
+        "https://dev.firbyai.com",
+        "https://www.firbyai.com",
+        "https://api.firbyai.com",
+        "https://app.firbyai.com",
         "https://firby.duckdns.org",
         "https://firby.nexusys.duckdns.org",
         "http://localhost:3000",
@@ -5062,7 +5062,7 @@ async def dev_api_user_profile(request: Request):
                     pass
 
             if admin_row and admin_row["name"]:
-                email = admin_row["email"] or "contacto@firbyai.lat"
+                email = admin_row["email"] or "contacto@firbyai.com"
                 name = admin_row["name"]
                 avatar = admin_row["avatar"] if "avatar" in admin_row.keys() and admin_row["avatar"] else ""
                 business_name = admin_row["business_name"] if "business_name" in admin_row.keys() and admin_row["business_name"] else ""
@@ -5095,7 +5095,7 @@ async def dev_api_user_profile(request: Request):
 
     return {
         "ok": True,
-        "email": "contacto@firbyai.lat",
+        "email": "contacto@firbyai.com",
         "name": "Santiago",
         "role": "owner",
         "avatar": "",
@@ -5462,7 +5462,7 @@ async def calendar_link_start(request: Request, scope_type: str = "login"):
             "solucion": "Verifica GCAL_CLIENT_ID en tu archivo .env"
         }
 
-    redirect_uri = "https://firbyai.lat/calendar-callback"
+    redirect_uri = "https://firbyai.com/calendar-callback"
     import urllib.parse
 
     if scope_type == "calendar":
@@ -5514,7 +5514,7 @@ async def calendar_oauth_callback(code: str = None, error: str = None, state: st
         return RedirectResponse(url="/sign-in")
 
     try:
-        redirect_uri = "https://firbyai.lat/calendar-callback"
+        redirect_uri = "https://firbyai.com/calendar-callback"
         client_id = os.getenv("GCAL_CLIENT_ID", "")
         client_secret = os.getenv("GCAL_CLIENT_SECRET", "")
 
@@ -6144,7 +6144,7 @@ async def api_activate_trial(request: Request):
         client_ip = request.client.host if request.client else ""
         user_agent = request.headers.get("user-agent", "")
         db.log_auth_event(
-            email=email or "trial_user@firbyai.lat",
+            email=email or "trial_user@firbyai.com",
             provider="wompi",
             action="activate_trial",
             status="success",
@@ -6207,7 +6207,7 @@ async def api_wompi_checkout_params(plan: str = "pro", email: str = ""):
         "amount_cop": amount_cop,
         "reference": reference,
         "signature": signature,
-        "redirect_url": "https://firbyai.lat/workspace/?trial_activated=true"
+        "redirect_url": "https://firbyai.com/workspace/?trial_activated=true"
     })
 
 
@@ -6225,7 +6225,7 @@ async def api_wompi_pay_direct(request: Request):
         body = {}
 
     plan = body.get("plan", "pro")
-    email = body.get("email", "").strip().lower() or "cliente@firbyai.lat"
+    email = body.get("email", "").strip().lower() or "cliente@firbyai.com"
     payment_method = body.get("payment_method", "card")
     nequi_phone = body.get("nequi_phone", "").replace(" ", "").replace("+57", "")
     card_token = body.get("card_token", "")
@@ -6279,7 +6279,7 @@ async def api_wompi_pay_direct(request: Request):
                 "signature": signature,
                 "customer_email": email,
                 "reference": reference,
-                "redirect_url": "https://firbyai.lat/workspace/?trial_activated=true"
+                "redirect_url": "https://firbyai.com/workspace/?trial_activated=true"
             }
 
             if card_token:
@@ -6554,7 +6554,7 @@ async def api_wompi_webhook(request: Request):
     tx_id = tx.get("id", "")
     status = tx.get("status", "")  # APPROVED, DECLINED, VOIDED, ERROR
     reference = tx.get("reference", "")
-    customer_email = tx.get("customer_email", "") or "cliente@firbyai.lat"
+    customer_email = tx.get("customer_email", "") or "cliente@firbyai.com"
     amount_in_cents = tx.get("amount_in_cents", 100000)
     pm_type = tx.get("payment_method_type", "")
     payment_source_id = tx.get("payment_source_id", "")
