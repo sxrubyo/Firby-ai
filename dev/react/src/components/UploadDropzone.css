@@ -1,0 +1,274 @@
+/* ══ Upload dropzone ═════════════════════════════════════ */
+.upl {
+  /* Bencho Design Tokens mapping - mapped cleanly to Firby's UI system */
+  --font-ui: var(--font-sans, "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  --card: #ffffff;
+  --fill-slab: #f5f5f7;
+  --fill-on: #17181a;
+  --ink: #09090b;
+  --pane-edge: rgba(0, 0, 0, 0.08);
+  --signal: #18181b;
+  --ok: #15803d;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  font-family: var(--font-ui);
+  color: var(--fill-on, var(--ink));
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+:root[data-theme="dark"] .upl,
+.dark .upl {
+  --card: #141418;
+  --fill-slab: #202026;
+  --fill-on: #f4f3f1;
+  --ink: #ffffff;
+  --pane-edge: rgba(255, 255, 255, 0.12);
+  --signal: #b9fa01;
+  --ok: #84cc16;
+}
+
+/* a slot of fixed size, so the box can close in round an upload
+   without moving anything below it */
+.upl-zone-wrap {
+  width: 100%;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 176px;}
+
+.upl-zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  cursor: pointer;
+  /* 176, up from 128: the drop target is the block, and a short
+     one read as a banner rather than a place to put something */
+  height: 176px;
+  padding: 0 16px;
+  overflow: hidden;
+  border-radius: var(--upl-r);
+  background: var(--fill-slab, var(--card));
+  /* a file over it and it grows, with a bounce; an upload and it
+     closes in round it */
+  transition:
+    scale 420ms cubic-bezier(0.3, 1.35, 0.4, 1),
+    width 460ms cubic-bezier(0.3, 1.2, 0.4, 1),
+    height 460ms cubic-bezier(0.3, 1.2, 0.4, 1),
+    background-color 200ms ease;}
+
+.upl-zone[data-over] { scale: 1.02; }
+
+/* the gulp: in a little as the file goes down, out past its size,
+   and settle */
+.upl-zone[data-gulp] { animation: upl-gulp 460ms cubic-bezier(0.3, 1.2, 0.4, 1); }
+
+.upl-zone[data-gulp] .upl-icon { animation: upl-open 460ms cubic-bezier(0.3, 1.4, 0.4, 1); }
+
+[data-stroke="on"] .upl-zone { box-shadow: 0 0 0 1px var(--pane-edge); }
+
+.upl-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  /* a light grey tile, no edge — the fill's own ink walked most
+     of the way to its slab, so it is a pale grey on the light fill
+     and a lifted grey on the dark one */
+  background: color-mix(in srgb, var(--fill-on, #17181a) 6%, var(--fill-slab, #fff));
+  color: color-mix(in srgb, var(--fill-on, #17181a) 70%, var(--fill-slab, #fff));
+  transition: translate 320ms cubic-bezier(0.3, 1.5, 0.4, 1), background-color 200ms ease, color 200ms ease;}
+
+/* over the box the tile only lifts, and its arrow goes to full
+   ink — no colour of its own */
+.upl-zone[data-over] .upl-icon {
+  translate: 0 -4px;
+  color: var(--fill-on, var(--ink));}
+
+.upl-say {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 13px;
+  text-align: center;}
+
+.upl-say b { font-weight: 500; }
+
+.upl-say span {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--fill-on, #17181a) 45%, var(--fill-slab, #fff));}
+
+.upl-zone[data-refuse] .upl-say b { color: #e5484d; }
+
+/* the file, arrived in the box */
+.upl-now {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  flex: none;
+  animation: upl-land 420ms var(--upl-spring) both;}
+
+.upl-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 150px;}
+
+.upl-name {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;}
+
+.upl-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 14px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--fill-on, #17181a) 45%, var(--fill-slab, #fff));}
+
+.upl-track {
+  position: relative;
+  height: 4px;
+  margin-top: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--fill-on, #17181a) 8%, var(--fill-slab, #fff));}
+
+.upl-bar {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--signal, #2231dd);
+  transform-origin: left center;}
+
+.upl-roll { display: inline-flex; line-height: 1em; height: 1em; overflow: hidden; }
+
+.upl-roll-col { display: inline-block; height: 1em; overflow: hidden; }
+
+.upl-roll-strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 220ms cubic-bezier(0.3, 1.2, 0.4, 1);}
+
+.upl-roll-strip > span { height: 1em; }
+
+.upl-end {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;}
+
+.upl-tick {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ok, #15803d);
+  color: #fff;
+  animation: upl-pop 380ms cubic-bezier(0.3, 1.6, 0.4, 1) both;}
+
+/* the tray: three files lying under the box */
+.upl-tray {
+  display: flex;
+  justify-content: center;
+  gap: 18px;}
+
+.upl-slot {
+  position: relative;
+  width: 76px;
+  height: 78px;}
+
+.upl-file {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding-top: 4px;
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+  /* home is a spring; the Bounce knob sets its overshoot */
+  transition: transform 460ms var(--upl-spring), opacity 200ms ease;}
+
+.upl-file[data-held] {
+  z-index: 5;
+  cursor: grabbing;
+  transition: none;}
+
+.upl-file[data-gone] { opacity: 0; pointer-events: none; transition: none; }
+
+.upl-file:not([data-gone]) { animation: upl-back 360ms var(--upl-spring) both; }
+
+.upl-file:focus-visible .upl-page { outline: 2px solid var(--signal, #2231dd); outline-offset: 3px; border-radius: 4px; }
+
+.upl-page { overflow: visible; }
+
+.upl-page-line {
+  stroke: color-mix(in srgb, var(--fill-on, #17181a) 18%, var(--fill-slab, #fff));
+  stroke-width: 1.5;
+  /* outline only: the page is drawn, not filled */
+  fill: none;}
+
+.upl-page-ext {
+  fill: #fff;
+  font-family: var(--font-ui);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;}
+
+.upl-label {
+  max-width: 76px;
+  overflow: hidden;
+  font-size: 11px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: color-mix(in srgb, var(--fill-on, #17181a) 70%, var(--fill-slab, #fff));}
+
+/* the tray sits on the STAGE, not on the block, so when Fill
+   takes the block the other way from the page its names would be
+   coloured for the wrong ground — light grey on a light stage.
+   Across that split they take the page's own ink instead. */
+/* the page's outline goes with its name, the same colour */
+:root:not([data-theme="dark"]) [data-fill="dark"] .upl-label { color: color-mix(in srgb, #17181a 70%, #ffffff); }
+
+:root:not([data-theme="dark"]) [data-fill="dark"] .upl-page-line { stroke: color-mix(in srgb, #17181a 70%, #ffffff); }
+
+:root[data-theme="dark"] [data-fill="light"] .upl-label { color: color-mix(in srgb, #f4f3f1 70%, #0e0f11); }
+
+:root[data-theme="dark"] [data-fill="light"] .upl-page-line { stroke: color-mix(in srgb, #f4f3f1 70%, #0e0f11); }
+
+@keyframes upl-gulp {
+  0% { scale: 1.02; }
+  35% { scale: 0.985; }
+  70% { scale: 1.006; }
+  100% { scale: 1; }}
+
+@keyframes upl-open { 40% { scale: 1.08; } }
+
+@keyframes upl-land { from { opacity: 0; scale: 0.85; translate: 0 10px; } }
+
+@keyframes upl-pop { from { scale: 0; } }
+
+@keyframes upl-back { from { scale: 0.7; opacity: 0; } }

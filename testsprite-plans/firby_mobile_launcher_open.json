@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/TestSprite/testsprite-cli/main/schemas/plan.schema.json",
+  "projectId": "firby-operator-core",
+  "type": "frontend",
+  "name": "Mobile viewport: Firby chat window opens cleanly with header and input bar visible",
+  "description": "When a visitor on a mobile viewport (390x844 or 412x915) taps the chat launcher button, the full chat container expands visibly into the viewport showing the executive header and input area.",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the homepage"
+    },
+    {
+      "type": "action",
+      "description": "Tap the floating Firby chat launcher button in the bottom right corner"
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the chat window expands into view with the dark green gradient background, header title, close button, and active message container"
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the text input field and send button are visible and accessible within the viewport bounds"
+    }
+  ]
+}

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261004_negro8_centrado">
+    <link rel="shortcut icon" href="/favicon.ico?v=20261004_negro8_centrado">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GP01L8M20H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GP01L8M20H');
+    </script>
+    <!-- End Google tag (gtag.js) -->
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-N7FJJPZ9');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "yk3dt2xwep");
+    </script>
+    <!-- End Microsoft Clarity -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#0d1117">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <script src="/dark-theme.js"></script>
+    <link rel="stylesheet" href="/dark-theme.css">
+    <title>Política de Privacidad — Firby</title>
+    <meta name="description" content="Política de Tratamiento de Datos Personales y Privacidad de Firby AI en cumplimiento de la Ley 1581 de 2012 de Colombia.">
+    <link rel="icon" type="image/png" href="/assets/branding/Isotipo-pestana.png?v=20261004_negro8_centrado">
+    <link rel="apple-touch-icon" href="/assets/branding/Isotipo-pestana.png?v=20261004_negro8_centrado">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://firbyai.com/privacy">
+    <meta property="og:title" content="Política de Privacidad — Firby AI">
+    <meta property="og:description" content="Política de Tratamiento de Datos Personales y Privacidad de Firby AI en Colombia y Latinoamérica.">
+    <meta property="og:image" content="https://firbyai.com/assets/figma/firby_brand_logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-page: #ffffff;
+            --bg-subtle: #f8fafc;
+            --bg-card: #ffffff;
+            --border-subtle: #e2e8f0;
+            --border-card: #e2e8f0;
+            --text-heading: #09090b;
+            --text-body: #475569;
+            --text-muted: #64748b;
+            --emerald-primary: #15803d;
+            --dark-primary: #09090b;
+            --dark-hover: #18181b;
+            --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar Floating Glass Pill */
+        .navbar-floating-wrapper {
+            position: fixed;
+            top: 18px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .navbar-glass-pill {
+            pointer-events: auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 28px;
+            width: 100%;
+            max-width: 1120px;
+            height: 76px;
+            padding: 0 16px 0 24px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 100px;
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06), inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            height: 30px;
+            width: auto;
+            display: block;
+        }
+
+        html.dark .navbar-logo img,
+        html[data-theme="dark"] .navbar-logo img {
+            content: url('/assets/figma/firby_brand_logo_dark.png');
+        }
+
+        .footer-brand img,
+        .footer-logo img,
+        .footer-logo-img {
+            content: url('/assets/figma/firby_brand_logo_dark.png');
+        }
+
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .navbar-link {
+            font-family: var(--font-heading);
+            font-size: 13.5px;
+            font-weight: 500;
+            color: #334155;
+            transition: color 0.2s ease;
+        }
+
+        .navbar-link:hover {
+            color: var(--text-heading);
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-nav-signin {
+            font-family: var(--font-heading);
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #0f172a;
+            padding: 9px 18px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-nav-signin:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-nav-cta {
+            font-family: var(--font-heading);
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #ffffff;
+            background: var(--dark-primary);
+            padding: 10px 22px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-nav-cta:hover {
+            background: var(--dark-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Legal Header */
+        .legal-header {
+            padding-top: 140px;
+            padding-bottom: 40px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .legal-title {
+            font-family: var(--font-heading);
+            font-size: clamp(30px, 3.8vw, 42px);
+            font-weight: 800;
+            color: var(--text-heading);
+            letter-spacing: -0.03em;
+            line-height: 1.18;
+            margin-bottom: 12px;
+        }
+
+        .legal-meta {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Legal Content */
+        .legal-content {
+            padding: 50px 0 90px;
+        }
+
+        .legal-section {
+            margin-bottom: 44px;
+        }
+
+        .legal-section h2 {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .legal-section p {
+            font-size: 15px;
+            color: var(--text-body);
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .legal-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .legal-section strong {
+            color: var(--text-heading);
+            font-weight: 700;
+        }
+
+        .legal-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .legal-section li {
+            font-size: 14.5px;
+            color: var(--text-body);
+            line-height: 1.65;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .legal-section li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer-section {
+            background: #09090b;
+            color: #94a3b8;
+            padding: 70px 0 35px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #64748b;
+            max-width: 320px;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-heading);
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-col-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col-links a {
+            font-size: 14px;
+            color: #94a3b8;
+            transition: color 0.2s ease;
+        }
+
+        .footer-col-links a:hover {
+            color: #ffffff;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #64748b;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-portal-link {
+            color: #ffffff;
+            margin-left: 12px;
+            font-weight: 600;
+        }
+
+        .footer-portal-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-floating-wrapper {
+                top: 12px !important;
+                padding: 0 12px !important;
+            }
+
+            .navbar-glass-pill {
+                height: 64px !important;
+                padding: 0 10px 0 16px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                border-radius: 100px !important;
+                background: rgba(255, 255, 255, 0.82) !important;
+                backdrop-filter: blur(24px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+                border: 1px solid rgba(0, 0, 0, 0.10) !important;
+                box-shadow: 0 8px 24px -3px rgba(0, 0, 0, 0.08), inset 0 1px 1.5px rgba(255, 255, 255, 0.95) !important;
+            }
+
+            .navbar-logo img {
+                height: 22px !important;
+                width: auto !important;
+            }
+
+            .navbar-links {
+                display: none !important;
+            }
+
+            .navbar-actions {
+                display: flex !important;
+                align-items: center !important;
+                gap: 6px !important;
+                flex-shrink: 0 !important;
+            }
+
+            .btn-signin-desktop,
+            .btn-nav-signin {
+                display: inline-flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                flex-shrink: 0 !important;
+                white-space: nowrap !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 11px !important;
+                font-family: var(--font-heading) !important;
+                font-size: 11.5px !important;
+                font-weight: 600 !important;
+                height: 32px !important;
+                border-radius: 100px !important;
+                color: #09090b !important;
+                background: #ffffff !important;
+                border: 1px solid rgba(0, 0, 0, 0.12) !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+                text-decoration: none !important;
+                transition: all 0.2s ease !important;
+            }
+
+            .btn-signin-desktop:hover, .btn-nav-signin:hover, .btn-signin-desktop:active, .btn-nav-signin:active {
+                background: rgba(0, 0, 0, 0.09) !important;
+                color: #000000 !important;
+            }
+
+            .btn-nav-cta {
+                display: inline-flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                flex-shrink: 0 !important;
+                white-space: nowrap !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 13px !important;
+                font-family: var(--font-heading) !important;
+                font-size: 11.5px !important;
+                font-weight: 700 !important;
+                height: 32px !important;
+                border-radius: 100px !important;
+                background: #09090b !important;
+                color: #ffffff !important;
+                border: none !important;
+                cursor: pointer !important;
+                white-space: nowrap !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14) !important;
+                text-decoration: none !important;
+            }
+
+            .btn-nav-cta:active {
+                transform: scale(0.97);
+            }
+
+            .legal-header { padding-top: 115px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+        }
+    .footer-lang-selector .lang-current { color: #ffffff !important; font-weight: 700; }
+        .footer-lang-selector .lang-switch-link { color: #94a3b8; transition: color 0.2s ease; }
+        .footer-lang-selector .lang-switch-link:hover { color: #ffffff; }
+    
+        /* -- UNIFIED DARK FOOTER (PERFECT CONTRAST) -- */
+        footer, .footer-section {
+            background: #09090b !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            padding: 56px 0 32px 0 !important;
+            color: #94a3b8 !important;
+            position: relative;
+            z-index: 10 !important;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif) !important;
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            margin-bottom: 16px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+        }
+
+        .footer-brand p, .footer-desc {
+            font-size: 13.5px !important;
+            color: #94a3b8 !important;
+            line-height: 1.6 !important;
+            max-width: 320px !important;
+        }
+
+        .footer-link, .footer-col-links a {
+            font-size: 13.5px !important;
+            color: #94a3b8 !important;
+            text-decoration: none !important;
+            transition: color 0.2s ease !important;
+        }
+
+        .footer-link:hover, .footer-col-links a:hover {
+            color: #ffffff !important;
+        }
+
+        .footer-divider {
+            height: 1px !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            margin: 32px 0 24px 0 !important;
+            border: none !important;
+        }
+
+        .footer-bottom {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            font-size: 13px !important;
+            color: #94a3b8 !important;
+            flex-wrap: wrap !important;
+            gap: 16px !important;
+        }
+
+        .footer-copy-text {
+            font-size: 13px !important;
+            color: #94a3b8 !important;
+        }
+
+        .footer-portal-link {
+            color: #94a3b8 !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            margin-left: 12px !important;
+            transition: color 0.2s ease !important;
+        }
+
+        .footer-portal-link:hover {
+            color: #ffffff !important;
+            text-decoration: underline !important;
+        }
+
+        .footer-lang-selector {
+            font-size: 13px !important;
+            color: #94a3b8 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+
+        .footer-lang-selector span,
+        .footer-lang-selector .lang-label,
+        .footer-lang-selector .lang-separator {
+            color: #94a3b8 !important;
+        }
+
+        .footer-lang-selector .lang-current {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            padding: 3px 10px !important;
+            border-radius: 6px !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            letter-spacing: 0.02em !important;
+            display: inline-block !important;
+        }
+
+        .footer-lang-selector .lang-switch-link {
+            color: #94a3b8 !important;
+            text-decoration: none !important;
+            padding: 3px 8px !important;
+            border-radius: 4px !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .footer-lang-selector .lang-switch-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N7FJJPZ9"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Floating Navigation -->
+    <div class="navbar-floating-wrapper">
+        <header class="navbar-glass-pill" id="navbar">
+            <a href="/" class="navbar-logo" aria-label="Firby Inicio">
+                <img src="/assets/figma/firby_brand_logo.png" alt="Firby" />
+            </a>
+
+            <nav class="navbar-links">
+                <a href="/#problema" class="navbar-link">El Problema</a>
+                <a href="/#como-funciona" class="navbar-link">Cómo Funciona</a>
+                <a href="/#equipo-digital" class="navbar-link">Equipo Digital</a>
+                <a href="/#planes" class="navbar-link">Planes</a>
+                <a href="/#contacto" class="navbar-link">Contacto</a>
+            </nav>
+
+            <div class="navbar-actions">
+                
+                <a href="/sign-in" class="btn-signin-desktop btn-nav-signin">Iniciar Sesión</a>
+                <a href="/#contacto" class="btn-nav-cta">Comencemos</a>
+            </div>
+        </header>
+    </div>
+
+    <!-- Header Section -->
+    <header class="legal-header">
+        <div class="container">
+            <h1 class="legal-title">Política de Privacidad y Tratamiento de Datos Personales</h1>
+            <div class="legal-meta">
+                <span>Vigente desde: 6 de Septiembre de 2026</span>
+                <span>•</span>
+                <span>República de Colombia y Latinoamérica</span>
+                <span>•</span>
+                <span>Ley Estatutaria 1581 de 2012</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="legal-content">
+        <div class="container">
+
+            <!-- Section 1 -->
+            <section class="legal-section">
+                <h2>1. Responsable del Tratamiento de la Información</h2>
+                <p>
+                    La plataforma <strong>Firby AI</strong> (en adelante "Firby" o "el Servicio") es operada y representada comercialmente en Colombia por <strong>Santiago Rubio Parra</strong> (en calidad de titular de la actividad de desarrollo tecnológico y software), domiciliado en la ciudad de Medellín, Colombia.
+                </p>
+                <p>
+                    Para cualquier consulta, requerimiento de Hábeas Data, actualización o solicitud de supresión de datos, los canales directos y oficiales de contacto son el correo electrónico <strong>contacto@firbyai.com</strong> y la línea de atención <strong>+57 (324) 369-9856</strong>.
+                </p>
+                <p>
+                    El tratamiento de la información se rige de manera estricta por la <strong>Ley 1581 de 2012</strong>, su <strong>Decreto Reglamentario 1377 de 2013</strong> y el régimen constitucional de protección de datos personales de la República de Colombia.
+                </p>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="legal-section">
+                <h2>2. Datos Recopilados y Finalidad del Tratamiento</h2>
+                <p>
+                    <strong>Datos de empresas, consultorios y clientes contratantes:</strong> Nombre del profesional, representante legal o administrador, razón social o nombre comercial, documento de identidad o NIT, número de contacto celular (WhatsApp ejecutivo), correo electrónico corporativo, configuración de horarios y agendas de atención, e información para la emisión de facturación o cobros.
+                </p>
+                <p>
+                    <strong>Datos de visitantes y prospectos gestionados en la web:</strong> Nombre, teléfono o WhatsApp de contacto, correo electrónico, motivo de consulta, horario de cita seleccionado en la web y solicitudes comerciales formuladas.
+                </p>
+                <p>
+                    <strong>Finalidad del tratamiento:</strong> La recolección y tratamiento de datos tiene como único y exclusivo propósito la operación del operador digital autónomo en el sitio web del cliente, la sincronización de citas y reuniones en tiempo real con Google Calendar, el envío de alertas privadas y solicitudes de visto bueno al WhatsApp del contratante, y la administración técnica de la suscripción SaaS. <strong>Firby no comercializa, no arrienda ni transfiere bases de datos de clientes ni prospectos a terceros con fines publicitarios.</strong>
+                </p>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="legal-section">
+                <h2>3. Pasarela de Pagos y Seguridad de Tarjetas (Wompi)</h2>
+                <p>
+                    <strong>Seguridad financiera y PCI-DSS:</strong> Todas las transacciones comerciales, validaciones de tarjetas de crédito y débito, pagos por PSE, Nequi y transferencias Bancolombia son procesadas de manera directa y segura por la pasarela de pagos <strong>Wompi (Bancolombia S.A.)</strong>, entidad certificada bajo el estándar de seguridad internacional <strong>PCI-DSS Nivel 1</strong>.
+                </p>
+                <p>
+                    <strong>Almacenamiento cero de datos sensibles:</strong> Firby <strong>no recopila, no tiene acceso ni almacena</strong> los números completos de las tarjetas bancarias, fechas de vencimiento completas ni códigos de seguridad (CVV). Toda la información sensible es encriptada directamente en los servidores de Wompi, y Firby únicamente custodia identificadores de token seguros para procesar los cobros previamente autorizados por el usuario.
+                </p>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="legal-section">
+                <h2>4. Condiciones de la Prueba Gratuita de 7 Días y Facturación Recurrente</h2>
+                <p>
+                    <strong>Período de prueba sin cobro por suscripción:</strong> Al momento de registrarte en la prueba de siete (7) días calendario, se realiza una verificación técnica de la tarjeta bancaria a través de Wompi para certificar la validez del medio de pago. Durante estos primeros 7 días calendario <strong>no se realiza ningún cobro por la suscripción</strong>.
+                </p>
+                <p>
+                    <strong>Inicio de facturación recurrente:</strong> Finalizado el séptimo (7°) día calendario de prueba para los planes Starter o Pro, si el usuario no ha solicitado la cancelación del servicio, se activará de forma automática el cobro mensual recurrente del plan contratado (Plan Starter: $290.000 COP/mes o Plan Pro: $490.000 COP/mes). El Plan Equipos ($890.000 COP/mes) opera bajo suscripción mensual directa sin período de prueba.
+                </p>
+                <p>
+                    <strong>Cancelación transparente y sin penalidad:</strong> El usuario es libre de cancelar la suscripción en cualquier instante dentro del período de 7 días de prueba, o en cualquier momento de su ciclo mensual, directamente desde su panel de control o escribiendo a <strong>contacto@firbyai.com</strong>. Al confirmar la cancelación, la tarjeta no volverá a ser debitada.
+                </p>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="legal-section">
+                <h2>5. Integración con Google OAuth y Google Calendar API</h2>
+                <p>
+                    <strong>Alcance de permisos:</strong> Cuando el usuario decide registrarse o conectar sus servicios utilizando su cuenta de Google, Firby solicita de manera exclusiva los alcances estrictamente necesarios para su funcionamiento:
+                </p>
+                <ul style="list-style: disc; padding-left: 24px; margin-top: 8px; margin-bottom: 12px; color: var(--text-body); line-height: 1.7;">
+                    <li><strong>Identidad básica:</strong> <code>openid</code>, <code>email</code> y <code>profile</code> para autenticación segura en el espacio de trabajo.</li>
+                    <li><strong>Google Calendar:</strong> <code>https://www.googleapis.com/auth/calendar.events</code> con el único fin de consultar disponibilidad en tiempo real e insertar automáticamente las citas y reservas agendadas por los visitantes de su sitio web.</li>
+                </ul>
+                <p>
+                    <strong>Restricción estricta y privacidad de datos:</strong> Firby no solicita acceso ni lee correos de Gmail, documentos de Google Drive ni contactos personales. Los datos obtenidos a través de las APIs de Google se utilizan exclusivamente para la gestión operativa de citas solicitada por el usuario. Firby no vende, no transfiere a terceros ni utiliza datos de usuarios de Google para publicidad ni para el entrenamiento de modelos de inteligencia artificial generalizados.
+                </p>
+                <p style="margin-top: 14px; padding: 14px 18px; background: var(--bg-subtle); border-left: 3px solid #15803d; border-radius: 6px; font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Google API Services User Data Policy:</strong><br>
+                    Firby's use and transfer to any other app of information received from Google APIs will adhere to <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" style="color: #15803d; font-weight: 600; text-decoration: underline;">Google API Services User Data Policy</a>, including the Limited Use requirements.
+                </p>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="legal-section">
+                <h2>6. Derechos del Titular y Procedimiento de Hábeas Data</h2>
+                <p>
+                    En virtud del artículo 8 de la Ley 1581 de 2012 de la República de Colombia, el titular de los datos personales tiene derecho en todo momento a conocer, actualizar y rectificar su información, solicitar prueba de la autorización otorgada, ser informado sobre el uso de sus datos y revocar la autorización o solicitar la supresión de la información cuando lo estime pertinente.
+                </p>
+                <p>
+                    Para ejercer sus derechos, el titular o representante puede enviar una comunicación formal a <strong>contacto@firbyai.com</strong> adjuntando copia de su documento de identidad y detallando el objeto de su solicitud. Las solicitudes serán atendidas en un plazo máximo de quince (15) días hábiles conforme a la legislación colombiana.
+                </p>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="legal-section">
+                <h2>7. Infraestructura y Seguridad de la Información</h2>
+                <p>
+                    Los datos procesados por Firby residen en centros de datos seguros con cifrado de extremo a extremo en tránsito (protocolos TLS 1.3 y certificados SSL de alta seguridad) y cifrado en reposo bajo estándar AES-256. Se realizan respaldos periódicos automatizados y el acceso administrativo a servidores de bases de datos se encuentra protegido por llaves criptográficas y redes privadas virtuales.
+                </p>
+            </section>
+
+            <!-- Section 8 -->
+            <section class="legal-section">
+                <h2>8. Vigencia y Modificaciones</h2>
+                <p>
+                    La presente política rige a partir del 6 de Septiembre de 2026. Firby se reserva el derecho de actualizar este documento ante cambios legislativos o mejoras operativas. Las modificaciones sustanciales serán publicadas en el sitio web oficial <strong>https://firbyai.com/privacy</strong> con fecha de entrada en vigencia.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="/assets/figma/firby_brand_logo.png" alt="Firby AI" class="footer-logo-img" style="height: 28px; width: auto; max-width: 130px; object-fit: contain; display: block; margin-bottom: 14px;" />
+                    <p class="footer-desc">
+                        Operador digital aut&oacute;nomo para empresas y profesionales. Atiende en tu sitio web, agenda citas en tu Google Calendar y te mantiene informado en tu celular.
+                    </p>
+                </div>
+
+                <!-- Col 2: Plataforma -->
+                <div>
+                    <h4 class="footer-col-title">Plataforma</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="/sign-in">Iniciar Sesi&oacute;n (Acceso Clientes)</a></li>
+                        <li><a href="/#como-funciona">C&oacute;mo Funciona</a></li>
+                        <li><a href="/#equipo-digital">Equipo Digital</a></li>
+                        <li><a href="/#planes">Planes y Precios</a></li>
+                        <li><a href="/#seguridad-cumplimiento">Seguridad y Control</a></li>
+                        <li><a href="/#experiencia-conversacional">Demostraci&oacute;n en Vivo</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Legal -->
+                <div>
+                    <h4 class="footer-col-title">Legal</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="/terms">T&eacute;rminos de Servicio</a></li>
+                        <li><a href="/privacy">Pol&iacute;tica de Privacidad</a></li>
+                        <li><a href="/data-agreement">Acuerdo de Datos</a></li>
+                        <li><a href="mailto:contacto@firbyai.com">Contacto de Seguridad</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-info">
+                    <div class="footer-copy-text">
+                        &copy; 2026 Firby AI. Todos los derechos reservados.
+                        <a href="/sign-in" class="footer-portal-link">Acceso Clientes (Iniciar Sesi&oacute;n)</a>
+                    </div>
+                </div>
+
+                <div class="footer-lang-selector">
+                    <span class="lang-label">Idioma:</span>
+                    <a href="/en" class="lang-switch-link">English</a>
+                    <span class="lang-separator">&middot;</span>
+                    <strong class="lang-current">Espa&ntilde;ol</strong>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

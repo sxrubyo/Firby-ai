@@ -1,0 +1,86 @@
+[
+  {
+    "key": "query_info",
+    "name": "Consultas Generales y Catálogo",
+    "category": "informacion",
+    "description": "Permite responder preguntas frecuentes, horarios, ubicación, servicios y tarifas públicas.",
+    "level": 1,
+    "level_name": "Autónomo Seguro",
+    "enabled": true,
+    "requires_identity": false,
+    "requires_human_approval": false,
+    "execution_count": 842
+  },
+  {
+    "key": "schedule_appointment",
+    "name": "Agendamiento y Reservas",
+    "category": "operaciones",
+    "description": "Permite verificar huecos en la agenda y apartar citas en tiempo real.",
+    "level": 1,
+    "level_name": "Autónomo Seguro",
+    "enabled": true,
+    "requires_identity": false,
+    "requires_human_approval": false,
+    "execution_count": 389
+  },
+  {
+    "key": "update_contact_info",
+    "name": "Actualización de Datos de Contacto",
+    "category": "datos",
+    "description": "Permite modificar correo, número celular o dirección del cliente en la base de datos.",
+    "level": 2,
+    "level_name": "Acción Verificada",
+    "enabled": true,
+    "requires_identity": true,
+    "requires_human_approval": false,
+    "execution_count": 114
+  },
+  {
+    "key": "reschedule_cancel",
+    "name": "Reagendamiento y Cancelación de Citas",
+    "category": "operaciones",
+    "description": "Permite cancelar o mover una cita existente a otro horario solicitado.",
+    "level": 2,
+    "level_name": "Acción Verificada",
+    "enabled": true,
+    "requires_identity": true,
+    "requires_human_approval": false,
+    "execution_count": 75
+  },
+  {
+    "key": "issue_refund",
+    "name": "Emisión de Reembolsos y Devoluciones",
+    "category": "financiero",
+    "description": "Procesamiento de reintegros de dinero a clientes por cancelaciones o reclamos.",
+    "level": 3,
+    "level_name": "Visto Bueno Requerido",
+    "enabled": true,
+    "requires_identity": true,
+    "requires_human_approval": true,
+    "execution_count": 8
+  },
+  {
+    "key": "custom_discount",
+    "name": "Descuentos Especiales y Tarifas de Excepción",
+    "category": "financiero",
+    "description": "Aplicación de descuentos no publicados o promociones personalizadas.",
+    "level": 3,
+    "level_name": "Visto Bueno Requerido",
+    "enabled": true,
+    "requires_identity": true,
+    "requires_human_approval": true,
+    "execution_count": 16
+  },
+  {
+    "key": "sensitive_export",
+    "name": "Exportación Masiva de Registros",
+    "category": "seguridad",
+    "description": "Descarga de historiales completos de clientes o transacciones del sistema.",
+    "level": 3,
+    "level_name": "Visto Bueno Requerido",
+    "enabled": false,
+    "requires_identity": true,
+    "requires_human_approval": true,
+    "execution_count": 0
+  }
+]

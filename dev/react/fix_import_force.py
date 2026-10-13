@@ -1,0 +1,8 @@
+with open('/home/ubuntu/firby-dev-react/src/components/ui/modern-side-bar.tsx', 'r') as f:
+    content = f.read()
+
+content = content.replace("HelpCircle\\n}", "HelpCircle,\\n  Server\\n}")
+content = content.replace("HelpCircle\n}", "HelpCircle,\n  Server\n}")
+
+with open('/home/ubuntu/firby-dev-react/src/components/ui/modern-side-bar.tsx', 'w') as f:
+    f.write(content)

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-BLB26J2X');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261009_isotipo_negro">
+    <link rel="shortcut icon" href="/favicon.ico?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/branding/Isotipo-pestana.png?v=20261009_isotipo_negro">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png?v=20261009_isotipo_negro">
+    
+    <!-- Theme Anti-Flicker Script: Strict LIGHT Mode Default -->
+    <script>
+    (function() {
+        try {
+            var t = localStorage.getItem('theme_v3');
+            if (t === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        } catch(e) {}
+    })();
+    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crea tu cuenta — Firby</title>
+    <link rel="canonical" href="https://firbyai.com/onboarding">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #fafafa;
+      color: #09090b;
+      margin: 0;
+      padding: 0;
+    }
+    .input-pro {
+      background-color: #ffffff;
+      border: 1px solid #e4e4e7;
+      transition: all 0.15s ease-in-out;
+    }
+    .input-pro:focus {
+      border-color: #09090b;
+      box-shadow: 0 0 0 1px #09090b;
+      outline: none;
+    }
+    .btn-action {
+      background-color: #b8f901;
+      color: #09090b;
+      transition: all 0.15s ease-in-out;
+    }
+    .btn-action:hover {
+      background-color: #a6e000;
+    }
+
+    /* Footer styled with same dark black as top banner */
+    footer, .footer-section {
+      background: #121215;
+      border-top: 1px solid #27272a;
+      padding: 56px 0 32px 0;
+      color: #a1a1aa;
+    }
+    .footer-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 44px;
+    }
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+    .footer-desc {
+      font-size: 13.5px;
+      color: #a1a1aa;
+      line-height: 1.6;
+      max-width: 320px;
+      margin-top: 14px;
+    }
+    .footer-col-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+    .footer-col-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col-links a {
+      font-size: 13.5px;
+      color: #a1a1aa;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-col-links a:hover {
+      color: #ffffff;
+    }
+    .footer-divider {
+      height: 1px;
+      background: #27272a;
+      margin: 32px 0 24px 0;
+    }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #71717a;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-portal-link {
+      color: #a1a1aa;
+      text-decoration: underline;
+      margin-left: 8px;
+    }
+    .footer-portal-link:hover {
+      color: #ffffff;
+    }
+    .footer-lang-selector {
+      font-size: 13px;
+      color: #71717a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lang-current {
+      color: #ffffff !important;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       ONBOARDING DARK MODE SUPPORT (Header & Footer remain strictly black #121215)
+       ========================================================================== */
+    html.dark body,
+    html[data-theme="dark"] body {
+      background-color: #09090b !important;
+      color: #f4f4f5 !important;
+    }
+
+    /* Keep Header strictly dark (#121215) in both modes */
+    header,
+    header.bg-\[\#121215\] {
+      background-color: #121215 !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+    }
+
+    /* Keep Footer strictly dark (#121215) in both modes */
+    footer,
+    .footer-section {
+      background-color: #121215 !important;
+      border-color: #27272a !important;
+      color: #a1a1aa !important;
+    }
+
+    /* Onboarding Main Content & Form Cards in Dark Mode */
+    html.dark main,
+    html[data-theme="dark"] main {
+      background-color: #09090b !important;
+    }
+
+    html.dark main .bg-white,
+    html.dark .bg-white,
+    html[data-theme="dark"] main .bg-white,
+    html[data-theme="dark"] .bg-white {
+      background-color: #121215 !important;
+      border-color: rgba(255, 255, 255, 0.10) !important;
+    }
+
+    /* Typography in Dark Mode */
+    html.dark .text-neutral-900,
+    html[data-theme="dark"] .text-neutral-900 {
+      color: #ffffff !important;
+    }
+    html.dark .text-neutral-800,
+    html[data-theme="dark"] .text-neutral-800 {
+      color: #f4f4f5 !important;
+    }
+    html.dark .text-neutral-700,
+    html[data-theme="dark"] .text-neutral-700 {
+      color: #d4d4d8 !important;
+    }
+    html.dark .text-neutral-600,
+    html[data-theme="dark"] .text-neutral-600 {
+      color: #a1a1aa !important;
+    }
+    html.dark .text-neutral-500,
+    html[data-theme="dark"] .text-neutral-500 {
+      color: #71717a !important;
+    }
+
+    /* Form Inputs in Dark Mode */
+    html.dark .input-pro,
+    html[data-theme="dark"] .input-pro {
+      background-color: #18181b !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+      color: #ffffff !important;
+    }
+    html.dark .input-pro:focus,
+    html[data-theme="dark"] .input-pro:focus {
+      border-color: #b8f901 !important;
+      box-shadow: 0 0 0 1px #b8f901 !important;
+    }
+
+    /* Action button remains vibrant lime with black text */
+    .btn-action {
+      background-color: #b8f901 !important;
+      color: #09090b !important;
+    }
+
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-BLB26J2X"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Top Full-Width Header Bar (Rectángulo negro suave de derecha a izquierda) -->
+  <header class="w-full bg-[#121215] border-b border-[#27272a]/70 py-4 px-6 sm:px-12 flex items-center justify-between">
+    <div class="max-w-5xl w-full mx-auto flex items-center justify-between">
+      <a href="/" title="Volver al inicio" class="inline-flex items-center transition-transform hover:scale-[1.02] active:scale-[0.98]">
+        <img src="/assets/figma/firby_brand_logo.png" alt="Firby AI" class="h-8 sm:h-9 w-auto object-contain select-none">
+      </a>
+      <a href="/sign-in" class="text-xs font-semibold text-neutral-300 hover:text-white transition">
+        Iniciar Sesión &rarr;
+      </a>
+    </div>
+  </header>
+
+  <!-- Main 2-Column Responsive Layout (Balanced, Compact Blocks, Clean Floating) -->
+  <main class="flex-1 w-full max-w-5xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-start">
+
+      <!-- Columna Izquierda: Formulario Onboarding Acortado y Compacto (6 cols, max-w-[430px]) -->
+      <div class="lg:col-span-6 w-full max-w-[430px] text-left">
+
+        <!-- Main Header -->
+        <div class="mb-6 text-left">
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight mb-1">
+            ¡Bienvenido!
+          </h1>
+          <p class="text-lg sm:text-xl font-bold text-neutral-800">
+            Crea tu cuenta en Firby
+          </p>
+        </div>
+
+        <!-- Onboarding Form -->
+        <form id="proOnboardingForm" class="space-y-4">
+
+          <!-- Nombre y Apellido (Máxima Personalización) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="firstName" class="block text-sm font-normal text-neutral-700 mb-1">
+                Nombre <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                placeholder="Escribe tu nombre"
+                required
+                class="w-full input-pro rounded-xl px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400"
+              >
+              <p class="text-[12px] text-neutral-400 mt-1">
+                Para que Firby se dirija a ti de tú a tú.
+              </p>
+            </div>
+
+            <div>
+              <label for="lastName" class="block text-sm font-normal text-neutral-700 mb-1">
+                Apellido <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                placeholder="Escribe tu apellido"
+                required
+                class="w-full input-pro rounded-xl px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400"
+              >
+              <p class="text-[12px] text-neutral-400 mt-1">
+                Para reportes formales, contratos y facturación.
+              </p>
+            </div>
+          </div>
+
+          <!-- Nombre de usuario -->
+          <div>
+            <label for="username" class="block text-sm font-normal text-neutral-700 mb-1">
+              Nombre de usuario <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Escribe tu usuario"
+              required
+              class="w-full input-pro rounded-xl px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400"
+            >
+            <p class="text-[12px] text-neutral-400 mt-1">
+              Este será el usuario que utilizarás para ingresar a Firby.
+            </p>
+          </div>
+
+          <!-- Nombre de la Empresa o Negocio -->
+          <div>
+            <label for="businessName" class="block text-sm font-normal text-neutral-700 mb-1">
+              Nombre de tu empresa, consultorio o negocio <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="businessName"
+              placeholder="Escribe el nombre de tu empresa o marca"
+              required
+              class="w-full input-pro rounded-xl px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400"
+            >
+            <p class="text-[12px] text-neutral-400 mt-1">
+              El nombre visible de tu espacio de trabajo.
+            </p>
+          </div>
+
+          <!-- Tipo de Negocio / Industria -->
+          <div>
+            <label for="industry" class="block text-sm font-normal text-neutral-700 mb-1">
+              Sector o tipo de actividad <span class="text-red-500">*</span>
+            </label>
+            <select
+              id="industry"
+              required
+              class="w-full input-pro rounded-xl px-3.5 py-2.5 text-sm text-neutral-900 cursor-pointer"
+            >
+              <option value="Salud y Clínicas">Salud, Medicina y Clínicas Odontológicas</option>
+              <option value="Medicina Estética y Dermatología">Medicina Estética, Spa y Bienestar</option>
+              <option value="Servicios Profesionales">Servicios Profesionales y Consultoría</option>
+              <option value="Comercio y Retail">Comercio, Tiendas y Ventas</option>
+              <option value="Educación y Academias">Educación y Cursos</option>
+              <option value="Inmobiliaria">Inmobiliaria y Bienes Raíces</option>
+              <option value="Otro sector comercial">Otro sector o actividad</option>
+            </select>
+            <p class="text-[12px] text-neutral-400 mt-1">
+              Nos permite calibrar las respuestas y servicios de tu operador.
+            </p>
+          </div>
+
+          <!-- Correo electrónico -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label for="email" class="block text-sm font-normal text-neutral-700">
+                Correo electrónico <span class="text-red-500">*</span>
+              </label>
+              <span id="googleVerifiedTag" class="hidden text-xs font-medium text-neutral-500">
+                Verificado con Google
+              </span>
+            </div>
+            <input
+              type="email"
+              id="email"
+              placeholder="Escribe tu correo electrónico"
+              required
+              class="w-full input-pro rounded-xl px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400"
+            >
+            <p id="emailHelpText" class="text-[12px] text-neutral-500 mt-1">
+              Donde recibirás los informes y el acceso a tu plataforma.
+            </p>
+          </div>
+
+          <!-- WhatsApp con Selector de Bandera Real -->
+          <div>
+            <label class="block text-sm font-normal text-neutral-700 mb-1">
+              WhatsApp <span class="text-red-500">*</span>
+            </label>
+            <div class="flex items-center gap-2 relative">
+
+              <!-- Dropdown Trigger -->
+              <div class="relative">
+                <button
+                  type="button"
+                  id="countryBtn"
+                  onclick="toggleCountryDropdown()"
+                  class="flex items-center gap-2 px-3 py-2.5 bg-white border border-neutral-200 rounded-xl hover:border-neutral-400 focus:outline-none transition select-none"
+                >
+                  <img id="flagImg" src="https://flagcdn.com/w40/co.png" alt="Colombia" class="w-5 h-auto rounded-sm object-contain">
+                  <span id="dialCode" class="text-sm font-bold text-neutral-800">+57</span>
+                  <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+
+                <!-- Country List Dropdown -->
+                <div
+                  id="countryDropdown"
+                  class="hidden absolute left-0 top-full mt-1.5 w-60 bg-white border border-neutral-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto py-1"
+                >
+                  <div onclick="selectCountry('co', '+57', 'Colombia')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/co.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">Colombia</span>
+                    <span class="text-neutral-400 font-mono">+57</span>
+                  </div>
+                  <div onclick="selectCountry('mx', '+52', 'México')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/mx.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">México</span>
+                    <span class="text-neutral-400 font-mono">+52</span>
+                  </div>
+                  <div onclick="selectCountry('us', '+1', 'Estados Unidos')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/us.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">Estados Unidos</span>
+                    <span class="text-neutral-400 font-mono">+1</span>
+                  </div>
+                  <div onclick="selectCountry('es', '+34', 'España')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/es.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">España</span>
+                    <span class="text-neutral-400 font-mono">+34</span>
+                  </div>
+                  <div onclick="selectCountry('cl', '+56', 'Chile')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/cl.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">Chile</span>
+                    <span class="text-neutral-400 font-mono">+56</span>
+                  </div>
+                  <div onclick="selectCountry('pe', '+51', 'Perú')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/pe.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">Perú</span>
+                    <span class="text-neutral-400 font-mono">+51</span>
+                  </div>
+                  <div onclick="selectCountry('ar', '+54', 'Argentina')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/ar.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">Argentina</span>
+                    <span class="text-neutral-400 font-mono">+54</span>
+                  </div>
+                  <div onclick="selectCountry('ec', '+593', 'Ecuador')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/ec.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">Ecuador</span>
+                    <span class="text-neutral-400 font-mono">+593</span>
+                  </div>
+                  <div onclick="selectCountry('pa', '+507', 'Panamá')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/pa.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">Panamá</span>
+                    <span class="text-neutral-400 font-mono">+507</span>
+                  </div>
+                  <div onclick="selectCountry('cr', '+506', 'Costa Rica')" class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-neutral-800 hover:bg-neutral-100 cursor-pointer">
+                    <img src="https://flagcdn.com/w40/cr.png" class="w-5 h-auto rounded-sm">
+                    <span class="flex-1">Costa Rica</span>
+                    <span class="text-neutral-400 font-mono">+506</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Phone Number Input -->
+              <input
+                type="tel"
+                id="whatsappNumber"
+                placeholder="3001234567"
+                required
+                class="flex-1 input-pro rounded-xl px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400"
+              >
+            </div>
+            <p class="text-[12px] text-neutral-500 mt-1">
+              Tu número de WhatsApp para recibir alertas de citas y hablar con Firby.
+            </p>
+          </div>
+
+          <!-- Contraseña (opcional con Google) -->
+          <div id="passwordBlock">
+            <label for="password" class="block text-sm font-normal text-neutral-700 mb-1">
+              Contraseña <span id="passwordRequiredStar" class="text-red-500">*</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Crea una contraseña segura"
+              class="w-full input-pro rounded-xl px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400"
+            >
+            <p id="passwordHint" class="text-[12px] text-neutral-500 mt-1">
+              Mínimo 6 caracteres.
+            </p>
+          </div>
+
+          <!-- Checkbox Tratamiento de Datos -->
+          <div class="pt-1">
+            <label class="flex items-start gap-2.5 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                id="acceptTerms"
+                required
+                class="mt-1 w-4 h-4 rounded border-neutral-300 text-neutral-900 focus:ring-0 cursor-pointer"
+              >
+              <span class="text-[12px] text-neutral-600 leading-relaxed">
+                Acepto la autorización para el tratamiento de mis datos personales y los
+                <a href="/terms" target="_blank" class="text-neutral-900 font-semibold underline hover:text-neutral-700">Términos de Servicio</a>
+                y
+                <a href="/privacy" target="_blank" class="text-neutral-900 font-semibold underline hover:text-neutral-700">Política de Privacidad</a> de Firby.
+              </span>
+            </label>
+          </div>
+
+          <!-- Submit CTA Button -->
+          <div class="pt-1">
+            <button
+              type="submit"
+              id="submitBtn"
+              class="w-full btn-action font-bold text-sm py-3 px-5 rounded-xl shadow-sm active:scale-[0.99] text-center"
+            >
+              Crear tu cuenta y comenzar prueba
+            </button>
+          </div>
+
+        </form>
+
+        <!-- Footer Links (Left Aligned) -->
+        <div class="mt-6 text-left border-t border-neutral-200 pt-5">
+          <p class="text-xs text-neutral-500">
+            ¿Ya tienes una cuenta?
+            <a href="/sign-in" class="text-neutral-900 font-bold hover:underline ml-1">
+              Inicia sesión
+            </a>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Columna Derecha: Contenido Flotante Directo en Background (Exclusiva para PC / Desktop, Oculta en Móvil, 6 cols, max-w-[450px]) -->
+      <div class="hidden lg:flex lg:col-span-6 w-full max-w-[450px] flex-col lg:sticky lg:top-8 pt-1">
+
+        <!-- Titular de Valor -->
+        <div class="mb-4">
+          <span class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider block mb-1">
+            Operador Digital Autónomo
+          </span>
+          <h2 class="text-lg sm:text-xl font-bold text-neutral-900 tracking-tight leading-snug">
+            Atención continua en tu web, agenda organizada y control total en tu WhatsApp.
+          </h2>
+        </div>
+
+        <div class="w-full border-t border-neutral-200/60 my-3"></div>
+
+        <!-- Antes de continuar, te contamos: -->
+        <div class="space-y-3.5 pt-0.5">
+          <p class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">
+            Antes de continuar, te contamos:
+          </p>
+
+          <!-- Punto 1: 7 días gratis -->
+          <div class="space-y-0.5">
+            <h3 class="text-[13px] font-semibold text-neutral-900 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#b8f901] inline-block flex-shrink-0"></span>
+              Prueba 7 días gratis
+            </h3>
+            <p class="text-[11.5px] text-neutral-600 leading-relaxed pl-3.5">
+              Empiezas a configurar a tu operador Firby de inmediato y pruebas su operación con tus reglas. El cobro de tu plan solo inicia si decides continuar al finalizar el día 7. Puedes cancelar cuando quieras en 1 clic.
+            </p>
+          </div>
+
+          <!-- Punto 2: Control total de agenda -->
+          <div class="space-y-0.5">
+            <h3 class="text-[13px] font-semibold text-neutral-900 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#b8f901] inline-block flex-shrink-0"></span>
+              En Firby tienes el control de tu agenda
+            </h3>
+            <p class="text-[11.5px] text-neutral-600 leading-relaxed pl-3.5">
+              Tú decides cómo se confirman las citas. Firby revisa disponibilidad real en tu Google Calendar y agenda en tiempo real, o solicita tu visto bueno antes de confirmar.
+            </p>
+          </div>
+
+          <!-- Punto 3: Operador en tu sitio web -->
+          <div class="space-y-0.5">
+            <h3 class="text-[13px] font-semibold text-neutral-900 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#b8f901] inline-block flex-shrink-0"></span>
+              Tu operador en tu sitio web en 3 minutos
+            </h3>
+            <p class="text-[11.5px] text-neutral-600 leading-relaxed pl-3.5">
+              Pega una sola línea de código en tu página web. Firby atiende a tus visitantes las 24 horas, aclara dudas de servicios y precios, y agenda citas directamente en pantalla. Firby nunca atiende visitantes por WhatsApp.
+            </p>
+          </div>
+
+          <!-- Punto 4: Tu línea ejecutiva privada por WhatsApp -->
+          <div class="space-y-0.5">
+            <h3 class="text-[13px] font-semibold text-neutral-900 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#b8f901] inline-block flex-shrink-0"></span>
+              Tu línea privada de WhatsApp con Firby
+            </h3>
+            <p class="text-[11.5px] text-neutral-600 leading-relaxed pl-3.5">
+              WhatsApp es exclusivo para ti como dueño. Firby te manda alertas de citas al celular, te pide visto bueno para excepciones comerciales y puedes chatearle para pedirle resúmenes o bloquear horarios en tu servidor.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Official Landing Page Footer with matching #121215 black background -->
+  <footer class="footer-section">
+    <div class="footer-container">
+      <div class="footer-grid">
+
+        <!-- Col 1: Brand -->
+        <div class="footer-brand">
+          <img src="/assets/figma/firby_brand_logo.png" alt="Firby AI" class="footer-logo-img" style="height: 28px; width: auto; max-width: 130px; object-fit: contain; display: block; margin-bottom: 14px;" />
+          <p class="footer-desc">
+            Operador digital autónomo para empresas y profesionales. Atiende en tu sitio web, agenda citas en tu Google Calendar y te mantiene informado en tu celular.
+          </p>
+        </div>
+
+        <!-- Col 2: Plataforma -->
+        <div>
+          <h4 class="footer-col-title">Plataforma</h4>
+          <ul class="footer-col-links">
+            <li><a href="/sign-in">Iniciar Sesión (Acceso Clientes)</a></li>
+            <li><a href="/#como-funciona">Cómo Funciona</a></li>
+            <li><a href="/#equipo-digital">Equipo Digital</a></li>
+            <li><a href="/#planes">Planes y Precios</a></li>
+            <li><a href="/#seguridad-cumplimiento">Seguridad y Control</a></li>
+            <li><a href="/#experiencia-conversacional">Demostración en Vivo</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Legal -->
+        <div>
+          <h4 class="footer-col-title">Legal</h4>
+          <ul class="footer-col-links">
+            <li><a href="/terms">Términos de Servicio</a></li>
+            <li><a href="/privacy">Política de Privacidad</a></li>
+            <li><a href="/data-agreement">Acuerdo de Datos</a></li>
+            <li><a href="mailto:contacto@firbyai.com">Contacto de Seguridad</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-info">
+          <div class="footer-copy-text">
+            &copy; 2026 Firby AI. Todos los derechos reservados.
+            <a href="/sign-in" class="footer-portal-link">Acceso Clientes (Iniciar Sesión)</a>
+          </div>
+        </div>
+
+        <div class="footer-lang-selector">
+          <span class="lang-label">Idioma:</span>
+          <a href="/en" class="lang-switch-link text-[#a1a1aa] hover:text-white underline">English</a>
+          <span class="lang-separator">&middot;</span>
+          <strong class="lang-current">Español</strong>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    let currentDialCode = '+57';
+
+    function toggleCountryDropdown() {
+      const dd = document.getElementById('countryDropdown');
+      dd.classList.toggle('hidden');
+    }
+
+    function selectCountry(code, dial, name) {
+      currentDialCode = dial;
+      document.getElementById('flagImg').src = 'https://flagcdn.com/w40/' + code + '.png';
+      document.getElementById('dialCode').textContent = dial;
+      document.getElementById('countryDropdown').classList.add('hidden');
+    }
+
+    document.addEventListener('click', function(e) {
+      const btn = document.getElementById('countryBtn');
+      const dd = document.getElementById('countryDropdown');
+      if (btn && dd && !btn.contains(e.target) && !dd.contains(e.target)) {
+        dd.classList.add('hidden');
+      }
+    });
+
+    // 1. Inmediatamente sanitizar la barra del navegador para NUNCA exponer parámetros ni permitir spoofing por URL
+    try {
+      var planParam = new URLSearchParams(window.location.search).get('plan');
+      if (planParam) {
+        localStorage.setItem('firby_selected_plan', planParam.toLowerCase());
+      }
+    } catch(e) {}
+    if (window.location.search) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    function clearFirbySession() {
+      try {
+        localStorage.removeItem('firby_user_email');
+        localStorage.removeItem('firby_auth_provider');
+        localStorage.removeItem('firby_master_key');
+        localStorage.removeItem('firby_user_name');
+        localStorage.removeItem('firby_user_last_name');
+        localStorage.removeItem('firby_user_full_name');
+        localStorage.removeItem('firby_username');
+      } catch(e) {}
+      try {
+        fetch('/api/auth/clear-oauth-session', { method: 'POST', credentials: 'include' }).catch(function(){});
+      } catch(e) {}
+    }
+
+    // 2. Cargar sesión verificada (Google OAuth o Verificación OTP por correo)
+    async function loadVerifiedSession() {
+      let sessionEmail = '';
+      let sessionProvider = '';
+      let sessionName = '';
+
+      // 2.1 Verificar si hay sesión de Google OAuth
+      try {
+        const resp = await fetch('/api/auth/oauth-session', { credentials: 'include' });
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data && data.valid && data.email) {
+            sessionEmail = data.email;
+            sessionProvider = 'google';
+            if (data.name) sessionName = data.name;
+          }
+        }
+      } catch (err) {
+        console.warn('OAuth session check:', err);
+      }
+
+      // 2.2 Si no viene de Google OAuth, verificar si completó OTP en sign-up
+      if (!sessionEmail) {
+        try {
+          const localEmail = localStorage.getItem('firby_user_email');
+          const localProvider = localStorage.getItem('firby_auth_provider');
+          if (localEmail) {
+            sessionEmail = localEmail;
+            sessionProvider = localProvider || 'email_otp';
+          }
+        } catch(e) {}
+      }
+
+      // 2.3 Aplicar datos de sesión verificada
+      if (sessionEmail) {
+        const emailInput = document.getElementById('email');
+        emailInput.value = sessionEmail;
+        emailInput.readOnly = true;
+        emailInput.classList.add('bg-neutral-100', 'text-neutral-600', 'cursor-not-allowed');
+
+        const tag = document.getElementById('googleVerifiedTag');
+        if (tag) {
+          tag.textContent = sessionProvider === 'google' ? 'Verificado con Google' : 'Correo verificado';
+          tag.classList.remove('hidden');
+        }
+
+        const helpText = document.getElementById('emailHelpText');
+        if (helpText) {
+          helpText.innerHTML = 'Correo verificado para tu cuenta. ¿No es tu correo? <a href="/sign-up" onclick="clearFirbySession()" class="text-neutral-900 font-semibold underline">Inicia sesión con otra cuenta</a>.';
+        }
+
+        const pwStar = document.getElementById('passwordRequiredStar');
+        if (pwStar) pwStar.classList.add('hidden');
+        const pwHint = document.getElementById('passwordHint');
+        if (pwHint) pwHint.textContent = 'Opcional. Puedes definir una contraseña si deseas acceder sin código de seguridad en el futuro.';
+        const pw = document.getElementById('password');
+        if (pw) pw.required = false;
+
+        if (sessionName) {
+          const parts = sessionName.trim().split(/\s+/);
+          const first = parts[0] || '';
+          const last = parts.slice(1).join(' ') || '';
+          const fNameEl = document.getElementById('firstName');
+          const lNameEl = document.getElementById('lastName');
+          const bNameEl = document.getElementById('businessName');
+
+          if (fNameEl && !fNameEl.value) fNameEl.value = first;
+          if (lNameEl && !lNameEl.value) lNameEl.value = last;
+          if (bNameEl && !bNameEl.value) bNameEl.value = sessionName;
+        }
+
+        const uNameEl = document.getElementById('username');
+        if (uNameEl && !uNameEl.value) {
+          const prefix = sessionEmail.split('@')[0].toLowerCase().replace(/[^a-z0-9._]/g, '');
+          uNameEl.value = prefix;
+        }
+        return;
+      }
+
+      // Si no hay correo verificado, la contraseña es requerida
+      const pw = document.getElementById('password');
+      if (pw) pw.required = true;
+    }
+
+    loadVerifiedSession();
+
+    // 3. Envío seguro de Onboarding
+    document.getElementById('proOnboardingForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Creando cuenta...';
+
+      const fullNumber = currentDialCode + ' ' + document.getElementById('whatsappNumber').value.trim();
+      const bName = document.getElementById('businessName').value.trim();
+      const fName = document.getElementById('firstName').value.trim();
+      const lName = document.getElementById('lastName').value.trim();
+      const uName = document.getElementById('username').value.trim();
+      const fullName = (fName + ' ' + lName).trim() || uName || fName;
+      const selectedIndustry = document.getElementById('industry').value;
+      const userEmail = document.getElementById('email').value.trim();
+      const passwordVal = document.getElementById('password').value;
+
+      const clinicData = {
+        name: bName || fullName,
+        owner_name: fullName,
+        first_name: fName,
+        last_name: lName,
+        username: uName,
+        services: selectedIndustry,
+        phone: fullNumber,
+        email: userEmail,
+        password: passwordVal,
+        onboarding_done: 1,
+        setup_done: 1
+      };
+
+      try {
+        const resp = await fetch('/api/onboarding/complete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(clinicData)
+        });
+        const result = await resp.json();
+        if (result && result.master_key) {
+          localStorage.setItem('firby_master_key', result.master_key);
+        }
+      } catch (err) {
+        console.warn('Onboarding complete warning:', err);
+      }
+
+      localStorage.setItem('firby_onboarding_done', 'true');
+      localStorage.setItem('firby_user_email', userEmail);
+      localStorage.setItem('firby_user_name', fName);
+      localStorage.setItem('firby_user_last_name', lName);
+      localStorage.setItem('firby_user_full_name', fullName);
+      localStorage.setItem('firby_username', uName);
+
+      var nextPlan = (localStorage.getItem('firby_selected_plan') || 'pro').toLowerCase();
+      window.location.replace('/free-trial?plan=' + encodeURIComponent(nextPlan));
+    });
+  </script>
+
+  <script>
+  (function() {
+      function applyTheme(theme) {
+          if (theme === 'dark') {
+              document.documentElement.classList.add('dark');
+              document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+              document.documentElement.classList.remove('dark');
+              document.documentElement.setAttribute('data-theme', 'light');
+          }
+      }
+      window.addEventListener('storage', function(e) {
+          if (e.key === 'theme_v3' || e.key === 'theme_v2' || e.key === 'theme' || e.key === 'firby_theme') {
+              if (e.newValue) applyTheme(e.newValue);
+          }
+      });
+  })();
+  </script>
+
+</body>
+</html>

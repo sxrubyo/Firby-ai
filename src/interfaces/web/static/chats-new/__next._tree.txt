@@ -1,0 +1,5 @@
+:HL["/_next/static/chunks/3repz8pkaqc8x.css","style"]
+:HL["/fonts/NeueMontreal-Regular.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/NeueMontreal-Medium.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/NeueMontreal-Bold.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"chats-new","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"Oso7apIBhQ6SkBP85wRqX"}

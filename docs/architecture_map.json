@@ -1,0 +1,206 @@
+{
+  "brand_assets.py": [],
+  "chat_firby.py": [],
+  "knowledge_base.py": [],
+  "firby-chat.py": [],
+  "firby-omni.py": [],
+  "firby.py": [
+    "brand_assets.py",
+    "knowledge_base.py",
+    "firby_admin.py",
+    "firby_audio.py",
+    "firby_brain_v10.py",
+    "firby_core/__init__.py",
+    "firby_core/first_turn_ops.py",
+    "firby_core/prompt_ops.py",
+    "firby_demo.py",
+    "firby_domino.py",
+    "firby_generator.py",
+    "firby_i18n.py",
+    "firby_intelligence.py",
+    "firby_nuke_robot_phrases.py",
+    "firby_pitch_upgrade.py",
+    "firby_production.py",
+    "firby_send_guard.py",
+    "firby_session.py",
+    "firby_utils.py",
+    "nova_bridge.py",
+    "search.py",
+    "smart_handoff.py",
+    "v7/orchestrator.py"
+  ],
+  "firby_admin.py": [
+    "firby.py",
+    "firby_utils.py"
+  ],
+  "firby_agents/__init__.py": [],
+  "firby_agents/agenda.py": [],
+  "firby_agents/captacion.py": [],
+  "firby_agents/conocimiento.py": [],
+  "firby_agents/escalacion.py": [],
+  "firby_agents/objeciones.py": [],
+  "firby_agents/seguimiento.py": [],
+  "firby_audio.py": [
+    "firby_config.py"
+  ],
+  "firby_brain_v10.py": [],
+  "firby_bridge.py": [
+    "firby.py"
+  ],
+  "firby_cli.py": [
+    "firby_cli_bb.py",
+    "firby_i18n.py"
+  ],
+  "firby_cli_bb.py": [],
+  "firby_config.py": [],
+  "firby_core/__init__.py": [
+    "firby_core/conversation_engine.py",
+    "firby_core/persona_registry.py"
+  ],
+  "firby_core/conversation_engine.py": [
+    "firby_core/persona_registry.py"
+  ],
+  "firby_core/first_turn_ops.py": [],
+  "firby_core/persona_registry.py": [],
+  "firby_core/prompt_ops.py": [],
+  "firby_cron.py": [],
+  "firby_demo.py": [],
+  "firby_domino.py": [],
+  "firby_generator.py": [
+    "firby_config.py"
+  ],
+  "firby_i18n.py": [],
+  "firby_integrations/__init__.py": [],
+  "firby_integrations/llm.py": [],
+  "firby_integrations/whatsapp.py": [],
+  "firby_intelligence.py": [],
+  "firby_memory.py": [],
+  "firby_nuke_robot_phrases.py": [],
+  "firby_pairing.py": [],
+  "firby_patch.py": [],
+  "firby_pitch_upgrade.py": [],
+  "firby_production.py": [
+    "firby.py"
+  ],
+  "firby_router.py": [
+    "firby_config.py"
+  ],
+  "firby_send_guard.py": [
+    "firby_pitch_upgrade.py"
+  ],
+  "firby_session.py": [
+    "firby_config.py"
+  ],
+  "firby_skills/__init__.py": [],
+  "firby_skills/demo_mode.py": [
+    "firby_i18n.py"
+  ],
+  "firby_skills/text_processing.py": [],
+  "firby_skills/tone_detection.py": [],
+  "firby_sync_fix.py": [],
+  "firby_tui.py": [],
+  "firby_utils.py": [],
+  "firby_voice.py": [],
+  "nova_bridge.py": [],
+  "scripts/long_conversation_harness.py": [],
+  "search.py": [],
+  "smart_handoff.py": [
+    "knowledge_base.py"
+  ],
+  "test_conversation.py": [
+    "firby.py"
+  ],
+  "tests/test_demo_patient_entry.py": [
+    "firby.py",
+    "firby_domino.py"
+  ],
+  "tests/test_firby_bridge.py": [
+    "firby_bridge.py"
+  ],
+  "tests/test_patient_greeting_flow.py": [
+    "firby_brain_v10.py",
+    "firby_core/conversation_engine.py",
+    "firby_core/first_turn_ops.py",
+    "firby_core/persona_registry.py"
+  ],
+  "tests/test_robot_phrase_boundaries.py": [
+    "firby_nuke_robot_phrases.py",
+    "firby_send_guard.py"
+  ],
+  "tests/test_search_and_llm_runtime.py": [],
+  "tests/test_smart_handoff.py": [
+    "smart_handoff.py"
+  ],
+  "tests/test_sync_runtime.py": [
+    "firby_cli.py"
+  ],
+  "tests/test_telegram_webhook_mode.py": [],
+  "v7/__init__.py": [
+    "v7/agents/agenda.py",
+    "v7/agents/base.py",
+    "v7/agents/captacion.py",
+    "v7/agents/conocimiento.py",
+    "v7/agents/escalacion.py",
+    "v7/agents/objeciones.py",
+    "v7/agents/seguimiento.py",
+    "v7/router.py"
+  ],
+  "v7/agents/__init__.py": [
+    "v7/agents/agenda.py",
+    "v7/agents/base.py",
+    "v7/agents/captacion.py",
+    "v7/agents/conocimiento.py",
+    "v7/agents/escalacion.py",
+    "v7/agents/objeciones.py",
+    "v7/agents/seguimiento.py",
+    "v7/router.py"
+  ],
+  "v7/agents/agenda.py": [
+    "v7/agents/base.py",
+    "v7/postprocess.py"
+  ],
+  "v7/agents/base.py": [
+    "v7/postprocess.py"
+  ],
+  "v7/agents/captacion.py": [
+    "v7/agents/base.py",
+    "v7/postprocess.py"
+  ],
+  "v7/agents/conocimiento.py": [
+    "v7/agents/base.py",
+    "v7/postprocess.py"
+  ],
+  "v7/agents/escalacion.py": [
+    "v7/agents/base.py",
+    "v7/postprocess.py"
+  ],
+  "v7/agents/objeciones.py": [
+    "v7/agents/base.py",
+    "v7/postprocess.py"
+  ],
+  "v7/agents/seguimiento.py": [
+    "v7/agents/base.py",
+    "v7/postprocess.py"
+  ],
+  "v7/memory/__init__.py": [
+    "v7/agents/agenda.py",
+    "v7/agents/base.py",
+    "v7/agents/captacion.py",
+    "v7/agents/conocimiento.py",
+    "v7/agents/escalacion.py",
+    "v7/agents/objeciones.py",
+    "v7/agents/seguimiento.py",
+    "v7/router.py"
+  ],
+  "v7/memory/patient_profile.py": [],
+  "v7/orchestrator.py": [
+    "v7/agents/__init__.py",
+    "v7/agents/base.py",
+    "v7/memory/patient_profile.py",
+    "v7/postprocess.py",
+    "v7/router.py"
+  ],
+  "v7/postprocess.py": [],
+  "v7/router.py": [],
+  "verify_conversation_impl.py": []
+}

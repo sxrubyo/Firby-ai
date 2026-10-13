@@ -1,0 +1,119 @@
+/**
+ * MagicBento - React Bits CSS
+ * Adapted for Firby:
+ * - NO purple: Replaced with Firby electric lime (185, 250, 1) and slate
+ * - Compatible with light and dark mode
+ * - Works seamlessly with arbitrary grids
+ */
+
+:root {
+  --dark-green-primary: rgba(20, 83, 45, 1);
+  --dark-green-glow: rgba(20, 83, 45, 0.2);
+  --dark-green-border: rgba(20, 83, 45, 0.5);
+  --glow-color: 20, 83, 45;
+}
+
+.magic-bento-grid {
+  position: relative;
+  user-select: none;
+}
+
+.magic-bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 200px;
+}
+
+.magic-bento-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.dark .magic-bento-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+}
+
+/* Border glow effect with Firby Lime */
+.magic-bento-card--border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  background: radial-gradient(
+    var(--glow-radius, 220px) circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(var(--glow-color, 185, 250, 1), calc(var(--glow-intensity, 0) * 0.95)) 0%,
+    rgba(var(--glow-color, 185, 250, 1), calc(var(--glow-intensity, 0) * 0.4)) 35%,
+    transparent 65%
+  );
+  border-radius: inherit;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.magic-bento-card--border-glow:hover {
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.05),
+    0 0 20px rgba(var(--glow-color, 185, 250, 1), 0.15);
+}
+
+.dark .magic-bento-card--border-glow:hover {
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(var(--glow-color, 185, 250, 1), 0.22);
+}
+
+.particle-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.particle::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: rgba(var(--glow-color, 185, 250, 1), 0.3);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Global spotlight styles */
+.global-spotlight {
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  z-index: 200 !important;
+  pointer-events: none;
+}
+
+.bento-section {
+  position: relative;
+}

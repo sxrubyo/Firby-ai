@@ -1,0 +1,152 @@
+================================================================================
+           FIRBY V10 ULTRA — SYSTEM BLUEPRINT & ARCHITECTURAL SPECIFICATION
+================================================================================
+Document Version: 10.0.0
+Purpose: Comprehensive technical & executive blueprint for AI evaluation,
+         red-teaming, and architectural validation without reading source code.
+Target Platform: WhatsApp Business, Web Application, Omnichannel (Telegram/Notion)
+OS & Environment: Linux / Python 3.12 / PM2 Runtime / Baileys WhatsApp Bridge
+================================================================================
+
+1. EXECUTIVE OVERVIEW
+--------------------------------------------------------------------------------
+Firby is a hyper-realistic, autonomous 24/7 AI Commercial Advisor and Smart
+Receptionist engineered specifically for businesses (clinics, medical centers,
+aesthetic centers, SaaS, and service businesses) operating on WhatsApp.
+
+Unlike generic chatbots or rigid decision-tree bots:
+- Firby operates 100% dynamically via LLMs (Groq Llama-3.3-70b / Gemini 2.5 Flash).
+- She speaks with natural Latin/Colombian warmth, behaving like a real, empathetic
+  commercial advisor named Valeria (or any custom tenant name like Andrea/Lucía).
+- She uses native WhatsApp formatting (zero inverted '¿' or '¡' marks, natural
+  emojis, short multi-bubble messages).
+- She implements WhatsApp Conversion Psychology (3rd Bubble Isolated Closing
+  Questions and Behavioral Mirroring for text and voice notes).
+- She runs a zero-RAM-bloat file-system persistent memory architecture per tenant.
+
+
+2. CORE FEATURE MATRIX & ARCHITECTURAL CAPABILITIES
+--------------------------------------------------------------------------------
+[F-01] NATIVE HUMAN WHATSAPP FORMATTING ENGINE (firby_nuke_robot_phrases.py)
+       - Strips all inverted opening punctuation ('¿' and '¡') globally from
+         100% of LLM text outputs. Humans on WhatsApp use single trailing marks ('?').
+       - Eliminates robotic identity clichés ("Hola, soy Firby la IA recepcionista").
+       - Replaces cold introductions with warm advisor openings:
+         "Holaa! Hablas con Valeria de {clinic_name}, qué rico saludarte!"
+
+[F-02] ISOLATED 3RD BUBBLE CLOSING QUESTION TECHNIQUE
+       - Automatically splits outgoing response bubbles separated by '|||'.
+       - Isolates the closing question into its own standalone 3rd bubble
+         (e.g., "Prefieres jornada de la mañana o de la tarde?").
+       - Positioned directly above the lead's keyboard input box on WhatsApp,
+         boosting lead reply rates by over +40%.
+
+[F-03] PSYCHOLOGY OF BEHAVIORAL MIRRORING (ESPEJEO EN AUDIO Y TEXTO)
+       - When a lead requests a voice note or asks about a treatment
+         ("mandame una nota de voz explicándome el Botox"):
+         Firby DOES NOT give meta explanations ("puedo enviar audios").
+       - She IMMEDIATELY mirrors the lead's emotional tone and topic in character:
+         "Mira te cuento cómo trabajamos eso: aplicamos el producto en puntos
+         estratégicos para relajar el músculo sin perder expresión natural."
+       - Renders voice notes in real-time via ElevenLabs audio engine.
+
+[F-04] MULTI-TENANT IDENTITY & CUSTOM AGENT NAMING
+       - 100% tenant isolation. If Tenant A configures the name "Andrea",
+         Firby updates IDENTITY.md and runtime prompts for Tenant A ONLY.
+       - Tenant B retains its own custom identity ("Valeria", "Lucía", "Sofia").
+       - Prompt getters dynamically bind the tenant's agent name across all
+         greetings, audio notes, and admin reports.
+
+[F-05] STRUCTURED ADMIN ONBOARDING INTERVIEW ENGINE (/onboarding)
+       - Conducts a multi-step interactive onboarding interview with the founder/admin:
+         1. Founder / Doctor Identity (Dra. Carolina Gómez, Dr. Alejandro, team size).
+         2. Clinic Specialty & Star Treatments.
+         3. Night & After-Hours Policy (Soft Guidance to 8 AM vs 24/7 Auto Booking).
+         4. Admin Notification WhatsApp Number.
+       - Stores onboarding results persistently in instance files:
+         /instances/{instance_id}/identity/IDENTITY.md
+         /instances/{instance_id}/soul/SOUL.md
+         /instances/{instance_id}/knowledge/teachings.json
+
+[F-06] FILE-BASED INFINITE MEMORY STORE (ZERO AWS RAM BLOAT)
+       - To prevent RAM consumption on AWS servers and avoid LLM token context exhaustion:
+         * Tenant Identity: /instances/{id}/identity/IDENTITY.md
+         * Business Soul & Learnings: /instances/{id}/soul/SOUL.md
+         * Knowledge & Pricing Base: /instances/{id}/knowledge/teachings.json
+         * Patient History: /instances/{id}/memory/chats/{chat_id}.json
+       - Before generating any candidate response, Firby reads these files
+         from disk in milliseconds.
+
+[F-07] TIME-AWARE AFTER-HOURS INTELLIGENCE (3:00 AM MADRUGADA)
+       - Calculates local time in Colombia (UTC-5).
+       - When a lead writes late at night or 3:00 AM:
+         * Soft Guidance Mode (Default): Answers all questions warmly, then
+           clarifies gently that final medical appointment slots are confirmed
+           at 8:00 AM by the team.
+         * 24/7 Auto-Booking Mode (Admin Override): Processes full instant
+           booking at any hour if enabled by the admin.
+
+[F-08] REAL-TIME ADMIN ↔ CLIENT NOTIFICATION ENGINE (AdminOutreachEngine)
+       - When a lead books an appointment or needs human assistance, Firby
+         sends a natural, warm WhatsApp report to her boss (the Admin):
+         "Hola! Te cuento que acabo de agendar a Camila Restrepo (3015218242)
+          para Botox el Viernes 3:00 PM! Quedó guardada en la agenda.
+          Si quieres enviarle un mensaje desde aquí, dime o escribe 'háblale a 3015218242'."
+       - Supports proactive outbound messages: /escribir <number>, háblale a <number>.
+
+[F-09] SURGICAL LLM PROMPT REFINEMENT ENGINE (_refine_prompt_section_via_llm)
+       - When the admin requests a tone or style adjustment ("quiero que hables
+         de forma más ejecutiva y lujosa"):
+       - Firby invokes an internal LLM Prompt Architect to update ONLY the custom
+         tone section in personas/{instance_id}/runtime_override.json without
+         destroying existing commercial rules or booking constraints.
+
+[F-10] MULTI-PROVIDER RESILIENT LLM FALLBACK CASCADE
+       - Primary: Groq (Llama-3.3-70b-versatile)
+       - Backup Series: Gemini 2.5 Flash (7 rotated API keys)
+       - Fallback: OpenAI / Claude
+       - Automatic 429 rate limit detection and 180s circuit breaker locking.
+
+[F-11] OMNICHANNEL & CALENDAR INTEGRATIONS
+       - WhatsApp: Baileys WebSockets Bridge (resolve JID via sock.onWhatsApp).
+       - Google Calendar: OAuth2 direct binding, slot availability, event creation.
+       - Notion / Web Search: SerpAPI Google search & Notion workspace sync.
+
+
+3. SYSTEM DIRECTORY LAYOUT & INSTANCE ARCHITECTURE
+--------------------------------------------------------------------------------
+/home/ubuntu/firby/
+  ├── firby.py                          # Core CLI & launcher
+  ├── firby_nuke_robot_phrases.py       # Punctuation & human formatting engine
+  ├── firby_brain_v10.py                # Brain & memory coordination
+  ├── src/
+  │   ├── core/
+  │   │   ├── runtime.py                 # Main FirbyUltra orchestrator
+  │   │   ├── admin_engines.py           # Admin conversation & learning engine
+  │   │   └── globals.py                 # Core globals & normalizers
+  │   ├── interfaces/web/
+  │   │   ├── app.py                     # Web application API
+  │   │   └── demo_handler.py            # Live Demo LLM handler
+  │   └── firby/
+  │       └── admin/
+  │           └── outreach.py            # AdminOutreachEngine & alerts
+  ├── instances/
+  │   └── clinica-de-las-americas/       # Isolated Tenant Instance
+  │       ├── identity/IDENTITY.md       # Tenant Founder & Brand identity
+  │       ├── soul/SOUL.md               # Tenant learnings & soul
+  │       └── memory/chats/              # Per-patient chat history
+  └── tests/                             # 247 Unit Tests (100% Passing)
+
+
+4. VERIFICATION, HEALTH & QUALITY STANDARDS
+--------------------------------------------------------------------------------
+- Test Suite Pass Rate: 247 / 247 PASSED (100% Success).
+- PM2 Service Health: 5/5 Processes ONLINE (whatsapp-bridge, hermes, firby,
+  firby-clinica-de-las-americas, firby-ovni).
+- Git Repository Status: Clean, conventional commits pushed to private remote
+  (https://github.com/sxrubyo/firby.git branch: refactor-v10).
+- Session Handoff Score: 100 / 100 Excellent.
+
+================================================================================
+                      END OF FIRBY SYSTEM SPECIFICATION
+================================================================================

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-BLB26J2X');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261009_isotipo_negro">
+    <link rel="shortcut icon" href="/favicon.ico?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/branding/Isotipo-pestana.png?v=20261009_isotipo_negro">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png?v=20261009_isotipo_negro">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firby — Comparador de Tipografías Bold & Gorditas</title>
+    <link rel="canonical" href="https://firbyai.com/tipografias">
+
+    <!-- Preconnect Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts Candidates -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Comfortaa:wght@600;700&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&family=M+PLUS+Rounded+1c:wght@700;800;900&family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&family=Quicksand:wght@600;700&family=Rubik:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border-card: #e2e8f0;
+            --text-heading: #09090b;
+            --text-body: #475569;
+            --text-muted: #64748b;
+            --accent-lime: #b8f901;
+            --emerald-primary: #15803d;
+            --dark-primary: #09090b;
+        }
+
+        body.dark-theme {
+            --bg-page: #0b0f17;
+            --bg-card: #111827;
+            --border-card: #1f2937;
+            --text-heading: #f8fafc;
+            --text-body: #94a3b8;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            padding-bottom: 80px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* Top Bar */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-card);
+            padding: 16px 24px;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        body.dark-theme .topbar {
+            background: rgba(17, 24, 39, 0.88);
+            border-bottom-color: #1f2937;
+        }
+
+        .topbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            height: 30px;
+            width: auto;
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge-pill {
+            background: #15803d;
+            color: #ffffff;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .input-live {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-heading);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            width: 280px;
+            max-width: 100%;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-live:focus {
+            border-color: #15803d;
+            box-shadow: 0 0 0 2px rgba(21, 128, 61, 0.15);
+        }
+
+        .size-slider-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12.5px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .size-slider {
+            width: 110px;
+            accent-color: #15803d;
+            cursor: pointer;
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-heading);
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background: #e2e8f0;
+        }
+
+        body.dark-theme .theme-toggle-btn:hover {
+            background: #1f2937;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 32px auto 0 auto;
+            padding: 0 24px;
+        }
+
+        .hero-banner-info {
+            background: linear-gradient(135deg, rgba(21, 128, 61, 0.08) 0%, rgba(184, 249, 1, 0.12) 100%);
+            border: 1px solid rgba(21, 128, 61, 0.2);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 36px;
+        }
+
+        .hero-banner-info h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 6px;
+        }
+
+        .hero-banner-info p {
+            font-size: 14px;
+            color: var(--text-body);
+            max-width: 820px;
+        }
+
+        /* Grid */
+        .fonts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        /* Card */
+        .font-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            position: relative;
+        }
+
+        .font-card:hover {
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+            border-color: #cbd5e1;
+        }
+
+        body.dark-theme .font-card:hover {
+            border-color: #374151;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+        }
+
+        .font-card.is-current {
+            border: 2px solid #15803d;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-card);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .font-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .font-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-heading);
+        }
+
+        .font-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        body.dark-theme .font-tag {
+            background: #1f2937;
+            color: #94a3b8;
+        }
+
+        .font-tag.featured {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .weight-btn {
+            background: transparent;
+            border: 1px solid var(--border-card);
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .weight-btn.active, .weight-btn:hover {
+            background: var(--dark-primary);
+            color: #ffffff;
+            border-color: var(--dark-primary);
+        }
+
+        body.dark-theme .weight-btn.active, body.dark-theme .weight-btn:hover {
+            background: #f8fafc;
+            color: #09090b;
+            border-color: #f8fafc;
+        }
+
+        /* Preview Display */
+        .preview-box {
+            margin-bottom: 20px;
+            padding: 16px 0;
+        }
+
+        .hero-title-sample {
+            font-size: 46px;
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            color: var(--text-heading);
+            margin-bottom: 14px;
+            text-wrap: balance;
+            transition: font-size 0.15s ease;
+        }
+
+        .highlight-lime {
+            color: #b8f901;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            display: inline;
+        }
+
+        .hero-sub-sample {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--text-body);
+            max-width: 680px;
+            margin-bottom: 20px;
+        }
+
+        /* Character Set Preview */
+        .charset-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 12px 16px;
+            background: var(--bg-page);
+            border-radius: 10px;
+            border: 1px solid var(--border-card);
+            font-size: 13.5px;
+            color: var(--text-muted);
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .charset-item strong {
+            color: var(--text-heading);
+            font-size: 14.5px;
+        }
+
+        /* Personality Note */
+        .personality-note {
+            font-size: 13px;
+            color: var(--text-body);
+            line-height: 1.5;
+            background: rgba(21, 128, 61, 0.04);
+            border-left: 3px solid #15803d;
+            padding: 10px 14px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title-sample {
+                font-size: 32px !important;
+            }
+            .input-live {
+                width: 100%;
+            }
+            .topbar-content {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-BLB26J2X"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Top sticky controls -->
+    <header class="topbar">
+        <div class="topbar-content">
+            <div class="brand-meta">
+                <a href="/" style="text-decoration:none;">
+                    <img src="/brand-assets/Firby.png" alt="Firby" class="brand-logo" onerror="this.src='/assets/branding/Isotipo-pestana.png?v=20261004_negro8_centrado">
+                </a>
+                <div class="brand-title">
+                    Laboratorio Tipográfico <span class="badge-pill">Bold & Gorditas</span>
+                </div>
+            </div>
+
+            <div class="controls-row">
+                <input type="text" id="liveTextInput" class="input-live" value="En Firby tienes el control de tu operación." placeholder="Escribe tu texto de prueba...">
+                <div class="size-slider-wrap">
+                    <span>Tamaño:</span>
+                    <input type="range" id="fontSizeSlider" class="size-slider" min="30" max="64" value="46">
+                    <span id="fontSizeLabel">46px</span>
+                </div>
+                <button id="themeToggle" class="theme-toggle-btn">🌓 Fondo</button>
+                <a href="/" style="font-size: 12.5px; font-weight:600; color:#15803d; text-decoration:none; margin-left:6px;">← Volver a Landing</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="hero-banner-info">
+            <h2>Explorador de Tipografías "Gorditas & Bold" (Estilo Fredoka)</h2>
+            <p>
+                Comparación directa entre la fuente actual (<strong>Plus Jakarta Sans</strong>, peso 800) y las mejores alternativas de Google Fonts que comparten la personalidad <strong>redondeada, jugosa, amable y bold</strong> ("chubby / rounded geometric") para el título principal de Firby.
+            </p>
+        </div>
+
+        <div class="fonts-grid">
+
+            <!-- 1. FREDOKA -->
+            <article class="font-card" data-font="Fredoka">
+                <div class="card-header">
+                    <div class="font-meta">
+                        <span class="font-name">1. Fredoka</span>
+                        <span class="font-tag featured">⭐ Tu Referencia Exacta</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="weight-btn" data-weight="600" onclick="setWeight(this, 600)">600 SemiBold</button>
+                        <button class="weight-btn active" data-weight="700" onclick="setWeight(this, 700)">700 Bold</button>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h1 class="hero-title-sample" style="font-family: 'Fredoka', cursive, sans-serif; font-weight: 700;">
+                        En Firby tienes el <span class="highlight-lime">control</span><br>de tu operación.
+                    </h1>
+                    <p class="hero-sub-sample">
+                        Tú decides qué acciones se resuelven de forma automática y cuáles requieren tu visto bueno. Agentes autónomos 24/7.
+                    </p>
+                </div>
+
+                <div class="charset-preview" style="font-family: 'Fredoka', cursive, sans-serif;">
+                    <div class="charset-item">Números: <strong>0 1 2 3 4 5 6 7 8 9 24/7</strong></div>
+                    <div class="charset-item">Acentos y tildes: <strong>Operación, Demostración, Autónomo, Éxito</strong></div>
+                    <div class="charset-item">Puntuación: <strong>¿Tienes el control? ¡100% verificado!</strong></div>
+                </div>
+
+                <div class="personality-note">
+                    <strong>Análisis:</strong> 100% redondeada, amable y suave. No tiene ninguna esquina dura. Transmite calidez, accesibilidad y simpatía inmediata, ideal para un agente que interactúa con humanos.
+                </div>
+            </article>
+
+            <!-- 2. BALOO 2 -->
+            <article class="font-card" data-font="Baloo 2">
+                <div class="card-header">
+                    <div class="font-meta">
+                        <span class="font-name">2. Baloo 2</span>
+                        <span class="font-tag featured">Extra Jugosa & Puffy</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="weight-btn" data-weight="700" onclick="setWeight(this, 700)">700 Bold</button>
+                        <button class="weight-btn active" data-weight="800" onclick="setWeight(this, 800)">800 ExtraBold</button>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h1 class="hero-title-sample" style="font-family: 'Baloo 2', cursive, sans-serif; font-weight: 800;">
+                        En Firby tienes el <span class="highlight-lime">control</span><br>de tu operación.
+                    </h1>
+                    <p class="hero-sub-sample">
+                        Tú decides qué acciones se resuelven de forma automática y cuáles requieren tu visto bueno. Agentes autónomos 24/7.
+                    </p>
+                </div>
+
+                <div class="charset-preview" style="font-family: 'Baloo 2', cursive, sans-serif;">
+                    <div class="charset-item">Números: <strong>0 1 2 3 4 5 6 7 8 9 24/7</strong></div>
+                    <div class="charset-item">Acentos y tildes: <strong>Operación, Demostración, Autónomo, Éxito</strong></div>
+                    <div class="charset-item">Puntuación: <strong>¿Tienes el control? ¡100% verificado!</strong></div>
+                </div>
+
+                <div class="personality-note">
+                    <strong>Análisis:</strong> Todavía más gordita y "acolchada" que Fredoka. Los glifos tienen proporciones anchas y gran volumen, luciendo casi como un logotipo 3D inflado en titulares grandes.
+                </div>
+            </article>
+
+            <!-- 3. NUNITO -->
+            <article class="font-card" data-font="Nunito">
+                <div class="card-header">
+                    <div class="font-meta">
+                        <span class="font-name">3. Nunito</span>
+                        <span class="font-tag featured">Gordita + Profesional SaaS</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="weight-btn" data-weight="800" onclick="setWeight(this, 800)">800 ExtraBold</button>
+                        <button class="weight-btn active" data-weight="900" onclick="setWeight(this, 900)">900 Black</button>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h1 class="hero-title-sample" style="font-family: 'Nunito', sans-serif; font-weight: 900;">
+                        En Firby tienes el <span class="highlight-lime">control</span><br>de tu operación.
+                    </h1>
+                    <p class="hero-sub-sample">
+                        Tú decides qué acciones se resuelven de forma automática y cuáles requieren tu visto bueno. Agentes autónomos 24/7.
+                    </p>
+                </div>
+
+                <div class="charset-preview" style="font-family: 'Nunito', sans-serif;">
+                    <div class="charset-item">Números: <strong>0 1 2 3 4 5 6 7 8 9 24/7</strong></div>
+                    <div class="charset-item">Acentos y tildes: <strong>Operación, Demostración, Autónomo, Éxito</strong></div>
+                    <div class="charset-item">Puntuación: <strong>¿Tienes el control? ¡100% verificado!</strong></div>
+                </div>
+
+                <div class="personality-note">
+                    <strong>Análisis:</strong> El balance perfecto entre curvas redondeadas suaves y estructura corporativa de software. Muy usada en empresas modernas de tecnología porque no pierde seriedad comercial a pesar de ser redondeada y amigable.
+                </div>
+            </article>
+
+            <!-- 4. M PLUS ROUNDED 1C -->
+            <article class="font-card" data-font="M PLUS Rounded 1c">
+                <div class="card-header">
+                    <div class="font-meta">
+                        <span class="font-name">4. M PLUS Rounded 1c</span>
+                        <span class="font-tag">Geometría Japonesa Ultra Pulida</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="weight-btn" data-weight="800" onclick="setWeight(this, 800)">800 ExtraBold</button>
+                        <button class="weight-btn active" data-weight="900" onclick="setWeight(this, 900)">900 Black</button>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h1 class="hero-title-sample" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900;">
+                        En Firby tienes el <span class="highlight-lime">control</span><br>de tu operación.
+                    </h1>
+                    <p class="hero-sub-sample">
+                        Tú decides qué acciones se resuelven de forma automática y cuáles requieren tu visto bueno. Agentes autónomos 24/7.
+                    </p>
+                </div>
+
+                <div class="charset-preview" style="font-family: 'M PLUS Rounded 1c', sans-serif;">
+                    <div class="charset-item">Números: <strong>0 1 2 3 4 5 6 7 8 9 24/7</strong></div>
+                    <div class="charset-item">Acentos y tildes: <strong>Operación, Demostración, Autónomo, Éxito</strong></div>
+                    <div class="charset-item">Puntuación: <strong>¿Tienes el control? ¡100% verificado!</strong></div>
+                </div>
+
+                <div class="personality-note">
+                    <strong>Análisis:</strong> Remates perfectamente semiesféricos, trazo ultra grueso y uniforme. Da una sensación de gadget o interfaz de alta tecnología amigable, sumamente nítida en pantallas Retina.
+                </div>
+            </article>
+
+            <!-- 5. BRICOLAGE GROTESQUE -->
+            <article class="font-card" data-font="Bricolage Grotesque">
+                <div class="card-header">
+                    <div class="font-meta">
+                        <span class="font-name">5. Bricolage Grotesque</span>
+                        <span class="font-tag featured">🔥 Tendencia SaaS 2025/2026</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="weight-btn" data-weight="700" onclick="setWeight(this, 700)">700 Bold</button>
+                        <button class="weight-btn active" data-weight="800" onclick="setWeight(this, 800)">800 ExtraBold</button>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h1 class="hero-title-sample" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;">
+                        En Firby tienes el <span class="highlight-lime">control</span><br>de tu operación.
+                    </h1>
+                    <p class="hero-sub-sample">
+                        Tú decides qué acciones se resuelven de forma automática y cuáles requieren tu visto bueno. Agentes autónomos 24/7.
+                    </p>
+                </div>
+
+                <div class="charset-preview" style="font-family: 'Bricolage Grotesque', sans-serif;">
+                    <div class="charset-item">Números: <strong>0 1 2 3 4 5 6 7 8 9 24/7</strong></div>
+                    <div class="charset-item">Acentos y tildes: <strong>Operación, Demostración, Autónomo, Éxito</strong></div>
+                    <div class="charset-item">Puntuación: <strong>¿Tienes el control? ¡100% verificado!</strong></div>
+                </div>
+
+                <div class="personality-note">
+                    <strong>Análisis:</strong> No tiene puntas de salchicha como Fredoka, pero sus curvas internas son hiper-frecuentes y bulbosas ("fleshy"). Tiene muchísima actitud, modernidad y personalidad vanguardista.
+                </div>
+            </article>
+
+            <!-- 6. RUBIK -->
+            <article class="font-card" data-font="Rubik">
+                <div class="card-header">
+                    <div class="font-meta">
+                        <span class="font-name">6. Rubik</span>
+                        <span class="font-tag">Chunky Squircle</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="weight-btn" data-weight="800" onclick="setWeight(this, 800)">800 ExtraBold</button>
+                        <button class="weight-btn active" data-weight="900" onclick="setWeight(this, 900)">900 Black</button>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h1 class="hero-title-sample" style="font-family: 'Rubik', sans-serif; font-weight: 900;">
+                        En Firby tienes el <span class="highlight-lime">control</span><br>de tu operación.
+                    </h1>
+                    <p class="hero-sub-sample">
+                        Tú decides qué acciones se resuelven de forma automática y cuáles requieren tu visto bueno. Agentes autónomos 24/7.
+                    </p>
+                </div>
+
+                <div class="charset-preview" style="font-family: 'Rubik', sans-serif;">
+                    <div class="charset-item">Números: <strong>0 1 2 3 4 5 6 7 8 9 24/7</strong></div>
+                    <div class="charset-item">Acentos y tildes: <strong>Operación, Demostración, Autónomo, Éxito</strong></div>
+                    <div class="charset-item">Puntuación: <strong>¿Tienes el control? ¡100% verificado!</strong></div>
+                </div>
+
+                <div class="personality-note">
+                    <strong>Análisis:</strong> Esquinas sutilmente redondeadas ("squircle"). Pesada, robusta y con cuerpo ("chunky"). Transmite potencia tecnológica, solidez y confiabilidad sin sentirse cortante.
+                </div>
+            </article>
+
+            <!-- 7. QUICKSAND -->
+            <article class="font-card" data-font="Quicksand">
+                <div class="card-header">
+                    <div class="font-meta">
+                        <span class="font-name">7. Quicksand</span>
+                        <span class="font-tag">Geométrica Redondeada Suave</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="weight-btn" data-weight="600" onclick="setWeight(this, 600)">600 SemiBold</button>
+                        <button class="weight-btn active" data-weight="700" onclick="setWeight(this, 700)">700 Bold</button>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h1 class="hero-title-sample" style="font-family: 'Quicksand', sans-serif; font-weight: 700;">
+                        En Firby tienes el <span class="highlight-lime">control</span><br>de tu operación.
+                    </h1>
+                    <p class="hero-sub-sample">
+                        Tú decides qué acciones se resuelven de forma automática y cuáles requieren tu visto bueno. Agentes autónomos 24/7.
+                    </p>
+                </div>
+
+                <div class="charset-preview" style="font-family: 'Quicksand', sans-serif;">
+                    <div class="charset-item">Números: <strong>0 1 2 3 4 5 6 7 8 9 24/7</strong></div>
+                    <div class="charset-item">Acentos y tildes: <strong>Operación, Demostración, Autónomo, Éxito</strong></div>
+                    <div class="charset-item">Puntuación: <strong>¿Tienes el control? ¡100% verificado!</strong></div>
+                </div>
+
+                <div class="personality-note">
+                    <strong>Análisis:</strong> Basada en círculos puros y líneas abiertas con puntas redondas. Es más ligera y aérea que Fredoka o Baloo, pero muy elegante y moderna.
+                </div>
+            </article>
+
+            <!-- 8. COMFORTAA -->
+            <article class="font-card" data-font="Comfortaa">
+                <div class="card-header">
+                    <div class="font-meta">
+                        <span class="font-name">8. Comfortaa</span>
+                        <span class="font-tag">Ultra Circular Orgánica</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="weight-btn" data-weight="600" onclick="setWeight(this, 600)">600 SemiBold</button>
+                        <button class="weight-btn active" data-weight="700" onclick="setWeight(this, 700)">700 Bold</button>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h1 class="hero-title-sample" style="font-family: 'Comfortaa', cursive, sans-serif; font-weight: 700;">
+                        En Firby tienes el <span class="highlight-lime">control</span><br>de tu operación.
+                    </h1>
+                    <p class="hero-sub-sample">
+                        Tú decides qué acciones se resuelven de forma automática y cuáles requieren tu visto bueno. Agentes autónomos 24/7.
+                    </p>
+                </div>
+
+                <div class="charset-preview" style="font-family: 'Comfortaa', cursive, sans-serif;">
+                    <div class="charset-item">Números: <strong>0 1 2 3 4 5 6 7 8 9 24/7</strong></div>
+                    <div class="charset-item">Acentos y tildes: <strong>Operación, Demostración, Autónomo, Éxito</strong></div>
+                    <div class="charset-item">Puntuación: <strong>¿Tienes el control? ¡100% verificado!</strong></div>
+                </div>
+
+                <div class="personality-note">
+                    <strong>Análisis:</strong> Extremo de geometría circular. Muy distintiva y curva, da una sensación futurista suave.
+                </div>
+            </article>
+
+            <!-- 9. PLUS JAKARTA SANS (ACTUAL) -->
+            <article class="font-card is-current" data-font="Plus Jakarta Sans">
+                <div class="card-header">
+                    <div class="font-meta">
+                        <span class="font-name">9. Plus Jakarta Sans</span>
+                        <span class="font-tag" style="background:#15803d; color:#fff;">Tu Fuente Actual</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="weight-btn active" data-weight="800" onclick="setWeight(this, 800)">800 ExtraBold</button>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h1 class="hero-title-sample" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">
+                        En Firby tienes el <span class="highlight-lime">control</span><br>de tu operación.
+                    </h1>
+                    <p class="hero-sub-sample">
+                        Tú decides qué acciones se resuelven de forma automática y cuáles requieren tu visto bueno. Agentes autónomos 24/7.
+                    </p>
+                </div>
+
+                <div class="charset-preview" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                    <div class="charset-item">Números: <strong>0 1 2 3 4 5 6 7 8 9 24/7</strong></div>
+                    <div class="charset-item">Acentos y tildes: <strong>Operación, Demostración, Autónomo, Éxito</strong></div>
+                    <div class="charset-item">Puntuación: <strong>¿Tienes el control? ¡100% verificado!</strong></div>
+                </div>
+
+                <div class="personality-note">
+                    <strong>Análisis:</strong> Es la que tienes puesta actualmente. Geométrica moderna, nítida y con cuerpo potente en 800. Sus remates son rectos con esquinas suaves, lo que le da un toque formal de SaaS moderno.
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <script>
+        // Live text update
+        const input = document.getElementById('liveTextInput');
+        const titles = document.querySelectorAll('.hero-title-sample');
+
+        function updateLiveText() {
+            const raw = input.value || 'En Firby tienes el control de tu operación.';
+            titles.forEach(title => {
+                if (raw.toLowerCase().includes('control')) {
+                    const replaced = raw.replace(/(control)/gi, '<span class="highlight-lime">$1</span>');
+                    title.innerHTML = replaced;
+                } else {
+                    title.textContent = raw;
+                }
+            });
+        }
+        input.addEventListener('input', updateLiveText);
+
+        // Size slider
+        const slider = document.getElementById('fontSizeSlider');
+        const sizeLabel = document.getElementById('fontSizeLabel');
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value + 'px';
+            sizeLabel.textContent = val;
+            titles.forEach(t => t.style.fontSize = val);
+        });
+
+        // Theme toggle
+        const themeBtn = document.getElementById('themeToggle');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+        });
+
+        // Weight selector
+        function setWeight(btn, weight) {
+            const card = btn.closest('.font-card');
+            const btns = card.querySelectorAll('.weight-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const title = card.querySelector('.hero-title-sample');
+            if (title) title.style.fontWeight = weight;
+        }
+    </script>
+</body>
+</html>

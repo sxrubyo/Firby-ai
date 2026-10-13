@@ -1,0 +1,113 @@
+{
+  "name": "@innvisor/firby-ai",
+  "version": "9.8.6",
+  "description": "Open-source runtime for governed autonomous business operators across web, email, Telegram, and optional messaging channels.",
+  "license": "MIT",
+  "author": "Santiago Rubio",
+  "homepage": "https://github.com/sxrubyo/firby#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxrubyo/firby.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sxrubyo/firby/issues"
+  },
+  "bin": {
+    "firby": "npm/firby.js"
+  },
+  "files": [
+    "npm/firby.js",
+    "npm/repo_resolution.js",
+    "firby",
+    "firby.py",
+    "*.py",
+    "!patch*.py",
+    "!fix*.py",
+    "!implement_*.py",
+    "!create_dev_account.py",
+    "!verify_*.py",
+    "!firby_watchdog.py",
+    "!firby_ultra*.db*",
+    "!scratch*.py",
+    "!test_*.py",
+    "!chat_firby.py",
+    "brand-assets/firby-logo.png",
+    "brand-assets/Firby.web.logo.png",
+    "brand-assets/Logo_Firby_Petalo_Claro.png",
+    "brand-assets/web.background.png",
+    "brand-assets/A_dark_luxury_web_background_202605210700.jpeg",
+    "firby_cli.py",
+    "firby_cli_bb.py",
+    "firby_tui.py",
+    "firby_sync_fix.py",
+    "firby_i18n.py",
+    "firby_brain_v10.py",
+    "firby_bridge.py",
+    "firby_domino.py",
+    "firby_nuke_robot_phrases.py",
+    "smart_handoff.py",
+    "firby_pairing.py",
+    "knowledge_base.py",
+    "search.py",
+    "brand_assets.py",
+    "nova_bridge.py",
+    "ecosystem.config.js",
+    "run.sh",
+    "requirements.txt",
+    ".env.example",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "install.sh",
+    "package.json",
+    "src/core/admin_engines.py",
+    "firby_config.py",
+    "src/interfaces/web/demo_handler.py",
+    "src/core/production_monitor.py",
+    "firby_router.py",
+    "firby_utils.py",
+    "firby_memory_engine.py",
+    "firby_uncertainty.py",
+    "firby_voice.py",
+    "firby_cron.py",
+    "firby_nova_proxy.py",
+    "firby_memory.py",
+    "firby_session.py",
+    "firby_generator.py",
+    "firby_audio.py",
+    "firby_core/**/*.py",
+    "firby_agents/**/*.py",
+    "firby_integrations/**/*.py",
+    "firby_skills/**/*.py",
+    "core/**/*.py",
+    "nova/rules/*.yaml",
+    "personas/firby/base/*.yaml",
+    "v7/**/*.py",
+    "src/**/*.py"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "pack:check": "npm pack --dry-run --json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "firby",
+    "ai",
+    "agent",
+    "whatsapp",
+    "telegram",
+    "receptionist",
+    "cli",
+    "automation"
+  ],
+  "dependencies": {
+    "boxen": "^5.1.2",
+    "chalk": "^4.1.2",
+    "figlet": "^1.11.0",
+    "ora": "^5.4.1"
+  }
+}

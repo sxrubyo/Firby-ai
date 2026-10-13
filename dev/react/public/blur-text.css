@@ -1,0 +1,44 @@
+/**
+ * BlurText - React Bits CSS
+ * High-performance blur reveal animation
+ */
+.blur-text-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.section-header .blur-text-container,
+.text-center .blur-text-container {
+  justify-content: center;
+}
+
+.blur-text-item {
+  display: inline-block;
+  will-change: transform, filter, opacity;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(-28px);
+  transition: opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+              filter 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-blur-direction="bottom"] .blur-text-item {
+  transform: translateY(28px);
+}
+
+.blur-text-item.blur-text-in {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-text-item {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

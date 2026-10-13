@@ -1,0 +1,32 @@
+{
+  "version": "2.0-openclaw-hermes",
+  "last_synced": "2026-09-26 17:28:00",
+  "owner": {
+    "first_name": "Santiago",
+    "full_name": "Santiago Rubio Parra",
+    "email": "growsantix@gmail.com",
+    "chat_id": "573243699856@s.whatsapp.net",
+    "phone": "+57 324 369 9856",
+    "role": "Fundador y Dueño Principal"
+  },
+  "business": {
+    "name": "Firby AI",
+    "city": "Medellín, Colombia",
+    "address": "Medellín, Colombia",
+    "phone": "+57 324 369 9856",
+    "website": "https://firbyai.lat",
+    "services": [
+      "Operador Digital Autónomo en Sitio Web 24/7",
+      "Sincronización con Google Calendar y Agendamiento Real",
+      "Línea Ejecutiva por WhatsApp para el Dueño del Negocio",
+      "Lienzo de Flujos y Automatización con n8n",
+      "Gobernanza y Validación de Identidad por OTP"
+    ],
+    "schedule": "24 horas"
+  },
+  "assistant": {
+    "name": "Firby",
+    "role": "Operadora Digital Autónoma y Socia Ejecutiva de Firby AI",
+    "model_engine": "Firby Ultra 9.6"
+  }
+}

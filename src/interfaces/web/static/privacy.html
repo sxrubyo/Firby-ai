@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-BLB26J2X');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261009_isotipo_negro">
+    <link rel="shortcut icon" href="/favicon.ico?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/branding/Isotipo-pestana.png?v=20261009_isotipo_negro">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png?v=20261009_isotipo_negro">
+    
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "yk3dt2xwep");
+    </script>
+    <!-- End Microsoft Clarity -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#0d1117">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <script src="/dark-theme.js"></script>
+    <link rel="stylesheet" href="/dark-theme.css">
+    <title>Política de Privacidad — Firby</title>
+    <link rel="canonical" href="https://firbyai.com/privacy">
+    <meta name="description" content="Política de Tratamiento de Datos Personales y Privacidad de Firby AI en cumplimiento de la Ley 1581 de 2012 de Colombia.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://firbyai.com/privacy">
+    <meta property="og:title" content="Política de Privacidad — Firby AI">
+    <meta property="og:description" content="Política de Tratamiento de Datos Personales y Privacidad de Firby AI en Colombia y Latinoamérica.">
+    <meta property="og:image" content="https://firbyai.com/assets/figma/firby_brand_logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-page: #ffffff;
+            --bg-subtle: #f8fafc;
+            --bg-card: #ffffff;
+            --border-subtle: #e2e8f0;
+            --border-card: #e2e8f0;
+            --text-heading: #09090b;
+            --text-body: #475569;
+            --text-muted: #64748b;
+            --emerald-primary: #15803d;
+            --dark-primary: #09090b;
+            --dark-hover: #18181b;
+            --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar Floating Glass Pill */
+        /* ==========================================================================
+   Top Navigation Floating Glass Capsule (Canonical Navbar & Mobile Drawer)
+   ========================================================================== */
+.navbar-floating-wrapper {
+    position: fixed;
+    top: 18px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+.navbar-glass-pill {
+    pointer-events: auto;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 28px;
+    width: 100%;
+    max-width: 1120px;
+    height: 76px;
+    padding: 0 16px 0 24px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 100px;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06), inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.dark .navbar-glass-pill,
+html[data-theme="dark"] .navbar-glass-pill {
+    background: rgba(15, 23, 42, 0.85);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.1);
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar-logo:hover {
+    transform: scale(1.02);
+    opacity: 0.95;
+}
+
+.navbar-logo:active {
+    transform: scale(0.98);
+}
+
+.navbar-logo img {
+    height: 30px;
+    width: auto;
+    display: block;
+}
+
+html.dark .navbar-logo img,
+html[data-theme="dark"] .navbar-logo img {
+    content: url('/assets/figma/firby_brand_logo_white.png') !important;
+    filter: brightness(0) invert(1) !important;
+}
+
+.footer-brand img,
+.footer-logo img,
+.footer-logo-img {
+    content: url('/assets/figma/firby_brand_logo_dark.png');
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+.navbar-link {
+    font-family: var(--font-heading, 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #334155;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    position: relative;
+}
+
+.navbar-link:hover {
+    color: var(--text-heading, #09090b);
+}
+
+html.dark .navbar-link,
+html[data-theme="dark"] .navbar-link {
+    color: #94a3b8;
+}
+
+html.dark .navbar-link:hover,
+html[data-theme="dark"] .navbar-link:hover {
+    color: #ffffff;
+}
+
+/* Nav Item Dropdown */
+.nav-item-dropdown {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-heading, 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #334155;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+}
+
+.nav-dropdown-trigger:hover,
+.nav-item-dropdown:hover .nav-dropdown-trigger {
+    color: var(--text-heading, #09090b);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.nav-chevron {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.65;
+}
+
+.nav-item-dropdown:hover .nav-chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.03);
+    padding: 10px;
+    min-width: 290px;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1100;
+}
+
+.nav-dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -16px;
+    left: 0;
+    right: 0;
+    height: 16px;
+}
+
+.nav-item-dropdown:hover .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.nav-dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.dropdown-item-title {
+    font-family: var(--font-heading, 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-heading, #09090b);
+    line-height: 1.3;
+}
+
+.dropdown-item-desc {
+    font-family: var(--font-body, 'Inter', system-ui, -apple-system, sans-serif);
+    font-size: 11.5px;
+    color: var(--text-muted, #64748b);
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
+html.dark .nav-dropdown-trigger,
+html[data-theme="dark"] .nav-dropdown-trigger {
+    color: #cbd5e1;
+}
+
+html.dark .nav-dropdown-trigger:hover,
+html[data-theme="dark"] .nav-dropdown-trigger:hover,
+html.dark .nav-item-dropdown:hover .nav-dropdown-trigger,
+html[data-theme="dark"] .nav-item-dropdown:hover .nav-dropdown-trigger {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+html.dark .nav-dropdown-menu,
+html[data-theme="dark"] .nav-dropdown-menu {
+    background: rgba(18, 18, 21, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.8);
+}
+
+html.dark .nav-dropdown-item:hover,
+html[data-theme="dark"] .nav-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+html.dark .dropdown-item-title,
+html[data-theme="dark"] .dropdown-item-title {
+    color: #f8fafc;
+}
+
+html.dark .dropdown-item-desc,
+html[data-theme="dark"] .dropdown-item-desc {
+    color: #94a3b8;
+}
+
+.navbar-actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-nav-signin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-family: var(--font-heading, 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    color: #09090b;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-nav-signin:hover {
+    background: #e2e8f0;
+    color: #000000;
+}
+
+html.dark .btn-nav-signin,
+html[data-theme="dark"] .btn-nav-signin {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #f8fafc;
+}
+
+html.dark .btn-nav-signin:hover,
+html[data-theme="dark"] .btn-nav-signin:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+}
+
+/* 1. Navbar CTA (Sin relleno, trazo elegante, chevron) */
+.btn-nav-cta {
+    background: transparent !important;
+    color: #09090b !important;
+    border: 1.5px solid #09090b !important;
+    font-family: var(--font-heading, 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif) !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+    padding: 9px 20px !important;
+    border-radius: 100px !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+}
+
+.btn-nav-cta:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-color: #000000 !important;
+    transform: translateY(-1px) !important;
+}
+
+.btn-nav-chevron {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+}
+
+.btn-nav-cta:hover .btn-nav-chevron {
+    transform: translateY(1.5px);
+}
+
+html.dark .btn-nav-cta,
+html[data-theme="dark"] .btn-nav-cta {
+    background: transparent !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+html.dark .btn-nav-cta span,
+html[data-theme="dark"] .btn-nav-cta span {
+    color: #ffffff !important;
+}
+
+html.dark .btn-nav-cta svg,
+html[data-theme="dark"] .btn-nav-cta svg,
+html.dark .btn-nav-chevron,
+html[data-theme="dark"] .btn-nav-chevron {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+}
+
+html.dark .btn-nav-cta:hover,
+html[data-theme="dark"] .btn-nav-cta:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.btn-nav-hamburger {
+    display: none !important;
+}
+
+/* Mobile Drawer (iOS Sheet) */
+.mobile-nav-drawer {
+    display: none;
+    position: fixed;
+    top: 66px;
+    left: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 20px 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    transform: translateY(-15px) scale(0.97);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    z-index: 999;
+    max-height: calc(100vh - 85px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-nav-drawer.active {
+    display: block !important;
+    transform: translateY(0) scale(1) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.mobile-nav-link:hover {
+    background: #f1f5f9;
+}
+
+.mobile-nav-chevron {
+    width: 18px;
+    height: 18px;
+    stroke: #64748b;
+}
+
+.mobile-drawer-bottom-zone {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-mobile-drawer-signin {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 12px 18px !important;
+    border-radius: 9999px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    color: #09090b !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-mobile-drawer-signin:hover {
+    background: #f8fafc !important;
+    border-color: rgba(0, 0, 0, 0.20) !important;
+}
+
+/* Mobile Drawer Dark Mode */
+html.dark .mobile-nav-drawer,
+html[data-theme="dark"] .mobile-nav-drawer {
+    background: rgba(13, 17, 23, 0.97) !important;
+    background-color: #0d1117 !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(32px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+}
+
+html.dark .mobile-nav-link,
+html[data-theme="dark"] .mobile-nav-link {
+    color: #f0f6fc !important;
+}
+
+html.dark .mobile-nav-link:hover,
+html[data-theme="dark"] .mobile-nav-link:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+}
+
+html.dark .mobile-nav-chevron,
+html[data-theme="dark"] .mobile-nav-chevron {
+    stroke: #8b949e !important;
+}
+
+html.dark .mobile-drawer-bottom-zone,
+html[data-theme="dark"] .mobile-drawer-bottom-zone {
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark .btn-mobile-drawer-signin,
+html[data-theme="dark"] .btn-mobile-drawer-signin {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.16) !important;
+    color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+    .navbar-floating-wrapper {
+        top: 0 !important;
+        padding: 0 !important;
+    }
+    .navbar-glass-pill {
+        height: 64px !important;
+        padding: 0 16px !important;
+        border-radius: 0 !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    html.dark .navbar-glass-pill,
+    html[data-theme="dark"] .navbar-glass-pill {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .navbar-links {
+        display: none !important;
+    }
+
+    .btn-signin-desktop,
+    .btn-nav-signin {
+        display: none !important;
+    }
+
+    .navbar-logo {
+        margin-left: 8px !important;
+    }
+
+    .btn-nav-cta {
+        display: inline-flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding: 0 12px !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        height: 34px !important;
+        background: transparent !important;
+        border: 1.25px solid #000000 !important;
+        color: #000000 !important;
+        border-radius: 100px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        gap: 5px !important;
+        box-shadow: none !important;
+    }
+
+    .btn-nav-cta .btn-nav-chevron {
+        display: none !important;
+    }
+
+    html.dark .btn-nav-cta,
+    html[data-theme="dark"] .btn-nav-cta {
+        border-color: #ffffff !important;
+        color: #ffffff !important;
+    }
+
+    .btn-nav-hamburger {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: column !important;
+        gap: 4.5px !important;
+        width: 38px !important;
+        height: 38px !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        margin-left: 6px !important;
+        flex-shrink: 0 !important;
+        box-sizing: border-box !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    .btn-nav-hamburger .bar {
+        display: block !important;
+        width: 19px !important;
+        height: 2px !important;
+        background-color: #09090b !important;
+        border-radius: 2px !important;
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease !important;
+    }
+
+    html.dark .btn-nav-hamburger .bar,
+    html[data-theme="dark"] .btn-nav-hamburger .bar {
+        background-color: #ffffff !important;
+    }
+
+    .btn-nav-hamburger.active .bar-top {
+        transform: translateY(6.5px) rotate(45deg) !important;
+    }
+    .btn-nav-hamburger.active .bar-mid {
+        opacity: 0 !important;
+        transform: scaleX(0) !important;
+    }
+    .btn-nav-hamburger.active .bar-bot {
+        transform: translateY(-6.5px) rotate(-45deg) !important;
+    }
+
+    .mobile-nav-drawer {
+        top: 68px !important;
+    }
+}
+
+        /* Legal Header */
+        .legal-header {
+            padding-top: 140px;
+            padding-bottom: 40px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .legal-title {
+            font-family: var(--font-heading);
+            font-size: clamp(30px, 3.8vw, 42px);
+            font-weight: 800;
+            color: var(--text-heading);
+            letter-spacing: -0.03em;
+            line-height: 1.18;
+            margin-bottom: 12px;
+        }
+
+        .legal-meta {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Legal Content */
+        .legal-content {
+            padding: 50px 0 90px;
+        }
+
+        .legal-section {
+            margin-bottom: 44px;
+        }
+
+        .legal-section h2 {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .legal-section p {
+            font-size: 15px;
+            color: var(--text-body);
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .legal-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .legal-section strong {
+            color: var(--text-heading);
+            font-weight: 700;
+        }
+
+        .legal-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .legal-section li {
+            font-size: 14.5px;
+            color: var(--text-body);
+            line-height: 1.65;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .legal-section li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer-section {
+            background: #09090b;
+            color: #94a3b8;
+            padding: 70px 0 35px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #64748b;
+            max-width: 320px;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-heading);
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-col-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col-links a {
+            font-size: 14px;
+            color: #94a3b8;
+            transition: color 0.2s ease;
+        }
+
+        .footer-col-links a:hover {
+            color: #ffffff;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #64748b;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-portal-link {
+            color: #ffffff;
+            margin-left: 12px;
+            font-weight: 600;
+        }
+
+        .footer-portal-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+
+            .legal-header { padding-top: 115px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+        }
+    .footer-lang-selector .lang-current { color: #ffffff !important; font-weight: 700; }
+        .footer-lang-selector .lang-switch-link { color: #94a3b8; transition: color 0.2s ease; }
+        .footer-lang-selector .lang-switch-link:hover { color: #ffffff; }
+    
+        /* -- UNIFIED DARK FOOTER (PERFECT CONTRAST) -- */
+        footer, .footer-section {
+            background: #09090b !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            padding: 56px 0 32px 0 !important;
+            color: #94a3b8 !important;
+            position: relative;
+            z-index: 10 !important;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif) !important;
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            margin-bottom: 16px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+        }
+
+        .footer-brand p, .footer-desc {
+            font-size: 13.5px !important;
+            color: #94a3b8 !important;
+            line-height: 1.6 !important;
+            max-width: 320px !important;
+        }
+
+        .footer-link, .footer-col-links a {
+            font-size: 13.5px !important;
+            color: #94a3b8 !important;
+            text-decoration: none !important;
+            transition: color 0.2s ease !important;
+        }
+
+        .footer-link:hover, .footer-col-links a:hover {
+            color: #ffffff !important;
+        }
+
+        .footer-divider {
+            height: 1px !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            margin: 32px 0 24px 0 !important;
+            border: none !important;
+        }
+
+        .footer-bottom {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            font-size: 13px !important;
+            color: #94a3b8 !important;
+            flex-wrap: wrap !important;
+            gap: 16px !important;
+        }
+
+        .footer-copy-text {
+            font-size: 13px !important;
+            color: #94a3b8 !important;
+        }
+
+        .footer-portal-link {
+            color: #94a3b8 !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            margin-left: 12px !important;
+            transition: color 0.2s ease !important;
+        }
+
+        .footer-portal-link:hover {
+            color: #ffffff !important;
+            text-decoration: underline !important;
+        }
+
+        .footer-lang-selector {
+            font-size: 13px !important;
+            color: #94a3b8 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+
+        .footer-lang-selector span,
+        .footer-lang-selector .lang-label,
+        .footer-lang-selector .lang-separator {
+            color: #94a3b8 !important;
+        }
+
+        .footer-lang-selector .lang-current {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            padding: 3px 10px !important;
+            border-radius: 6px !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            letter-spacing: 0.02em !important;
+            display: inline-block !important;
+        }
+
+        .footer-lang-selector .lang-switch-link {
+            color: #94a3b8 !important;
+            text-decoration: none !important;
+            padding: 3px 8px !important;
+            border-radius: 4px !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .footer-lang-selector .lang-switch-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-BLB26J2X"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Floating Navigation -->
+        <!-- Top Navigation Floating Glass Capsule (Píldora Flotante con Efecto Vidrio) -->
+    <div class="navbar-floating-wrapper">
+        <header class="navbar-glass-pill" id="navbar">
+            <a href="/" class="navbar-logo" aria-label="Firby Inicio">
+                <img src="/assets/figma/firby_brand_logo_black.png" alt="Firby" width="96" height="32" fetchpriority="high" decoding="async" />
+            </a>
+
+            <nav class="navbar-links">
+                <!-- Dropdown 1: Producto -->
+                <div class="nav-item-dropdown">
+                    <button class="nav-dropdown-trigger" type="button" aria-haspopup="true">
+                        <span>Producto</span>
+                        <svg class="nav-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <a href="/como-funciona" class="nav-dropdown-item">
+                            <span class="dropdown-item-title">Cómo Funciona</span>
+                            <span class="dropdown-item-desc">Arquitectura y los 3 momentos de atención</span>
+                        </a>
+                        <a href="/integraciones" class="nav-dropdown-item">
+                            <span class="dropdown-item-title">Integraciones</span>
+                            <span class="dropdown-item-desc">Google Calendar, CMS y webhooks</span>
+                        </a>
+                        <a href="/calculadora" class="nav-dropdown-item">
+                            <span class="dropdown-item-title">Calculadora de ROI</span>
+                            <span class="dropdown-item-desc">Estima ingresos y horas ahorradas al mes</span>
+                        </a>
+                        <a href="/docs" class="nav-dropdown-item">
+                            <span class="dropdown-item-title">Documentación</span>
+                            <span class="dropdown-item-desc">Guía técnica e integración en 60 segundos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Dropdown 2: Soluciones -->
+                <div class="nav-item-dropdown">
+                    <button class="nav-dropdown-trigger" type="button" aria-haspopup="true">
+                        <span>Soluciones</span>
+                        <svg class="nav-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <a href="/soluciones" class="nav-dropdown-item">
+                            <span class="dropdown-item-title">Por Industria</span>
+                            <span class="dropdown-item-desc">Salud, legal, academias y multisede</span>
+                        </a>
+                        <a href="/casos-de-exito" class="nav-dropdown-item">
+                            <span class="dropdown-item-title">Casos de Éxito</span>
+                            <span class="dropdown-item-desc">Métricas y resultados operativos auditables</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 3: Planes -->
+                <a href="/planes" class="navbar-link">Planes</a>
+
+                <!-- Dropdown 4: Empresa -->
+                <div class="nav-item-dropdown">
+                    <button class="nav-dropdown-trigger" type="button" aria-haspopup="true">
+                        <span>Empresa</span>
+                        <svg class="nav-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <a href="/seguridad" class="nav-dropdown-item">
+                            <span class="dropdown-item-title">Centro de Seguridad</span>
+                            <span class="dropdown-item-desc">Aislamiento de datos y gobernanza</span>
+                        </a>
+                        <a href="/about-us" class="nav-dropdown-item">
+                            <span class="dropdown-item-title">Sobre Nosotros</span>
+                            <span class="dropdown-item-desc">Nuestra visión y filosofía operativa</span>
+                        </a>
+                        <a href="/faq" class="nav-dropdown-item">
+                            <span class="dropdown-item-title">Preguntas Frecuentes</span>
+                            <span class="dropdown-item-desc">Respuestas a dudas comerciales y técnicas</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="navbar-actions">
+                <a href="/sign-in" class="btn-signin-desktop btn-nav-signin">Iniciar Sesión</a>
+                <button class="btn-nav-cta" onclick="window.location.href='/sign-up';" aria-label="Comencemos">
+                    <span>Comencemos</span>
+                    <svg class="btn-nav-chevron" width="13" height="13" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M11.1581 6.13499C11.3595 5.94644 11.6763 5.95708 11.8651 6.15843C12.0536 6.3599 12.043 6.67669 11.8416 6.86546L7.84165 10.6155C7.64941 10.7954 7.35029 10.7954 7.15805 10.6155L3.15805 6.86546L3.09165 6.78831C2.95746 6.59859 2.96967 6.33468 3.13461 6.15843C3.29985 5.98217 3.56347 5.95169 3.76157 6.07347L3.84165 6.13499L7.49985 9.5637L11.1581 6.13499Z" fill="currentColor"/>
+                    </svg>
+                </button>
+                <button class="btn-nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Menú">
+                    <span class="bar bar-top"></span>
+                    <span class="bar bar-mid"></span>
+                    <span class="bar bar-bot"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mobile Glass Drawer Menu (Native iOS Sheet Style) -->
+        <div class="mobile-nav-drawer" id="mobileDrawer">
+            <div class="mobile-nav-inner">
+                <div class="ios-sheet-handle"></div>
+                <nav class="mobile-nav-links">
+                    <a href="/como-funciona" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Cómo Funciona</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="/soluciones" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Soluciones</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="/integraciones" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Integraciones</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="/casos-de-exito" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Casos de Éxito</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="/calculadora" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Calculadora de ROI</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="/planes" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Planes y Precios</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="/seguridad" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Centro de Seguridad</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="/docs" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Documentación</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="/about-us" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Sobre Nosotros</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="/faq" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <span class="mobile-nav-text">Preguntas Frecuentes</span>
+                        <svg class="mobile-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                </nav>
+
+                <div class="mobile-drawer-bottom-zone">
+                    <a href="/sign-in" class="btn-mobile-drawer-signin">
+                        <span>Iniciar Sesión (Portal Clientes)</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="legal-header">
+        <div class="container">
+            <h1 class="legal-title">Política de Privacidad y Tratamiento de Datos Personales</h1>
+            <div class="legal-meta">
+                <span>Vigente desde: 6 de Septiembre de 2026</span>
+                <span>•</span>
+                <span>República de Colombia y Latinoamérica</span>
+                <span>•</span>
+                <span>Ley Estatutaria 1581 de 2012</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="legal-content">
+        <div class="container">
+
+            <!-- Section 1 -->
+            <section class="legal-section">
+                <h2>1. Responsable del Tratamiento de la Información</h2>
+                <p>
+                    La plataforma <strong>Firby AI</strong> (en adelante "Firby" o "el Servicio") es operada y representada comercialmente en Colombia por <strong>Santiago Rubio Parra</strong> (en calidad de titular de la actividad de desarrollo tecnológico y software), domiciliado en la ciudad de Medellín, Colombia.
+                </p>
+                <p>
+                    Para cualquier consulta, requerimiento de Hábeas Data, actualización o solicitud de supresión de datos, los canales directos y oficiales de contacto son el correo electrónico <strong>contacto@firbyai.com</strong> y la línea de atención <strong>+57 (324) 369-9856</strong>.
+                </p>
+                <p>
+                    El tratamiento de la información se rige de manera estricta por la <strong>Ley 1581 de 2012</strong>, su <strong>Decreto Reglamentario 1377 de 2013</strong> y el régimen constitucional de protección de datos personales de la República de Colombia.
+                </p>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="legal-section">
+                <h2>2. Datos Recopilados y Finalidad del Tratamiento</h2>
+                <p>
+                    <strong>Datos de empresas, consultorios y clientes contratantes:</strong> Nombre del profesional, representante legal o administrador, razón social o nombre comercial, documento de identidad o NIT, número de contacto celular (WhatsApp ejecutivo), correo electrónico corporativo, configuración de horarios y agendas de atención, e información para la emisión de facturación o cobros.
+                </p>
+                <p>
+                    <strong>Datos de visitantes y prospectos gestionados en la web:</strong> Nombre, teléfono o WhatsApp de contacto, correo electrónico, motivo de consulta, horario de cita seleccionado en la web y solicitudes comerciales formuladas.
+                </p>
+                <p>
+                    <strong>Finalidad del tratamiento:</strong> La recolección y tratamiento de datos tiene como único y exclusivo propósito la operación del operador digital autónomo en el sitio web del cliente, la sincronización de citas y reuniones en tiempo real con Google Calendar, el envío de alertas privadas y solicitudes de visto bueno al WhatsApp del contratante, y la administración técnica de la suscripción SaaS. <strong>Firby no comercializa, no arrienda ni transfiere bases de datos de clientes ni prospectos a terceros con fines publicitarios.</strong>
+                </p>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="legal-section">
+                <h2>3. Pasarela de Pagos y Seguridad de Tarjetas (Wompi)</h2>
+                <p>
+                    <strong>Seguridad financiera y PCI-DSS:</strong> Todas las transacciones comerciales, validaciones de tarjetas de crédito y débito, pagos por PSE, Nequi y transferencias Bancolombia son procesadas de manera directa y segura por la pasarela de pagos <strong>Wompi (Bancolombia S.A.)</strong>, entidad certificada bajo el estándar de seguridad internacional <strong>PCI-DSS Nivel 1</strong>.
+                </p>
+                <p>
+                    <strong>Almacenamiento cero de datos sensibles:</strong> Firby <strong>no recopila, no tiene acceso ni almacena</strong> los números completos de las tarjetas bancarias, fechas de vencimiento completas ni códigos de seguridad (CVV). Toda la información sensible es encriptada directamente en los servidores de Wompi, y Firby únicamente custodia identificadores de token seguros para procesar los cobros previamente autorizados por el usuario.
+                </p>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="legal-section">
+                <h2>4. Condiciones de la Prueba Gratuita de 7 Días y Facturación Recurrente</h2>
+                <p>
+                    <strong>Período de prueba sin cobro por suscripción:</strong> Al momento de registrarte en la prueba de siete (7) días calendario, se realiza una verificación técnica de la tarjeta bancaria a través de Wompi para certificar la validez del medio de pago. Durante estos primeros 7 días calendario <strong>no se realiza ningún cobro por la suscripción</strong>.
+                </p>
+                <p>
+                    <strong>Inicio de facturación recurrente:</strong> Finalizado el séptimo (7°) día calendario de prueba para los planes Starter o Pro, si el usuario no ha solicitado la cancelación del servicio, se activará de forma automática el cobro mensual recurrente del plan contratado (Plan Starter: $290.000 COP/mes o Plan Pro: $490.000 COP/mes). El Plan Equipos ($890.000 COP/mes) opera bajo suscripción mensual directa sin período de prueba.
+                </p>
+                <p>
+                    <strong>Cancelación transparente y sin penalidad:</strong> El usuario es libre de cancelar la suscripción en cualquier instante dentro del período de 7 días de prueba, o en cualquier momento de su ciclo mensual, directamente desde su panel de control o escribiendo a <strong>contacto@firbyai.com</strong>. Al confirmar la cancelación, la tarjeta no volverá a ser debitada.
+                </p>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="legal-section">
+                <h2>5. Integración con Google OAuth y Google Calendar API</h2>
+                <p>
+                    <strong>Alcance de permisos:</strong> Cuando el usuario decide registrarse o conectar sus servicios utilizando su cuenta de Google, Firby solicita de manera exclusiva los alcances estrictamente necesarios para su funcionamiento:
+                </p>
+                <ul style="list-style: disc; padding-left: 24px; margin-top: 8px; margin-bottom: 12px; color: var(--text-body); line-height: 1.7;">
+                    <li><strong>Identidad básica:</strong> <code>openid</code>, <code>email</code> y <code>profile</code> para autenticación segura en el espacio de trabajo.</li>
+                    <li><strong>Google Calendar:</strong> <code>https://www.googleapis.com/auth/calendar.events</code> con el único fin de consultar disponibilidad en tiempo real e insertar automáticamente las citas y reservas agendadas por los visitantes de su sitio web.</li>
+                </ul>
+                <p>
+                    <strong>Restricción estricta y privacidad de datos:</strong> Firby no solicita acceso ni lee correos de Gmail, documentos de Google Drive ni contactos personales. Los datos obtenidos a través de las APIs de Google se utilizan exclusivamente para la gestión operativa de citas solicitada por el usuario. Firby no vende, no transfiere a terceros ni utiliza datos de usuarios de Google para publicidad ni para el entrenamiento de modelos de inteligencia artificial generalizados.
+                </p>
+                <p style="margin-top: 14px; padding: 14px 18px; background: var(--bg-subtle); border-left: 3px solid #15803d; border-radius: 6px; font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Google API Services User Data Policy:</strong><br>
+                    Firby's use and transfer to any other app of information received from Google APIs will adhere to <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" style="color: #15803d; font-weight: 600; text-decoration: underline;">Google API Services User Data Policy</a>, including the Limited Use requirements.
+                </p>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="legal-section">
+                <h2>6. Derechos del Titular y Procedimiento de Hábeas Data</h2>
+                <p>
+                    En virtud del artículo 8 de la Ley 1581 de 2012 de la República de Colombia, el titular de los datos personales tiene derecho en todo momento a conocer, actualizar y rectificar su información, solicitar prueba de la autorización otorgada, ser informado sobre el uso de sus datos y revocar la autorización o solicitar la supresión de la información cuando lo estime pertinente.
+                </p>
+                <p>
+                    Para ejercer sus derechos, el titular o representante puede enviar una comunicación formal a <strong>contacto@firbyai.com</strong> adjuntando copia de su documento de identidad y detallando el objeto de su solicitud. Las solicitudes serán atendidas en un plazo máximo de quince (15) días hábiles conforme a la legislación colombiana.
+                </p>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="legal-section">
+                <h2>7. Infraestructura y Seguridad de la Información</h2>
+                <p>
+                    Los datos procesados por Firby residen en centros de datos seguros con cifrado de extremo a extremo en tránsito (protocolos TLS 1.3 y certificados SSL de alta seguridad) y cifrado en reposo bajo estándar AES-256. Se realizan respaldos periódicos automatizados y el acceso administrativo a servidores de bases de datos se encuentra protegido por llaves criptográficas y redes privadas virtuales.
+                </p>
+            </section>
+
+            <!-- Section 8 -->
+            <section class="legal-section">
+                <h2>8. Vigencia y Modificaciones</h2>
+                <p>
+                    La presente política rige a partir del 6 de Septiembre de 2026. Firby se reserva el derecho de actualizar este documento ante cambios legislativos o mejoras operativas. Las modificaciones sustanciales serán publicadas en el sitio web oficial <strong>https://firbyai.com/privacy</strong> con fecha de entrada en vigencia.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="/assets/figma/firby_brand_logo.png" alt="Firby AI" class="footer-logo-img" style="height: 28px; width: auto; max-width: 130px; object-fit: contain; display: block; margin-bottom: 14px;" />
+                    <p class="footer-desc">
+                        Operador digital aut&oacute;nomo para empresas y profesionales. Atiende en tu sitio web, agenda citas en tu Google Calendar y te mantiene informado en tu celular.
+                    </p>
+                </div>
+
+                <!-- Col 2: Plataforma -->
+                <div>
+                    <h4 class="footer-col-title">Plataforma</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="/sign-in">Iniciar Sesi&oacute;n (Acceso Clientes)</a></li>
+                        <li><a href="/#como-funciona">C&oacute;mo Funciona</a></li>
+                        <li><a href="/#equipo-digital">Equipo Digital</a></li>
+                        <li><a href="/#planes">Planes y Precios</a></li>
+                        <li><a href="/#seguridad-cumplimiento">Seguridad y Control</a></li>
+                        <li><a href="/#experiencia-conversacional">Demostraci&oacute;n en Vivo</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Legal -->
+                <div>
+                    <h4 class="footer-col-title">Legal</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="/terms">T&eacute;rminos de Servicio</a></li>
+                        <li><a href="/privacy">Pol&iacute;tica de Privacidad</a></li>
+                        <li><a href="/data-agreement">Acuerdo de Datos</a></li>
+                        <li><a href="mailto:contacto@firbyai.com">Contacto de Seguridad</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-info">
+                    <div class="footer-copy-text">
+                        &copy; 2026 Firby AI. Todos los derechos reservados.
+                        <a href="/sign-in" class="footer-portal-link">Acceso Clientes (Iniciar Sesi&oacute;n)</a>
+                    </div>
+                </div>
+
+                <div class="footer-lang-selector">
+                    <span class="lang-label">Idioma:</span>
+                    <a href="/en" class="lang-switch-link">English</a>
+                    <span class="lang-separator">&middot;</span>
+                    <strong class="lang-current">Espa&ntilde;ol</strong>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script 
+      src="/widget.js?v=20261012_voice_engine_v6" 
+      data-site-id="firby_landing" 
+      data-primary-color="#ffffff" 
+      data-border-color="#00825a"
+      data-accent-color="#00825a" 
+      async>
+    </script>
+    <!-- Mobile Drawer Navigation Script -->
+    <script>
+        function toggleMobileNav() {
+            var drawer = document.getElementById('mobileDrawer');
+            var btn = document.getElementById('navHamburger');
+            if (!drawer) return;
+            var isActive = drawer.classList.toggle('active');
+            if (btn) btn.classList.toggle('active');
+        }
+
+        function closeMobileNav() {
+            var drawer = document.getElementById('mobileDrawer');
+            var btn = document.getElementById('navHamburger');
+            if (drawer) drawer.classList.remove('active');
+            if (btn) btn.classList.remove('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            var drawer = document.getElementById('mobileDrawer');
+            var btn = document.getElementById('navHamburger');
+            if (drawer && drawer.classList.contains('active')) {
+                if (!drawer.contains(e.target) && !btn.contains(e.target)) {
+                    closeMobileNav();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

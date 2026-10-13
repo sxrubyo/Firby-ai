@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /workspace/
+Disallow: /dev-portal/
+Disallow: /token
+Disallow: /chats-new
+Disallow: /onboarding
+
+Sitemap: https://firbyai.com/sitemap.xml

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "notif_1791178041150",
+    "title": "Cita confirmada en tiempo real",
+    "message": "Valeria Gómez ha agendado una cita para mañana a las 10:00 AM.",
+    "type": "success",
+    "time": "Justo ahora",
+    "timestamp": 1791178041.1507504,
+    "read": false
+  },
+  {
+    "id": "notif_1791178041140",
+    "title": "Cita confirmada en tiempo real",
+    "message": "Valeria Gómez ha agendado una cita para mañana a las 10:00 AM.",
+    "type": "success",
+    "time": "Justo ahora",
+    "timestamp": 1791178041.1402912,
+    "read": false
+  },
+  {
+    "id": "notif_1791178017810",
+    "title": "Cita confirmada",
+    "message": "Carlos Martínez agendó una cita para este jueves a las 3:15 PM.",
+    "type": "success",
+    "time": "Justo ahora",
+    "timestamp": 1791178017.8103545,
+    "read": false
+  }
+]

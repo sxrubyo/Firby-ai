@@ -1,0 +1,112 @@
+{
+  "design_manifesto": "Cero estética de IA. No hay gradientes morados aleatorios, ni sombras borrosas gigantes, ni ilustraciones de plástico. El Workspace de Ideas de Firby destila ingeniería B2B de máxima precisión: superficies de obsidiana profunda, bordes técnicos calibrados a 1px con sutil reflejo superior, tipografía con ritmo suizo y tipografía monoespaciada para hashes y métricas. El verde lima neón se reserva exclusivamente para estados activos y CTAs de conversión. Densidad de información elevada, navegación por teclado first y feedback táctil inmediato.",
+  "color_and_type_tokens": {
+    "background_obsidian": "#08080a",
+    "surface_cards": "#0f1015",
+    "border_technical": "rgba(255, 255, 255, 0.07)",
+    "accent_tactical_lime": "#b9fa01",
+    "typography_primary": "Neue Montreal, Inter, -apple-system, sans-serif (Weights: 400, 500, 600)",
+    "typography_mono": "Geist Mono, JetBrains Mono, monospace (Weights: 400, 500)"
+  },
+  "real_world_references": [
+    {
+      "product_name": "Linear",
+      "specific_pattern": "El Issue Drawer deslizante lateral y los ciclos/filtrado rápido por teclado.",
+      "why_it_works": "Permite inspeccionar contextos profundos sin perder la vista principal ni el foco de la lista.",
+      "firby_adaptation": "Implementamos el Slide-Over Drawer para inspeccionar copys, variantes visuales y métricas de adquisición de un creativo sin salir del lienzo."
+    },
+    {
+      "product_name": "Attio",
+      "specific_pattern": "Tablas densas con atributos personalizados y micro-dots de estado.",
+      "why_it_works": "Maximiza el escaneo visual de datos relacionales complejos en un espacio reducido.",
+      "firby_adaptation": "Diseñamos la vista de tabla con celdas compactas, avatares y micro-dots de color para estados de pauta y nicho."
+    },
+    {
+      "product_name": "Raycast",
+      "specific_pattern": "Barra de comandos central hiper-rápida y metadatos contextuales en la barra lateral.",
+      "why_it_works": "Reduce drásticamente los clics del usuario priorizando la velocidad operativa mediante atajos de teclado.",
+      "firby_adaptation": "Incorporamos el CMD+K Command Menu y la barra de acciones rápidas superior con búsqueda instantánea."
+    },
+    {
+      "product_name": "Cosmos",
+      "specific_pattern": "Galería visual limpia estructurada en grid modular sin ruido decorativo.",
+      "why_it_works": "Deja que los assets visuales hablen por sí mismos usando un fondo neutro y tipografía limpia.",
+      "firby_adaptation": "Vista de Galería/Canvas con previsualizaciones fieles de creativos estáticos 4:5 y video 9:16 con overlay de métricas CTR/ROAS."
+    }
+  ],
+  "three_view_modes": [
+    {
+      "view_name": "Vista Tabla Densa (Attio Style)",
+      "layout_structure": "Tabla de filas alternadas con bordes horizontales de 1px, scroll horizontal optimizado y cabecera sticky.",
+      "key_interactions": [
+        "Navegación con flechas Arriba/Abajo",
+        "Presionar Enter para abrir Drawer",
+        "CMD+F para filtrar inline por atributo"
+      ],
+      "data_points_per_item": [
+        "ID de creativo (#CR-8492)",
+        "Miniatura de asset",
+        "Título de la idea",
+        "Nicho / Vertical",
+        "Micro-dot de Estado (Activo, Test, Pausado)",
+        "CTR Estimado",
+        "ROAS Promedio",
+        "Fecha de creación"
+      ]
+    },
+    {
+      "view_name": "Vista Kanban por Etapas (Linear Style)",
+      "layout_structure": "Columnas fijas de ancho uniforme: 'Backlog', 'Generando Assets', 'Canary Test', 'Escalando', 'Descartado'.",
+      "key_interactions": [
+        "Drag and drop fluido entre columnas",
+        "Atajo N para crear nueva idea en la columna seleccionada",
+        "Filtro rápido por responsable"
+      ],
+      "data_points_per_item": [
+        "Badge de prioridad (P0, P1, P2)",
+        "Título del concepto",
+        "Indicador de copys generados (ej. 3 variantes)",
+        "Avatar del creador o sistema IA",
+        "Métrica clave de rendimiento"
+      ]
+    },
+    {
+      "view_name": "Vista Galería / Canvas Visual (Cosmos Style)",
+      "layout_structure": "Grid responsive de tarjetas 4:5 y 9:16 con separación estricta de 12px y superficie #0f1015.",
+      "key_interactions": [
+        "Hover para reproducción automática de video o zoom de imagen",
+        "Click derecho para menú contextual rápido",
+        "Espacio para vista previa rápida modal"
+      ],
+      "data_points_per_item": [
+        "Previsualización multimedia",
+        "Tag de ángulo de marketing (ej. 'Dolor de cliente')",
+        "Hash de versión",
+        "Badge de CTA principal"
+      ]
+    }
+  ],
+  "slide_over_drawer_spec": {
+    "header_section": "Cabecera con ID mono (#CR-4029), selector rápido de etapa tipo dropdown minimalista, y botón de cierre con atajo ESC.",
+    "tabs_or_sections": [
+      "Copywriting (Variantes A/B/C)",
+      "Assets Visuales (Estáticos & Reels)",
+      "Canary QA (Validación de normativas y UI)",
+      "Pauta Meta (Payload y Parámetros UTM)"
+    ],
+    "visual_asset_preview_layout": "Contenedor principal con relación de aspecto configurable (4:5 / 9:16), controles de reproducción limpios y selector lateral de variantes generadas.",
+    "action_footer": "Barra inferior fija con botón primario verde lima 'Sincronizar con Meta Ads Manager', secundario 'Re-generar con IA' y botón de clonar."
+  },
+  "quick_action_bar_spec": {
+    "left_controls": [
+      "Selector de Nicho/Sector (Dropdown con badge de cantidad)",
+      "Filtro de Etapa (Pill buttons con contadores)"
+    ],
+    "center_search": "Barra de búsqueda universal con placeholder 'Buscar ideas, copys, hashes o etiquetas...' y indicador de atajo CMD+K",
+    "right_actions": [
+      "+ Nueva Idea (Acción primaria en verde lima #b9fa01)",
+      "Sincronizar con Paperclip",
+      "Selector de Vista (Tabla / Kanban / Grid)"
+    ]
+  }
+}

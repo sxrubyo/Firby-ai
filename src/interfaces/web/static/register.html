@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-BLB26J2X');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261009_isotipo_negro">
+    <link rel="shortcut icon" href="/favicon.ico?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261009_isotipo_negro">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/branding/Isotipo-pestana.png?v=20261009_isotipo_negro">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png?v=20261009_isotipo_negro">
+    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crea tu Cuenta — Firby AI</title>
+    <link rel="canonical" href="https://firbyai.com/register">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #0a0a0c;
+      color: #f3f4f6;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-BLB26J2X"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+  <div class="w-full max-w-md flex flex-col items-center">
+    
+    <!-- Logo -->
+    <div class="mb-6 flex items-center justify-center">
+      <img src="/brand-assets/isotipo_firby_plano_verde_lima.png" alt="Firby" class="h-14 w-auto object-contain select-none">
+    </div>
+
+    <!-- Main Card -->
+    <div class="rounded-2xl border w-full border-[#2a2a2a] bg-[#111111] text-neutral-100 shadow-2xl shadow-black/40">
+      <div class="flex flex-col space-y-1.5 p-6 text-center pb-4">
+        <h3 class="font-semibold tracking-tight text-2xl text-white">Crea tu Cuenta</h3>
+        <p class="text-sm text-neutral-400">Ingresa tus datos y token de activación para configurar tu espacio de trabajo.</p>
+      </div>
+
+      <div class="p-6 pt-0 space-y-4">
+        
+        <!-- Error Alert -->
+        <div id="errorAlert" class="hidden p-3 bg-red-950/50 border border-red-900 rounded-lg text-red-200 text-xs text-center font-medium"></div>
+        
+        <!-- Success Alert -->
+        <div id="successAlert" class="hidden p-3 bg-emerald-950/50 border border-emerald-900 rounded-lg text-emerald-200 text-xs text-center font-medium">
+          Cuenta activada con éxito. Redirigiendo a tu panel...
+        </div>
+
+        <form id="createForm" onsubmit="handleCreateAccount(event)" class="space-y-3">
+          
+          <div>
+            <label for="name" class="block text-xs font-medium text-neutral-300 mb-1">Nombre Completo</label>
+            <div class="flex items-center gap-2 border border-[#333] rounded-lg px-3 py-2 bg-[#1a1a1a] focus-within:border-neutral-500 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-500 shrink-0"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <input type="text" id="name" required placeholder="Santiago Rubio" 
+                class="w-full bg-transparent border-0 text-white placeholder:text-neutral-600 text-sm focus:outline-none focus:ring-0 p-0">
+            </div>
+          </div>
+
+          <div>
+            <label for="business_name" class="block text-xs font-medium text-neutral-300 mb-1">Nombre de la Empresa o Clínica</label>
+            <div class="flex items-center gap-2 border border-[#333] rounded-lg px-3 py-2 bg-[#1a1a1a] focus-within:border-neutral-500 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-500 shrink-0"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M16 14h.01"></path></svg>
+              <input type="text" id="business_name" required placeholder="Clínica Dental Sonrisas" 
+                class="w-full bg-transparent border-0 text-white placeholder:text-neutral-600 text-sm focus:outline-none focus:ring-0 p-0">
+            </div>
+          </div>
+
+          <div>
+            <label for="email" class="block text-xs font-medium text-neutral-300 mb-1">Correo Electrónico</label>
+            <div class="flex items-center gap-2 border border-[#333] rounded-lg px-3 py-2 bg-[#1a1a1a] focus-within:border-neutral-500 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-500 shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+              <input type="email" id="email" required placeholder="contacto@empresa.com" 
+                class="w-full bg-transparent border-0 text-white placeholder:text-neutral-600 text-sm focus:outline-none focus:ring-0 p-0">
+            </div>
+          </div>
+
+          <div>
+            <label for="phone" class="block text-xs font-medium text-neutral-300 mb-1">WhatsApp / Teléfono</label>
+            <div class="flex items-center gap-2 border border-[#333] rounded-lg px-3 py-2 bg-[#1a1a1a] focus-within:border-neutral-500 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-500 shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <input type="tel" id="phone" required placeholder="+57 300 123 4567" 
+                class="w-full bg-transparent border-0 text-white placeholder:text-neutral-600 text-sm focus:outline-none focus:ring-0 p-0">
+            </div>
+          </div>
+
+          <div>
+            <label for="token" class="block text-xs font-medium text-neutral-300 mb-1">Token de Activación</label>
+            <div class="flex items-center gap-2 border border-[#333] rounded-lg px-3 py-2 bg-[#1a1a1a] focus-within:border-neutral-500 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-500 shrink-0"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15.5 7.5 3 3L22 7l-3-3"></path></svg>
+              <input type="text" id="token" required placeholder="ACTV-XXXX-XXXX" 
+                class="w-full bg-transparent border-0 text-white placeholder:text-neutral-600 text-sm focus:outline-none focus:ring-0 p-0 uppercase font-mono">
+            </div>
+          </div>
+
+          <div>
+            <label for="password" class="block text-xs font-medium text-neutral-300 mb-1">Contraseña</label>
+            <div class="flex items-center gap-2 border border-[#333] rounded-lg px-3 py-2 bg-[#1a1a1a] focus-within:border-neutral-500 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-500 shrink-0"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <input type="password" id="password" required minlength="6" placeholder="••••••••" 
+                class="w-full bg-transparent border-0 text-white placeholder:text-neutral-600 text-sm focus:outline-none focus:ring-0 p-0">
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn" 
+            class="w-full bg-white text-black hover:bg-neutral-200 font-medium text-sm py-2.5 rounded-lg shadow-sm transition mt-3 flex items-center justify-center gap-2">
+            <span>Activar y Comenzar</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </button>
+
+        </form>
+
+        <div class="pt-2 text-center">
+          <p class="text-xs text-neutral-400">
+            ¿Ya tienes una cuenta? 
+            <a href="/sign-in" class="text-white font-medium hover:underline ml-1">Iniciar Sesión</a>
+          </p>
+        </div>
+
+        <p class="text-[11px] text-neutral-600 text-center pt-2">
+          Al continuar, aceptas nuestros 
+          <a href="#" class="underline hover:text-neutral-400">Términos de Servicio</a> y 
+          <a href="#" class="underline hover:text-neutral-400">Política de Privacidad</a>.
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    async function handleCreateAccount(e) {
+      e.preventDefault();
+      const errorAlert = document.getElementById('errorAlert');
+      const successAlert = document.getElementById('successAlert');
+      const submitBtn = document.getElementById('submitBtn');
+
+      errorAlert.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-black" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Activando cuenta...</span>
+      `;
+
+      const payload = {
+        name: document.getElementById('name').value.trim(),
+        business_name: document.getElementById('business_name').value.trim(),
+        email: document.getElementById('email').value.trim().toLowerCase(),
+        phone: document.getElementById('phone').value.trim(),
+        token: document.getElementById('token').value.trim().toUpperCase(),
+        password: document.getElementById('password').value,
+        sector: 'general',
+        assistant_name: 'Valentina',
+        tone: 'profesional'
+      };
+
+      try {
+        const res = await fetch('/api/auth/register-pro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          errorAlert.innerText = data.detail || data.message || 'Token de activación inválido o ya utilizado.';
+          errorAlert.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>Activar y Comenzar</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>`;
+          return;
+        }
+
+        if (data.master_key) {
+          localStorage.setItem('firby_master_key', data.master_key);
+          localStorage.setItem('firby_user_email', payload.email);
+          localStorage.removeItem('dev_master_key');
+          localStorage.removeItem('firby_dev_mode');
+        }
+
+        successAlert.classList.remove('hidden');
+        submitBtn.classList.add('hidden');
+
+        setTimeout(() => {
+          window.location.href = data.redirect || '/panel/';
+        }, 1000);
+
+      } catch (err) {
+        errorAlert.innerText = 'Error de conexión con el servidor.';
+        errorAlert.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<span>Activar y Comenzar</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>`;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+{
+  "sector_name": "inmobiliarias y bienes raices",
+  "idea": {
+    "angle_name": "El comprador de medianoche",
+    "target_avatar": "Directores comerciales de inmobiliarias y agencias de bienes raíces",
+    "pain_point": "Prospectos calientes visitan tu web un domingo a las 10 de la noche buscando agendar una cita para ver un inmueble, pero encuentran un formulario estático. Para el lunes por la mañana, ya cotizaron con otra inmobiliaria.",
+    "hook_3s": "Tu inmobiliaria está perdiendo citas de compradores a medianoche porque nadie responde en tu web.",
+    "mechanism": "Firby atiende a los visitantes en tu web a cualquier hora, consulta tu disponibilidad en tiempo real en Google Calendar, agenda la visita y te envía una alerta directa a tu WhatsApp.",
+    "offer_cta": "Prueba 7 días gratis. Cancela cuando quieras en 1 clic."
+  },
+  "copy_pack": {
+    "angle_reference": "El comprador de medianoche en inmobiliarias",
+    "headline": "Tu inmobiliaria pierde compradores a medianoche",
+    "primary_text": "Un cliente busca ver un inmueble un domingo a las diez de la noche en tu web y solo encuentra un formulario estático que nadie lee hasta el lunes. Para ese momento, ya firmó con tu competencia. Firby vive en tu web atiende a los visitantes en tiempo real, consulta tu Google Calendar, agenda la visita y te avisa directo a tu WhatsApp. Prueba 7 días gratis. Cancela cuando quieras en 1 clic.",
+    "description_line": "Instala Firby en tu web y agenda citas 24/7 sin tocar el teclado.",
+    "video_script_9_16": "0 a 3 segundos: Tu inmobiliaria está perdiendo citas de compradores a medianoche porque nadie responde en tu web. 3 a 15 segundos: Un prospecto entra un domingo por la noche a ver propiedades, ve tu formulario de contacto y se va a la competencia porque nadie le contesta al instante. Mientras duermes, pierdes comisiones. 15 a 30 segundos: Firby es el operador digital que atiende tu web las 24 horas, agenda las visitas directamente en tu Google Calendar y te avisa al instante en tu WhatsApp privado. 30 a 45 segundos: Deja de perder dinero por culpa de los formularios estáticos. Prueba 7 días gratis. Cancela cuando quieras en 1 clic.",
+    "carousel_slides": [
+      "Un comprador busca inmuebles un domingo a las diez de la noche en tu web.",
+      "Se encuentra con un formulario estático que promete una respuesta para el lunes.",
+      "El lunes a primera hora, ese mismo cliente ya agendó con otra inmobiliaria.",
+      "Firby atiende tu web a cualquier hora, agenda la visita en tu calendario y te avisa en WhatsApp. Prueba 7 días gratis. Cancela cuando quieras en 1 clic."
+    ]
+  },
+  "visual_spec": {
+    "video_title": "El comprador de medianoche inmobiliario",
+    "aspect_ratio": "9:16 vertical (Reels/TikTok/Stories)",
+    "split_screen_left_web": "Pantalla dividida superior o izquierda mostrando una página web de una inmobiliaria en modo oscuro obsidiana (#0f0f11). Son las 11:45 PM de un domingo. Un visitante abre el widget flotante 2D de Firby con insignia squircle y monograma fi, pregunta por disponibilidad para visitar un apartamento y selecciona el horario en tiempo real.",
+    "split_screen_right_whatsapp": "Pantalla dividida inferior o derecha mostrando la interfaz ejecutiva privada de WhatsApp (+57 324 369 9856). El dueño del negocio recibe la alerta de Firby confirmando la cita de visita para el lunes a las 10:00 AM con todos los datos del lead de manera instantánea.",
+    "motion_timeline": [
+      "0 a 5 segundos: Split screen activo. Izquierda: Reloj marca 11:45 PM en la web inmobiliaria. Derecha: Teléfono del dueño con pantalla bloqueada y notificación de WhatsApp en silencio.",
+      "5 a 15 segundos: Izquierda: El visitante interactúa con Firby, consulta fecha y Firby sincroniza con Google Calendar mostrando espacios libres al instante.",
+      "15 a 25 segundos: Izquierda: El visitante confirma la cita con un clic. Derecha: Vibración y entrada instantánea del mensaje de Firby en el WhatsApp privado del dueño con los detalles del cliente.",
+      "25 a 35 segundos: Transición a pantalla completa con fondo obsidiana y tipografía Neue Montreal en verde lima neón (#b9fa01). Cierre con la oferta oficial: Prueba 7 días gratis. Cancela cuando quieras en 1 clic."
+    ],
+    "on_screen_text_overlays": [
+      "Tu inmobiliaria pierde compradores a medianoche",
+      "Formularios estáticos que nadie lee",
+      "Firby atiende tu web y agenda 24/7",
+      "Alerta directa a tu WhatsApp",
+      "Prueba 7 días gratis. Cancela cuando quieras en 1 clic"
+    ]
+  },
+  "static_spec": {
+    "creative_type": "Captura de producto con anotaciones",
+    "dimensions": "1080x1350",
+    "background_treatment": "Obsidiana #0f0f11 con sutil gradiente radial",
+    "headline_overlay": "Tu inmobiliaria pierde compradores a medianoche",
+    "badge_callout": "Google Calendar Sync en Vivo",
+    "proof_metric": "0% de prospectos perdidos fuera de horario",
+    "visual_layout_description": "Fondo color #0f0f11. En la parte superior, el badge táctil en color verde lima neón #b9fa01 sobre gris pizarra #1e222d con el texto Google Calendar Sync en Vivo. En el centro, una interfaz flotante estilo UI que simula el chat de Firby en un sitio web inmobiliario a las 11:42 PM, mostrando cómo agenda una visita de forma autónoma. Abajo, un bloque de texto tipográfico limpio en Neue Montreal con el titular principal y el llamado a la acción: Prueba 7 días gratis. Cancela cuando quieras en 1 clic. Cero emojis."
+  },
+  "compliance": {
+    "passed": true,
+    "compliance_score": 10,
+    "emoji_detected": false,
+    "pricing_violation": false,
+    "channel_confusion": false,
+    "identified_issues": [],
+    "mandatory_corrections": []
+  },
+  "skeptic_test": {
+    "persona_type": "Director comercial de inmobiliaria",
+    "initial_reaction": "Claro, como si un bot de tres pesos fuera a entender qué tipo de inmueble busca un cliente calificado a medianoche sin inventarse mentiras o mandar a alguien a perder el tiempo.",
+    "unanswered_objections": [
+      "¿Cómo evita el bot que agenden visitas a propiedades que ya se vendieron o cuyos dueños no pueden mostrar?",
+      "¿Qué pasa si el cliente pregunta por financiación, tasas de interés o condiciones legales y el bot le da información errónea?",
+      "¿Por qué confiar en un lead de domingo a medianoche si el 90 por ciento de las veces son curiosos sin un peso para la cuota inicial?"
+    ],
+    "believability_score": 4,
+    "hardened_counter_argument": "Demuéstrame con un registro de chat real de 2 minutos que Firby califica presupuesto y sincroniza exclusivamente con Google Calendar sin que el cliente tenga que hablar con un humano."
+  },
+  "media_plan": {
+    "campaign_objective": "Generacion de clientes potenciales y conversiones orientadas al inicio de la prueba de 7 dias",
+    "target_interests_and_behaviors": [
+      "Administracion de bienes raices",
+      "Agente inmobiliario",
+      "Gerente de ventas",
+      "Bienes raices comerciales",
+      "Inmobiliaria",
+      "Propietario de pequena empresa"
+    ],
+    "suggested_budget_distribution": "60% Prospeccion TOF, 30% Retargeting BOF, 10% Testing de copys y creativos",
+    "utm_structure": "utm_source=meta&utm_medium=cpc&utm_campaign=tof_inmobiliarias_medianoche&utm_content=anuncio_dolor_medianoche",
+    "bidding_strategy": "Costo por resultado mas bajo con limite de costo estricto para proteger el CAC"
+  },
+  "conversion_plan": {
+    "message_match_score": 10,
+    "landing_headline_recommendation": "Recupera compradores a medianoche y agenda visitas automáticas en tu inmobiliaria",
+    "widget_initial_greeting": "Hola. Veo que llegaste buscando cómo captar compradores fuera de horario. Conecto tu inventario con Google Calendar para agendar visitas 24/7 sin que muevas un dedo. ¿Probamos la integración con tu inmobiliaria?",
+    "friction_elimination_tips": [
+      "Eliminar formularios largos de registro pidiendo NIT o número de empleados",
+      "Permitir autenticación en un solo clic con Google para conectar el calendario de inmediato",
+      "Omitir la tarjeta de crédito para iniciar la prueba de 7 días gratis"
+    ]
+  }
+}

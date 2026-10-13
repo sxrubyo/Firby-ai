@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/TestSprite/testsprite-cli/main/schemas/plan.schema.json",
+  "projectId": "firby-operator-core",
+  "type": "frontend",
+  "name": "Desktop viewport: Chat launcher opens interaction surface with terms and conditions prompt",
+  "description": "When a desktop user opens the Firby operator surface, the chat renders the greeting, asks for terms acceptance with 'Sí, acepto', and displays the direct WhatsApp owner button.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the homepage"
+    },
+    {
+      "type": "action",
+      "description": "Click the Firby operator floating launcher"
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the chat header displays the Firby operator branding and executive escalation action"
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the initial interaction prompt requires terms and conditions acceptance with an affirmative button containing 'Sí, acepto'"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+# ==============================================================================
+# FIRBY — .gitignore Oficial
+# ==============================================================================
+
+# ── Variables de entorno y secretos ───────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Bases de datos SQLite y datos de runtime ──────────────────────────────────
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+vectors.db
+data.db
+conny_ultra.db
+firby_ultra.db
+*.session
+
+# ── Instancias de servidor y runtime local ────────────────────────────────────
+instances/
+conny-instances/
+~/conny-instances/
+
+# ── Artefactos de Frontend, Compilación y Build ───────────────────────────────
+node_modules/
+.next/
+dist/
+build/
+out/
+*.tsbuildinfo
+src/interfaces/web/static/_next/
+src/interfaces/web/static/workspace/*.txt
+src/interfaces/web/static/workspace/*/*.txt
+src/interfaces/web/dist/
+
+# ── Python, bytecode y entornos virtuales ────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Sandboxes, temporales, logs y scratch ─────────────────────────────────────
+sandboxes/
+scratch/
+scratch*/
+scratch_*.json
+scratch_*.py
+scratch_*.txt
+tools/Prompt-Engineering-Guide/
+/*.png
+codebase_map.json
+*.tmp
+*.pid
+*.log
+logs/
+npm-debug.log*
+
+# ── Backups y archivos comprimidos ────────────────────────────────────────────
+backups/
+*.bak
+*.bak.*
+*.bak_*
+*.tar.gz
+*.zip
+*.pre_merge*
+*.patch
+
+# ── Claves, certificados y credenciales ───────────────────────────────────────
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+client_secret*.json
+*credentials*.json
+google-service-account.json
+gcloud_master_tokens.json
+*tokens*.json
+*master_tokens*.json
+integrations/vault/
+
+# ── Sesiones de WhatsApp / Canales externos ───────────────────────────────────
+auth_info/
+auth_info_multi/
+auth_info_multi.txt
+session/
+sessions/
+.wwebjs_auth/
+.wwebjs_cache/
+wa_*.json
+
+# ── Datos de contexto y prompts dinámicos por cliente ─────────────────────────
+model_configs/
+teachings/
+memory_store/
+knowledge_gaps/
+personas/*/
+!personas/.gitkeep
+!personas/example/
+
+# ── Herramientas de análisis y diseño ─────────────────────────────────────────
+graphify-out/
+figma_design/
+brand-assets/
+disenos_pagina/
+
+# ── OS / IDE ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+scratch_audit_new/

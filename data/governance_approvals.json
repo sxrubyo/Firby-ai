@@ -1,0 +1,40 @@
+[
+  {
+    "id": "appr_9821a",
+    "action_key": "update_contact_info",
+    "action_name": "Actualización de Correo Electrónico",
+    "user_id": "usr_4829",
+    "user_name": "Santiago Gómez",
+    "channel": "web_widget",
+    "summary": "Cambio de correo de santiago@viejo.com a santiago@nuevo.com",
+    "details": {
+      "campo": "email",
+      "valor_anterior": "santiago@viejo.com",
+      "valor_nuevo": "santiago@nuevo.com",
+      "motivo": "Usuario actualizó su correo corporativo en el chat"
+    },
+    "status": "pending",
+    "created_at": "2026-09-09 21:07:25 UTC",
+    "resolved_at": null,
+    "resolved_by": null
+  },
+  {
+    "id": "appr_7344b",
+    "action_key": "custom_discount",
+    "action_name": "Descuento Especial de Cortesía",
+    "user_id": "usr_5102",
+    "user_name": "Dra. Marcela Valencia",
+    "channel": "telegram",
+    "summary": "Solicitud de cortesía del 15% para cita de revisión",
+    "details": {
+      "descuento": "15%",
+      "tratamiento": "Control Post-operatorio",
+      "tarifa_base": "$180.000 COP",
+      "tarifa_con_descuento": "$153.000 COP"
+    },
+    "status": "pending",
+    "created_at": "2026-09-09 21:07:25 UTC",
+    "resolved_at": null,
+    "resolved_by": null
+  }
+]
