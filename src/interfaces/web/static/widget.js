@@ -3479,7 +3479,11 @@
   // ═══════════════════════════════════════════════════════════════════════════
   let isLiveVoiceActive = false;
   let isLiveVoiceMuted = false;
-  let speechRecognizer = null;
+  let isFirbyBusy = false;
+  let liveSpeechRecognizer = null;
+  let isRecognitionRunning = false;
+  let recognitionRestartTimer = null;
+  let turnSilenceTimer = null;
   let liveVoiceAudio = null;
   let liveAudioStream = null;
   let liveAudioCtx = null;
@@ -3489,8 +3493,9 @@
   let liveMediaRecorder = null;
   let liveRecordedChunks = [];
   let isVADSpeaking = false;
-  let speechSilenceTimeout = null;
   let currentTurnTranscript = '';
+  const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const hasNativeSpeechRecognition = Boolean(SpeechRecognitionAPI);
 
   async function requestMicAccess() {
     if (!isLiveVoiceActive || isLiveVoiceMuted) return false;
@@ -3617,11 +3622,15 @@
         smoothedVolume += (currentVolume - smoothedVolume) * 0.25;
         smoothedBass += (currentBass - smoothedBass) * 0.28;
 
-        // VAD: Si el volumen supera el umbral mientras el usuario habla y Firby está en silencio
-        const isFirbySpeaking = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused);
-        if (currentVolume > 14 && !isFirbySpeaking) {
+        // VAD: Si el volumen supera el umbral mientras el usuario habla y Firby no está activo
+        const isAudioPlaying = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused);
+        const isFirbyActive = isFirbyBusy || isAudioPlaying;
+        if (currentVolume > 15 && !isFirbyActive) {
           isVADSpeaking = true;
-          handleDetectedSpeechTurn();
+          // Solo si el navegador NO cuenta con Web Speech API nativo, delegar captura por VAD
+          if (!hasNativeSpeechRecognition) {
+            handleVadDirectAudioTurn();
+          }
         }
 
         // Retina / Hi-DPI scaling dinámico
@@ -3651,7 +3660,7 @@
 
         const baseAmp = 3.5 + Math.sin(phase * 0.5) * 1.5;
         const voiceAmp = normVol * (cssH * 0.44);
-        const totalAmp = isFirbySpeaking ? (13 + Math.sin(phase * 1.6) * 9) : (baseAmp + voiceAmp);
+        const totalAmp = isFirbyActive ? (13 + Math.sin(phase * 1.6) * 9) : (baseAmp + voiceAmp);
 
         // Modulación física del orbe en vivo con la voz
         if (lvoOrb) {
@@ -3727,29 +3736,15 @@
     }
   }
 
-  function handleDetectedSpeechTurn(isFinal = false) {
-    if (!isLiveVoiceActive || isLiveVoiceMuted) return;
+  function handleVadDirectAudioTurn() {
+    if (!isLiveVoiceActive || isLiveVoiceMuted || isFirbyBusy) return;
     if (currentPlayingSourceNode || (liveVoiceAudio && !liveVoiceAudio.paused)) return;
 
-    clearTimeout(speechSilenceTimeout);
-    const silenceDelay = isFinal ? 380 : 680;
-    speechSilenceTimeout = setTimeout(async () => {
-      if (isLiveVoiceActive && !isLiveVoiceMuted && !currentPlayingSourceNode && (!liveVoiceAudio || liveVoiceAudio.paused)) {
-        let textToSend = (currentTurnTranscript || '').trim();
-        currentTurnTranscript = '';
-
-        if (textToSend && textToSend.length > 1) {
-          console.log('[Live Voice] Turno detectado por Web Speech API:', textToSend);
-          if (liveMediaRecorder && liveMediaRecorder.state !== 'inactive') {
-            try { liveMediaRecorder.stop(); } catch(_) {}
-          }
-          liveRecordedChunks = [];
-          if (liveAudioStream) {
-            setTimeout(() => { if (isLiveVoiceActive && !isLiveVoiceMuted) startLiveMediaRecorder(liveAudioStream); }, 80);
-          }
-          handleLiveVoiceTurn(textToSend);
-        } else if (liveRecordedChunks.length > 0 && isVADSpeaking) {
-          console.log('[Live Voice] Fallback: Enviando audio capturado al backend para transcripción...');
+    clearTimeout(turnSilenceTimer);
+    turnSilenceTimer = setTimeout(async () => {
+      const isAudioPlaying = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused);
+      if (isLiveVoiceActive && !isLiveVoiceMuted && !isFirbyBusy && !isAudioPlaying) {
+        if (liveRecordedChunks.length > 0 && isVADSpeaking) {
           isVADSpeaking = false;
           const mime = liveMediaRecorder ? (liveMediaRecorder.mimeType || 'audio/webm') : 'audio/webm';
           let recordedBlob = null;
@@ -3770,107 +3765,161 @@
               }
             });
             if (liveAudioStream) {
-              setTimeout(() => { if (isLiveVoiceActive && !isLiveVoiceMuted) startLiveMediaRecorder(liveAudioStream); }, 150);
+              setTimeout(() => { if (isLiveVoiceActive && !isLiveVoiceMuted && !isFirbyBusy) startLiveMediaRecorder(liveAudioStream); }, 150);
             }
           } else {
             recordedBlob = new Blob(liveRecordedChunks, { type: mime });
             liveRecordedChunks = [];
           }
 
-          if (recordedBlob && recordedBlob.size > 500) {
+          if (recordedBlob && recordedBlob.size > 2000) {
             const b64 = await blobToBase64(recordedBlob);
             handleLiveVoiceTurn('', b64, mime);
           }
         }
         isVADSpeaking = false;
       }
-    }, silenceDelay);
+    }, 850);
   }
 
   function initSpeechRecognition() {
-    if (!isLiveVoiceActive || isLiveVoiceMuted) return;
+    if (!isLiveVoiceActive || isLiveVoiceMuted || !hasNativeSpeechRecognition) return;
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      console.warn('[Live Voice] Web Speech API no disponible, operando con grabador VAD directo.');
-      return;
+    if (liveSpeechRecognizer) {
+      try {
+        liveSpeechRecognizer.onend = null;
+        liveSpeechRecognizer.onerror = null;
+        liveSpeechRecognizer.onresult = null;
+        liveSpeechRecognizer.onstart = null;
+        liveSpeechRecognizer.stop();
+      } catch(_) {}
+      liveSpeechRecognizer = null;
+      isRecognitionRunning = false;
     }
-
-    if (speechRecognizer) {
-      try { speechRecognizer.abort(); } catch(e){}
-      speechRecognizer = null;
-    }
-
-    speechRecognizer = new SpeechRecognition();
-    speechRecognizer.continuous = true;
-    speechRecognizer.interimResults = true;
-    speechRecognizer.lang = 'es-CO';
-
-    speechRecognizer.onstart = () => {
-      if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
-      if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-      if (lvoPermBtn) lvoPermBtn.style.display = 'none';
-    };
-
-    speechRecognizer.onresult = (event) => {
-      if (isLiveVoiceMuted || !isLiveVoiceActive) return;
-
-      let interim = '';
-      let finalTranscript = '';
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-          finalTranscript += event.results[i][0].transcript;
-        } else {
-          interim += event.results[i][0].transcript;
-        }
-      }
-
-      const currentText = (finalTranscript || interim).trim();
-      const hasFinal = Boolean((finalTranscript || '').trim());
-      if (currentText) {
-        currentTurnTranscript = currentText;
-        if (lvoUserText) lvoUserText.textContent = `Tú: "${currentText}"`;
-        if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-        handleDetectedSpeechTurn(hasFinal);
-      }
-    };
-
-    speechRecognizer.onerror = (e) => {
-      console.warn('[Live Voice] Recognition error:', e.error);
-      if (e.error === 'not-allowed') {
-        if (lvoStatusText) lvoStatusText.textContent = 'Permiso de micrófono requerido en tu navegador.';
-        if (lvoPermBtn) {
-          lvoPermBtn.textContent = 'Permitir micrófono';
-          lvoPermBtn.style.display = 'inline-flex';
-        }
-        return;
-      }
-      if (e.error === 'no-speech') return;
-      if (isLiveVoiceActive && !isLiveVoiceMuted && e.error !== 'aborted') {
-        setTimeout(() => {
-          if (isLiveVoiceActive && !isLiveVoiceMuted) {
-            try { speechRecognizer.start(); } catch(_) {}
-          }
-        }, 600);
-      }
-    };
-
-    speechRecognizer.onend = () => {
-      if (isLiveVoiceActive && !isLiveVoiceMuted && (!liveVoiceAudio || liveVoiceAudio.paused)) {
-        try { speechRecognizer.start(); } catch(_) {}
-      }
-    };
 
     try {
-      speechRecognizer.start();
-    } catch (e) {
-      console.warn('[Live Voice] start error:', e);
+      liveSpeechRecognizer = new SpeechRecognitionAPI();
+      liveSpeechRecognizer.continuous = true;
+      liveSpeechRecognizer.interimResults = true;
+      liveSpeechRecognizer.lang = 'es-419';
+
+      liveSpeechRecognizer.onstart = () => {
+        isRecognitionRunning = true;
+        if (isLiveVoiceActive && !isFirbyBusy) {
+          if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
+          if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
+          if (lvoPermBtn) lvoPermBtn.style.display = 'none';
+        }
+      };
+
+      liveSpeechRecognizer.onresult = (event) => {
+        if (!isLiveVoiceActive || isLiveVoiceMuted || isFirbyBusy) return;
+
+        let interim = '';
+        let finalTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            finalTranscript += event.results[i][0].transcript;
+          } else {
+            interim += event.results[i][0].transcript;
+          }
+        }
+
+        const currentSpeech = (finalTranscript || interim).trim();
+        const hasFinal = Boolean((finalTranscript || '').trim());
+        if (currentSpeech) {
+          currentTurnTranscript = currentSpeech;
+          if (lvoUserText) lvoUserText.textContent = `Tú: "${currentSpeech}"`;
+          if (lvoOrb && !isFirbyBusy) lvoOrb.className = 'firby-lvo-orb listening';
+
+          scheduleTurnSubmission(hasFinal);
+        }
+      };
+
+      liveSpeechRecognizer.onerror = (e) => {
+        console.warn('[Live Voice] Recognition error:', e.error);
+        if (e.error === 'not-allowed') {
+          isRecognitionRunning = false;
+          if (lvoStatusText) lvoStatusText.textContent = 'Permiso de micrófono requerido en tu navegador.';
+          if (lvoPermBtn) {
+            lvoPermBtn.textContent = 'Permitir micrófono';
+            lvoPermBtn.style.display = 'inline-flex';
+          }
+          return;
+        }
+        if (e.error === 'no-speech') return;
+
+        isRecognitionRunning = false;
+        if (isLiveVoiceActive && !isLiveVoiceMuted && !isFirbyBusy) {
+          clearTimeout(recognitionRestartTimer);
+          recognitionRestartTimer = setTimeout(() => {
+            safeStartRecognition();
+          }, 250);
+        }
+      };
+
+      liveSpeechRecognizer.onend = () => {
+        isRecognitionRunning = false;
+        if (isLiveVoiceActive && !isLiveVoiceMuted && !isFirbyBusy) {
+          clearTimeout(recognitionRestartTimer);
+          recognitionRestartTimer = setTimeout(() => {
+            safeStartRecognition();
+          }, 100);
+        }
+      };
+
+      safeStartRecognition();
+    } catch (err) {
+      console.warn('[Live Voice] SpeechRecognition setup error:', err);
     }
   }
 
+  function safeStartRecognition() {
+    if (!liveSpeechRecognizer || !isLiveVoiceActive || isLiveVoiceMuted || isFirbyBusy || isRecognitionRunning) return;
+    try {
+      liveSpeechRecognizer.start();
+      isRecognitionRunning = true;
+    } catch (e) {
+      if (e && (e.name === 'InvalidStateError' || (e.message && e.message.includes('already started')))) {
+        isRecognitionRunning = true;
+      } else {
+        console.warn('[Live Voice] safeStartRecognition error:', e);
+      }
+    }
+  }
+
+  function safeStopRecognition() {
+    if (!liveSpeechRecognizer) return;
+    try {
+      liveSpeechRecognizer.stop();
+    } catch (_) {}
+    isRecognitionRunning = false;
+  }
+
+  function scheduleTurnSubmission(isFinal) {
+    if (!isLiveVoiceActive || isLiveVoiceMuted || isFirbyBusy) return;
+
+    clearTimeout(turnSilenceTimer);
+    const delay = isFinal ? 550 : 1200;
+    turnSilenceTimer = setTimeout(() => {
+      if (!isLiveVoiceActive || isLiveVoiceMuted || isFirbyBusy) return;
+      const textToSend = (currentTurnTranscript || '').trim();
+      if (textToSend.length >= 2) {
+        console.log('[Live Voice] Enviando turno conversacional reconocido:', textToSend);
+        currentTurnTranscript = '';
+        handleLiveVoiceTurn(textToSend);
+      }
+    }, delay);
+  }
+
   function startLiveVoiceRecognition() {
-    initSpeechRecognition();
-    if (liveAudioStream) {
+    if (hasNativeSpeechRecognition) {
+      if (!liveSpeechRecognizer) {
+        initSpeechRecognition();
+      } else {
+        safeStartRecognition();
+      }
+    } else if (liveAudioStream) {
       startLiveMediaRecorder(liveAudioStream);
     }
   }
@@ -3880,6 +3929,8 @@
     unlockAudioPlayback();
     isLiveVoiceActive = true;
     isLiveVoiceMuted = false;
+    isFirbyBusy = false;
+    currentTurnTranscript = '';
     liveVoiceOverlay.style.display = 'flex';
     if (livePageBorder) {
       livePageBorder.classList.add('active');
@@ -3895,6 +3946,9 @@
 
   function closeLiveVoiceMode() {
     isLiveVoiceActive = false;
+    isFirbyBusy = false;
+    clearTimeout(turnSilenceTimer);
+    clearTimeout(recognitionRestartTimer);
     if (livePageBorder) {
       livePageBorder.classList.remove('active');
     }
@@ -3903,7 +3957,17 @@
       liveVisualizerAnimId = null;
     }
     if (liveVoiceOverlay) liveVoiceOverlay.style.display = 'none';
-    stopLiveVoiceRecognition();
+    if (liveSpeechRecognizer) {
+      try {
+        liveSpeechRecognizer.onend = null;
+        liveSpeechRecognizer.onerror = null;
+        liveSpeechRecognizer.onresult = null;
+        liveSpeechRecognizer.onstart = null;
+        liveSpeechRecognizer.abort();
+      } catch(_) {}
+      liveSpeechRecognizer = null;
+      isRecognitionRunning = false;
+    }
     if (currentPlayingSourceNode) {
       try { currentPlayingSourceNode.stop(); } catch(_) {}
       currentPlayingSourceNode = null;
@@ -3934,10 +3998,7 @@
   }
 
   function stopLiveVoiceRecognition() {
-    if (speechRecognizer) {
-      try { speechRecognizer.abort(); } catch(e){}
-      speechRecognizer = null;
-    }
+    safeStopRecognition();
   }
 
   if (lvoCloseBtn) lvoCloseBtn.addEventListener('click', closeLiveVoiceMode);
@@ -3954,7 +4015,7 @@
   // Barge-in / Interrupt y reintento de conexión
   if (lvoOrb) {
     lvoOrb.addEventListener('click', () => {
-      const isSpeaking = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused);
+      const isSpeaking = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused) || isFirbyBusy;
       if (isSpeaking) {
         if (currentPlayingSourceNode) {
           try { currentPlayingSourceNode.stop(); } catch(_) {}
@@ -3964,9 +4025,11 @@
           try { liveVoiceAudio.pause(); } catch(e){}
           liveVoiceAudio = null;
         }
+        isFirbyBusy = false;
+        currentTurnTranscript = '';
         if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
         if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-        startLiveVoiceRecognition();
+        safeStartRecognition();
       } else if (!liveAudioStream) {
         unlockAudioPlayback();
         requestMicAccess();
@@ -3986,7 +4049,9 @@
   async function handleLiveVoiceTurn(userText, audioBase64 = null, audioMime = 'audio/webm') {
     if ((!userText && !audioBase64) || !isLiveVoiceActive) return;
 
-    stopLiveVoiceRecognition();
+    isFirbyBusy = true;
+    clearTimeout(turnSilenceTimer);
+    safeStopRecognition();
 
     if (lvoStatusText) lvoStatusText.textContent = 'Firby pensando...';
     if (lvoOrb) lvoOrb.className = 'firby-lvo-orb';
@@ -3996,16 +4061,15 @@
         voice_mode: true,
         session_id: sessionId,
         org_id: ORG_ID,
+        message: userText || (currentTurnTranscript || 'Mensaje de voz'),
+        client_transcript: userText || currentTurnTranscript || '',
         web_context: {
           current_url: window.location.pathname,
           page_title: document.title
         }
       };
 
-      if (userText) {
-        payload.message = userText;
-      } else if (audioBase64) {
-        payload.message = 'Mensaje de voz';
+      if (audioBase64) {
         payload.audio_base64 = audioBase64;
         payload.audio_mime = audioMime;
       }
@@ -4018,7 +4082,6 @@
 
       if (!res.ok) {
         if (lvoStatusText) lvoStatusText.textContent = 'Error de conexión. Reintentando...';
-        setTimeout(() => { if (isLiveVoiceActive) startLiveVoiceRecognition(); }, 1500);
         return;
       }
 
@@ -4053,9 +4116,11 @@
         .replace(/^thought\s+/i, '')
         .trim() || replyText.replace(/^thought\s*/i, '').trim();
 
-      const displayUserText = recognizedQuery || 'Mensaje de voz';
-      if (lvoUserText) lvoUserText.textContent = `Tú: "${displayUserText}"`;
-      appendMessage(displayUserText, true, null, false);
+      const displayUserText = userText || recognizedQuery || '';
+      if (displayUserText && displayUserText !== 'Mensaje de voz') {
+        if (lvoUserText) lvoUserText.textContent = `Tú: "${displayUserText}"`;
+        appendMessage(displayUserText, true, null, false);
+      }
       appendMessage(replyText, false, null, false);
 
       // Limpiar texto para subtítulos visuales en el orbe
@@ -4094,22 +4159,25 @@
         currentPlayingSourceNode = null;
       }
       if (liveVoiceAudio) {
-        try { liveVoiceAudio.pause(); } catch(_) {}
+        try { liveVoiceAudio.pause(); } catch(e){}
         liveVoiceAudio = null;
       }
 
       await playLiveVoiceAudio(cleanVoiceText);
 
-      if (isLiveVoiceActive) {
-        if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
-        if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-        startLiveVoiceRecognition();
-      }
-
     } catch(err) {
       console.warn('[Live Voice] Error in turn:', err);
-      if (isLiveVoiceActive) {
-        setTimeout(startLiveVoiceRecognition, 1000);
+    } finally {
+      isFirbyBusy = false;
+      currentTurnTranscript = '';
+      if (isLiveVoiceActive && !isLiveVoiceMuted) {
+        if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
+        if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
+        setTimeout(() => {
+          if (isLiveVoiceActive && !isFirbyBusy) {
+            safeStartRecognition();
+          }
+        }, 120);
       }
     }
   }
@@ -4151,11 +4219,11 @@
           }
           sourceNode.connect(liveAudioCtx.destination);
           currentPlayingSourceNode = sourceNode;
-
           return await new Promise((resolve) => {
             sourceNode.onended = () => {
+              try { sourceNode.disconnect(); } catch (_) {}
               currentPlayingSourceNode = null;
-              resolve(true);
+              setTimeout(() => resolve(true), 200);
             };
             sourceNode.start(0);
           });
@@ -4175,7 +4243,7 @@
         audioEl.onended = () => {
           URL.revokeObjectURL(blobUrl);
           liveVoiceAudio = null;
-          resolve(true);
+          setTimeout(() => resolve(true), 200);
         };
         audioEl.onerror = () => {
           URL.revokeObjectURL(blobUrl);

@@ -2009,19 +2009,25 @@ async def widget_chat(request: Request):
     # Si llegó sólo la etiqueta de mensaje de voz y no se pudo transcribir
     voice_mode = bool(data.get("voice_mode", False))
     if (message.startswith("Mensaje de voz") or message == "Mensaje de voz") and not transcribed_audio:
-        fallback_voice_msg = (
-            "No logré escucharte con claridad. ¿Podrías repetirme tu consulta, por favor?"
-            if voice_mode
-            else "He recibido tu nota de voz, pero no fue posible escucharla con claridad. ¿Podrías repetirla o indicarme tu consulta por texto?"
-        )
-        return {
-            "ok": True,
-            "session_token": token,
-            "response": fallback_voice_msg,
-            "bubbles": [fallback_voice_msg],
-            "chips": ["Cómo funciona", "Ver planes y precios", "Cómo se instala"],
-            "ui_action": None
-        }
+        if client_transcript and len(client_transcript) > 2:
+            log.info(f"[/api/widget/chat] Rescatando mensaje mediante client_transcript: '{client_transcript}'")
+            message = client_transcript
+            transcribed_audio = client_transcript
+        else:
+            fallback_voice_msg = (
+                "No alcancé a escucharte bien. ¿Podrías repetirme tu consulta, por favor?"
+                if voice_mode
+                else "He recibido tu nota de voz, pero no fue posible escucharla con claridad. ¿Podrías repetirla o indicarme tu consulta por texto?"
+            )
+            return {
+                "ok": True,
+                "session_token": token,
+                "response": fallback_voice_msg,
+                "bubbles": [fallback_voice_msg],
+                "chips": ["Cómo funciona", "Ver planes y precios", "Cómo se instala"],
+                "ui_action": None,
+                "user_message": None
+            }
 
     if not message:
         return JSONResponse({"ok": False, "error": "Mensaje requerido"}, status_code=400)
@@ -2069,6 +2075,8 @@ async def widget_chat(request: Request):
             if transcribed_audio:
                 result["transcribed_audio"] = transcribed_audio
                 result["user_message"] = transcribed_audio
+            elif message and not message.startswith("Mensaje de voz"):
+                result["user_message"] = message
             if fts_store and result.get("response"):
                 try:
                     fts_store.record_message(
