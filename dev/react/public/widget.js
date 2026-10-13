@@ -3,7 +3,7 @@
  * High-Craft Minimalist Interface (Linear / Vercel style)
  * Native WebGL 3D Liquid Orb Thinking Engine (100% Transparent, Zero-Latency)
  * Multi-Model Rotation: Gemini 3.1, 3.5, 3.8 & 2.5
- * https://firbyai.lat
+ * https://firbyai.com
  */
 (function () {
   if (window.__FIRBY_WIDGET_LOADED__) return;
@@ -3222,7 +3222,7 @@
         <img src="/assets/chat/icon-preguntas.svg" alt="Preguntas frecuentes" />
         <span class="bws-hw-text">Preguntas frecuentes</span>
       </a>
-      <a class="bws-hw-item" href="mailto:contacto@firbyai.lat" aria-label="Escríbenos">
+      <a class="bws-hw-item" href="mailto:contacto@firbyai.com" aria-label="Escríbenos">
         <img src="/assets/chat/icon-escribenos.svg" alt="Escríbenos" />
         <span class="bws-hw-text">Escríbenos</span>
       </a>
@@ -3479,7 +3479,11 @@
   // ═══════════════════════════════════════════════════════════════════════════
   let isLiveVoiceActive = false;
   let isLiveVoiceMuted = false;
-  let speechRecognizer = null;
+  let isFirbyBusy = false;
+  let liveSpeechRecognizer = null;
+  let isRecognitionRunning = false;
+  let recognitionRestartTimer = null;
+  let turnSilenceTimer = null;
   let liveVoiceAudio = null;
   let liveAudioStream = null;
   let liveAudioCtx = null;
@@ -3489,8 +3493,16 @@
   let liveMediaRecorder = null;
   let liveRecordedChunks = [];
   let isVADSpeaking = false;
-  let speechSilenceTimeout = null;
   let currentTurnTranscript = '';
+  // ElevenLabs Conversational AI & Real-Time PCM Audio Streaming
+  let liveElevenLabsWs = null;
+  let liveGeminiWs = null;
+  let liveInputScriptProcessor = null;
+  let liveInputGain = null;
+  let liveAudioNextPlayTime = 0;
+  let liveActiveAudioSources = [];
+  const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const hasNativeSpeechRecognition = Boolean(SpeechRecognitionAPI);
 
   async function requestMicAccess() {
     if (!isLiveVoiceActive || isLiveVoiceMuted) return false;
@@ -3556,13 +3568,12 @@
     if (liveAudioStream) {
       // Iniciar el visualizador reactivo de audio por Web Audio API AnalyserNode
       startAudioVisualizer(liveAudioStream);
-      // Iniciar grabador continuo de respaldo para VAD
-      startLiveMediaRecorder(liveAudioStream);
+      // Iniciar streaming nativo full-duplex con ElevenLabs Conversational AI
+      connectElevenLabsConvAiSocket();
     }
 
-    if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
+    if (lvoStatusText) lvoStatusText.textContent = 'Conectando con Firby en vivo...';
     if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-    initSpeechRecognition();
     return true;
   }
 
@@ -3617,11 +3628,15 @@
         smoothedVolume += (currentVolume - smoothedVolume) * 0.25;
         smoothedBass += (currentBass - smoothedBass) * 0.28;
 
-        // VAD: Si el volumen supera el umbral mientras el usuario habla y Firby está en silencio
-        const isFirbySpeaking = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused);
-        if (currentVolume > 14 && !isFirbySpeaking) {
+        // VAD: Si el volumen supera el umbral mientras el usuario habla y Firby no está activo
+        const isAudioPlaying = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused);
+        const isFirbyActive = isFirbyBusy || isAudioPlaying;
+        if (currentVolume > 15 && !isFirbyActive) {
           isVADSpeaking = true;
-          handleDetectedSpeechTurn();
+          // Solo si el navegador NO cuenta con Web Speech API nativo, delegar captura por VAD
+          if (!hasNativeSpeechRecognition) {
+            handleVadDirectAudioTurn();
+          }
         }
 
         // Retina / Hi-DPI scaling dinámico
@@ -3651,7 +3666,7 @@
 
         const baseAmp = 3.5 + Math.sin(phase * 0.5) * 1.5;
         const voiceAmp = normVol * (cssH * 0.44);
-        const totalAmp = isFirbySpeaking ? (13 + Math.sin(phase * 1.6) * 9) : (baseAmp + voiceAmp);
+        const totalAmp = isFirbyActive ? (13 + Math.sin(phase * 1.6) * 9) : (baseAmp + voiceAmp);
 
         // Modulación física del orbe en vivo con la voz
         if (lvoOrb) {
@@ -3702,189 +3717,261 @@
     }
   }
 
-  function startLiveMediaRecorder(stream) {
-    if (!window.MediaRecorder || !stream) return;
-    try {
-      if (liveMediaRecorder && liveMediaRecorder.state !== 'inactive') {
-        try { liveMediaRecorder.stop(); } catch(_) {}
-      }
+  // ═══════════════════════════════════════════════════════════════════════════
+  // GEMINI LIVE FULL-DUPLEX SPEECH-TO-SPEECH STREAMING ENGINE
+  // ═══════════════════════════════════════════════════════════════════════════
 
-      let mimeType = 'audio/webm;codecs=opus';
-      if (!MediaRecorder.isTypeSupported(mimeType)) {
-        mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : (MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '');
+  function downsampleAndConvertToPCM16(buffer, fromRate, toRate) {
+    if (fromRate === toRate) {
+      const pcm = new Int16Array(buffer.length);
+      for (let i = 0; i < buffer.length; i++) {
+        const s = Math.max(-1, Math.min(1, buffer[i]));
+        pcm[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
       }
-
-      liveRecordedChunks = [];
-      liveMediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
-      liveMediaRecorder.ondataavailable = (e) => {
-        if (e.data && e.data.size > 0) {
-          liveRecordedChunks.push(e.data);
-        }
-      };
-      liveMediaRecorder.start(250);
-    } catch(e) {
-      console.warn('[Live Voice] MediaRecorder start error:', e);
+      return pcm;
     }
+    const ratio = fromRate / toRate;
+    const newLength = Math.round(buffer.length / ratio);
+    const pcm = new Int16Array(newLength);
+    for (let i = 0; i < newLength; i++) {
+      const origIndex = Math.min(Math.floor(i * ratio), buffer.length - 1);
+      const s = Math.max(-1, Math.min(1, buffer[origIndex]));
+      pcm[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+    }
+    return pcm;
   }
 
-  function handleDetectedSpeechTurn(isFinal = false) {
-    if (!isLiveVoiceActive || isLiveVoiceMuted) return;
-    if (currentPlayingSourceNode || (liveVoiceAudio && !liveVoiceAudio.paused)) return;
-
-    clearTimeout(speechSilenceTimeout);
-    const silenceDelay = isFinal ? 380 : 680;
-    speechSilenceTimeout = setTimeout(async () => {
-      if (isLiveVoiceActive && !isLiveVoiceMuted && !currentPlayingSourceNode && (!liveVoiceAudio || liveVoiceAudio.paused)) {
-        let textToSend = (currentTurnTranscript || '').trim();
-        currentTurnTranscript = '';
-
-        if (textToSend && textToSend.length > 1) {
-          console.log('[Live Voice] Turno detectado por Web Speech API:', textToSend);
-          if (liveMediaRecorder && liveMediaRecorder.state !== 'inactive') {
-            try { liveMediaRecorder.stop(); } catch(_) {}
-          }
-          liveRecordedChunks = [];
-          if (liveAudioStream) {
-            setTimeout(() => { if (isLiveVoiceActive && !isLiveVoiceMuted) startLiveMediaRecorder(liveAudioStream); }, 80);
-          }
-          handleLiveVoiceTurn(textToSend);
-        } else if (liveRecordedChunks.length > 0 && isVADSpeaking) {
-          console.log('[Live Voice] Fallback: Enviando audio capturado al backend para transcripción...');
-          isVADSpeaking = false;
-          const mime = liveMediaRecorder ? (liveMediaRecorder.mimeType || 'audio/webm') : 'audio/webm';
-          let recordedBlob = null;
-          if (liveMediaRecorder && liveMediaRecorder.state !== 'inactive') {
-            recordedBlob = await new Promise((resolve) => {
-              liveMediaRecorder.onstop = () => {
-                const b = new Blob(liveRecordedChunks, { type: mime });
-                liveRecordedChunks = [];
-                resolve(b);
-              };
-              try {
-                if (liveMediaRecorder.state === 'recording') {
-                  liveMediaRecorder.requestData();
-                }
-                liveMediaRecorder.stop();
-              } catch (_) {
-                resolve(new Blob(liveRecordedChunks, { type: mime }));
-              }
-            });
-            if (liveAudioStream) {
-              setTimeout(() => { if (isLiveVoiceActive && !isLiveVoiceMuted) startLiveMediaRecorder(liveAudioStream); }, 150);
-            }
-          } else {
-            recordedBlob = new Blob(liveRecordedChunks, { type: mime });
-            liveRecordedChunks = [];
-          }
-
-          if (recordedBlob && recordedBlob.size > 500) {
-            const b64 = await blobToBase64(recordedBlob);
-            handleLiveVoiceTurn('', b64, mime);
-          }
-        }
-        isVADSpeaking = false;
-      }
-    }, silenceDelay);
-  }
-
-  function initSpeechRecognition() {
-    if (!isLiveVoiceActive || isLiveVoiceMuted) return;
-
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      console.warn('[Live Voice] Web Speech API no disponible, operando con grabador VAD directo.');
+  async function connectElevenLabsConvAiSocket() {
+    if (liveElevenLabsWs && (liveElevenLabsWs.readyState === WebSocket.OPEN || liveElevenLabsWs.readyState === WebSocket.CONNECTING)) {
       return;
     }
-
-    if (speechRecognizer) {
-      try { speechRecognizer.abort(); } catch(e){}
-      speechRecognizer = null;
-    }
-
-    speechRecognizer = new SpeechRecognition();
-    speechRecognizer.continuous = true;
-    speechRecognizer.interimResults = true;
-    speechRecognizer.lang = 'es-CO';
-
-    speechRecognizer.onstart = () => {
-      if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
-      if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-      if (lvoPermBtn) lvoPermBtn.style.display = 'none';
-    };
-
-    speechRecognizer.onresult = (event) => {
-      if (isLiveVoiceMuted || !isLiveVoiceActive) return;
-
-      let interim = '';
-      let finalTranscript = '';
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-          finalTranscript += event.results[i][0].transcript;
-        } else {
-          interim += event.results[i][0].transcript;
-        }
-      }
-
-      const currentText = (finalTranscript || interim).trim();
-      const hasFinal = Boolean((finalTranscript || '').trim());
-      if (currentText) {
-        currentTurnTranscript = currentText;
-        if (lvoUserText) lvoUserText.textContent = `Tú: "${currentText}"`;
-        if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-        handleDetectedSpeechTurn(hasFinal);
-      }
-    };
-
-    speechRecognizer.onerror = (e) => {
-      console.warn('[Live Voice] Recognition error:', e.error);
-      if (e.error === 'not-allowed') {
-        if (lvoStatusText) lvoStatusText.textContent = 'Permiso de micrófono requerido en tu navegador.';
-        if (lvoPermBtn) {
-          lvoPermBtn.textContent = 'Permitir micrófono';
-          lvoPermBtn.style.display = 'inline-flex';
-        }
-        return;
-      }
-      if (e.error === 'no-speech') return;
-      if (isLiveVoiceActive && !isLiveVoiceMuted && e.error !== 'aborted') {
-        setTimeout(() => {
-          if (isLiveVoiceActive && !isLiveVoiceMuted) {
-            try { speechRecognizer.start(); } catch(_) {}
-          }
-        }, 600);
-      }
-    };
-
-    speechRecognizer.onend = () => {
-      if (isLiveVoiceActive && !isLiveVoiceMuted && (!liveVoiceAudio || liveVoiceAudio.paused)) {
-        try { speechRecognizer.start(); } catch(_) {}
-      }
-    };
-
     try {
-      speechRecognizer.start();
-    } catch (e) {
-      console.warn('[Live Voice] start error:', e);
+      if (lvoStatusText) lvoStatusText.textContent = 'Conectando con ElevenLabs...';
+      const signedResp = await fetch('/api/speech-engine/signed-url');
+      if (!signedResp.ok) throw new Error('HTTP ' + signedResp.status);
+      const creds = await signedResp.json();
+      if (!creds.signed_url) throw new Error('Sin signed_url');
+
+      console.log('[ElevenLabs ConvAI] Conectando WebSocket a ElevenLabs...');
+      liveElevenLabsWs = new WebSocket(creds.signed_url);
+
+      liveElevenLabsWs.onopen = () => {
+        console.log('[ElevenLabs ConvAI] WebSocket conectado con éxito.');
+        // Enviar handshake de inicio con saludo inicial oficial de Firby
+        const initPayload = {
+          type: 'conversation_initiation_client_data',
+          conversation_config_override: {
+            agent: {
+              first_message: 'Hola, soy Firby. ¿En qué puedo ayudarte hoy?'
+            }
+          }
+        };
+        liveElevenLabsWs.send(JSON.stringify(initPayload));
+        if (lvoStatusText) lvoStatusText.textContent = 'En vivo con Firby. Habla con naturalidad...';
+        if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
+        startMicrophoneStreaming();
+      };
+
+      liveElevenLabsWs.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          const mtype = data.type;
+
+          if (mtype === 'ping') {
+            const eventId = data.ping_event && data.ping_event.event_id;
+            if (liveElevenLabsWs && liveElevenLabsWs.readyState === WebSocket.OPEN) {
+              liveElevenLabsWs.send(JSON.stringify({ type: 'pong', event_id: eventId }));
+            }
+          } else if (mtype === 'conversation_initiation_metadata') {
+            if (lvoStatusText) lvoStatusText.textContent = 'En vivo con Firby. Habla con naturalidad...';
+            if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
+          } else if (mtype === 'audio') {
+            const b64Audio = data.audio_event && data.audio_event.audio_base_64;
+            if (b64Audio) {
+              playElevenLabsPCMChunk(b64Audio);
+            }
+          } else if (mtype === 'user_transcript') {
+            const userText = data.user_transcription_event && data.user_transcription_event.user_transcript;
+            if (userText) {
+              console.log('[ElevenLabs ConvAI] Transcripción usuario:', userText);
+              if (lvoUserText) lvoUserText.textContent = `Tú: "${userText}"`;
+              appendMessage(userText, true, null, false);
+
+              // Disparar acción visual web según intención del usuario
+              const lowerQ = userText.toLowerCase();
+              let targetSec = null;
+              if (/\b(plan|planes|precio|precios|costo|cu[aá]nto\s+cuesta|starter|pro|equipos)\b/.test(lowerQ)) {
+                targetSec = '#planes';
+              } else if (/\b(c[oó]mo\s+funciona|qu[eé]\s+hace|c[oó]mo\s+opera|funcionamiento|integraci[oó]n)\b/.test(lowerQ)) {
+                targetSec = '#como-funciona';
+              } else if (/\b(equipo|roles|empleados?\s+digital|asistente|recepcionista)\b/.test(lowerQ)) {
+                targetSec = '#equipo-digital';
+              } else if (/\b(canal|canales|whatsapp)\b/.test(lowerQ)) {
+                targetSec = '#canales';
+              } else if (/\b(contacto|probar|empezar|agenda|agendar|demo)\b/.test(lowerQ)) {
+                targetSec = '#contacto';
+              }
+              if (targetSec) {
+                try { executeUiAction({ type: 'navigate_to_section', target: targetSec }); } catch(_) {}
+              }
+            }
+          } else if (mtype === 'agent_response') {
+            const agentText = data.agent_response_event && data.agent_response_event.agent_response;
+            if (agentText) {
+              console.log('[ElevenLabs ConvAI] Respuesta agente:', agentText);
+              if (lvoAgentText) lvoAgentText.textContent = `Firby: "${agentText}"`;
+              if (lvoStatusText) lvoStatusText.textContent = 'Firby hablando...';
+              if (lvoOrb) lvoOrb.className = 'firby-lvo-orb speaking';
+              appendMessage(agentText, false, null, false);
+            }
+          } else if (mtype === 'interruption') {
+            console.log('[ElevenLabs ConvAI] Interrupción de voz detectada (barge-in).');
+            stopActiveAudioPlayback();
+            if (lvoStatusText) lvoStatusText.textContent = 'Te escucho...';
+            if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
+          }
+        } catch(e) {
+          console.warn('[ElevenLabs ConvAI] Error parseando mensaje:', e);
+        }
+      };
+
+      liveElevenLabsWs.onerror = (err) => {
+        console.warn('[ElevenLabs ConvAI] Error WebSocket:', err);
+      };
+
+      liveElevenLabsWs.onclose = () => {
+        console.log('[ElevenLabs ConvAI] WebSocket cerrado.');
+        stopMicrophoneStreaming();
+        stopActiveAudioPlayback();
+      };
+
+    } catch(err) {
+      console.warn('[ElevenLabs ConvAI] Excepción conectando:', err);
+      if (lvoStatusText) lvoStatusText.textContent = 'Error conectando con ElevenLabs. Reintentando...';
     }
   }
 
-  function startLiveVoiceRecognition() {
-    initSpeechRecognition();
-    if (liveAudioStream) {
-      startLiveMediaRecorder(liveAudioStream);
+  function startMicrophoneStreaming() {
+    if (!liveAudioCtx || !liveSource || liveInputScriptProcessor) return;
+    try {
+      if (liveAudioCtx.state === 'suspended') {
+        liveAudioCtx.resume();
+      }
+      liveInputScriptProcessor = liveAudioCtx.createScriptProcessor(2048, 1, 1);
+      liveInputScriptProcessor.onaudioprocess = (e) => {
+        if (!isLiveVoiceActive || isLiveVoiceMuted) return;
+        if (liveElevenLabsWs && liveElevenLabsWs.readyState === WebSocket.OPEN) {
+          const inputFloat32 = e.inputBuffer.getChannelData(0);
+          const pcm16 = downsampleAndConvertToPCM16(inputFloat32, liveAudioCtx.sampleRate, 16000);
+          const uint8 = new Uint8Array(pcm16.buffer);
+          let binary = '';
+          const len = uint8.byteLength;
+          for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode(uint8[i]);
+          }
+          const b64 = btoa(binary);
+          try {
+            liveElevenLabsWs.send(JSON.stringify({ user_audio_chunk: b64 }));
+          } catch(_) {}
+        }
+      };
+      // Ganancia en 0 conectada a destination para procesar sin eco local
+      liveInputGain = liveAudioCtx.createGain();
+      liveInputGain.gain.value = 0;
+      liveSource.connect(liveInputScriptProcessor);
+      liveInputScriptProcessor.connect(liveInputGain);
+      liveInputGain.connect(liveAudioCtx.destination);
+    } catch(e) {
+      console.warn('[ElevenLabs ConvAI] startMicrophoneStreaming error:', e);
+    }
+  }
+
+  function stopMicrophoneStreaming() {
+    if (liveInputScriptProcessor) {
+      try {
+        liveInputScriptProcessor.disconnect();
+        if (liveInputGain) liveInputGain.disconnect();
+      } catch(_) {}
+      liveInputScriptProcessor = null;
+      liveInputGain = null;
+    }
+  }
+
+  function playElevenLabsPCMChunk(b64Audio) {
+    if (!liveAudioCtx || liveAudioCtx.state === 'closed') return;
+    try {
+      if (liveAudioCtx.state === 'suspended') {
+        liveAudioCtx.resume();
+      }
+      const binaryString = atob(b64Audio);
+      const len = binaryString.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const int16 = new Int16Array(bytes.buffer);
+      if (int16.length === 0) return;
+      const float32 = new Float32Array(int16.length);
+      for (let i = 0; i < int16.length; i++) {
+        float32[i] = int16[i] / 32768.0;
+      }
+      const audioBuffer = liveAudioCtx.createBuffer(1, float32.length, 16000);
+      audioBuffer.copyToChannel(float32, 0);
+
+      const source = liveAudioCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      if (liveAnalyser) {
+        source.connect(liveAnalyser);
+      }
+      source.connect(liveAudioCtx.destination);
+
+      const now = liveAudioCtx.currentTime;
+      liveAudioNextPlayTime = Math.max(now, liveAudioNextPlayTime);
+      source.start(liveAudioNextPlayTime);
+      liveAudioNextPlayTime += audioBuffer.duration;
+
+      liveActiveAudioSources.push(source);
+      if (lvoOrb) lvoOrb.className = 'firby-lvo-orb speaking';
+      if (lvoStatusText) lvoStatusText.textContent = 'Firby hablando...';
+
+      source.onended = () => {
+        const idx = liveActiveAudioSources.indexOf(source);
+        if (idx !== -1) liveActiveAudioSources.splice(idx, 1);
+        if (liveActiveAudioSources.length === 0) {
+          if (lvoStatusText && isLiveVoiceActive && !isLiveVoiceMuted) {
+            lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
+            if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
+          }
+        }
+      };
+    } catch(err) {
+      console.warn('[ElevenLabs ConvAI] Error reproduciendo chunk PCM:', err);
+    }
+  }
+
+  function stopActiveAudioPlayback() {
+    liveActiveAudioSources.forEach(s => {
+      try { s.stop(); } catch(_) {}
+    });
+    liveActiveAudioSources = [];
+    if (liveAudioCtx) {
+      liveAudioNextPlayTime = liveAudioCtx.currentTime;
     }
   }
 
   function openLiveVoiceMode() {
     if (!liveVoiceOverlay) return;
+    openChat();
     unlockAudioPlayback();
     isLiveVoiceActive = true;
     isLiveVoiceMuted = false;
+    isFirbyBusy = false;
+    currentTurnTranscript = '';
     liveVoiceOverlay.style.display = 'flex';
     if (livePageBorder) {
       livePageBorder.classList.add('active');
     }
-    if (lvoStatusText) lvoStatusText.textContent = 'Conectando con Firby...';
+    if (lvoStatusText) lvoStatusText.textContent = 'Conectando con Firby en vivo...';
     if (lvoUserText) lvoUserText.textContent = '';
     if (lvoAgentText) lvoAgentText.textContent = '';
     if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
@@ -3895,6 +3982,9 @@
 
   function closeLiveVoiceMode() {
     isLiveVoiceActive = false;
+    isFirbyBusy = false;
+    clearTimeout(turnSilenceTimer);
+    clearTimeout(recognitionRestartTimer);
     if (livePageBorder) {
       livePageBorder.classList.remove('active');
     }
@@ -3903,7 +3993,29 @@
       liveVisualizerAnimId = null;
     }
     if (liveVoiceOverlay) liveVoiceOverlay.style.display = 'none';
-    stopLiveVoiceRecognition();
+
+    if (liveElevenLabsWs) {
+      try { liveElevenLabsWs.close(); } catch(_) {}
+      liveElevenLabsWs = null;
+    }
+    if (liveGeminiWs) {
+      try { liveGeminiWs.close(); } catch(_) {}
+      liveGeminiWs = null;
+    }
+    stopMicrophoneStreaming();
+    stopActiveAudioPlayback();
+
+    if (liveSpeechRecognizer) {
+      try {
+        liveSpeechRecognizer.onend = null;
+        liveSpeechRecognizer.onerror = null;
+        liveSpeechRecognizer.onresult = null;
+        liveSpeechRecognizer.onstart = null;
+        liveSpeechRecognizer.abort();
+      } catch(_) {}
+      liveSpeechRecognizer = null;
+      isRecognitionRunning = false;
+    }
     if (currentPlayingSourceNode) {
       try { currentPlayingSourceNode.stop(); } catch(_) {}
       currentPlayingSourceNode = null;
@@ -3934,10 +4046,8 @@
   }
 
   function stopLiveVoiceRecognition() {
-    if (speechRecognizer) {
-      try { speechRecognizer.abort(); } catch(e){}
-      speechRecognizer = null;
-    }
+    stopMicrophoneStreaming();
+    stopActiveAudioPlayback();
   }
 
   if (lvoCloseBtn) lvoCloseBtn.addEventListener('click', closeLiveVoiceMode);
@@ -3954,8 +4064,9 @@
   // Barge-in / Interrupt y reintento de conexión
   if (lvoOrb) {
     lvoOrb.addEventListener('click', () => {
-      const isSpeaking = (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused);
+      const isSpeaking = liveActiveAudioSources.length > 0 || (currentPlayingSourceNode !== null) || (liveVoiceAudio && !liveVoiceAudio.paused) || isFirbyBusy;
       if (isSpeaking) {
+        stopActiveAudioPlayback();
         if (currentPlayingSourceNode) {
           try { currentPlayingSourceNode.stop(); } catch(_) {}
           currentPlayingSourceNode = null;
@@ -3964,9 +4075,16 @@
           try { liveVoiceAudio.pause(); } catch(e){}
           liveVoiceAudio = null;
         }
+        if (liveElevenLabsWs && liveElevenLabsWs.readyState === WebSocket.OPEN) {
+          // ElevenLabs WebSocket activo
+        }
+        if (liveGeminiWs && liveGeminiWs.readyState === WebSocket.OPEN) {
+          try { liveGeminiWs.send(JSON.stringify({ type: 'audio_end' })); } catch(_) {}
+        }
+        isFirbyBusy = false;
+        currentTurnTranscript = '';
         if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
         if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-        startLiveVoiceRecognition();
       } else if (!liveAudioStream) {
         unlockAudioPlayback();
         requestMicAccess();
@@ -3986,7 +4104,9 @@
   async function handleLiveVoiceTurn(userText, audioBase64 = null, audioMime = 'audio/webm') {
     if ((!userText && !audioBase64) || !isLiveVoiceActive) return;
 
-    stopLiveVoiceRecognition();
+    isFirbyBusy = true;
+    clearTimeout(turnSilenceTimer);
+    safeStopRecognition();
 
     if (lvoStatusText) lvoStatusText.textContent = 'Firby pensando...';
     if (lvoOrb) lvoOrb.className = 'firby-lvo-orb';
@@ -3996,16 +4116,15 @@
         voice_mode: true,
         session_id: sessionId,
         org_id: ORG_ID,
+        message: userText || (currentTurnTranscript || 'Mensaje de voz'),
+        client_transcript: userText || currentTurnTranscript || '',
         web_context: {
           current_url: window.location.pathname,
           page_title: document.title
         }
       };
 
-      if (userText) {
-        payload.message = userText;
-      } else if (audioBase64) {
-        payload.message = 'Mensaje de voz';
+      if (audioBase64) {
         payload.audio_base64 = audioBase64;
         payload.audio_mime = audioMime;
       }
@@ -4018,7 +4137,6 @@
 
       if (!res.ok) {
         if (lvoStatusText) lvoStatusText.textContent = 'Error de conexión. Reintentando...';
-        setTimeout(() => { if (isLiveVoiceActive) startLiveVoiceRecognition(); }, 1500);
         return;
       }
 
@@ -4053,9 +4171,11 @@
         .replace(/^thought\s+/i, '')
         .trim() || replyText.replace(/^thought\s*/i, '').trim();
 
-      const displayUserText = recognizedQuery || 'Mensaje de voz';
-      if (lvoUserText) lvoUserText.textContent = `Tú: "${displayUserText}"`;
-      appendMessage(displayUserText, true, null, false);
+      const displayUserText = userText || recognizedQuery || '';
+      if (displayUserText && displayUserText !== 'Mensaje de voz') {
+        if (lvoUserText) lvoUserText.textContent = `Tú: "${displayUserText}"`;
+        appendMessage(displayUserText, true, null, false);
+      }
       appendMessage(replyText, false, null, false);
 
       // Limpiar texto para subtítulos visuales en el orbe
@@ -4094,22 +4214,25 @@
         currentPlayingSourceNode = null;
       }
       if (liveVoiceAudio) {
-        try { liveVoiceAudio.pause(); } catch(_) {}
+        try { liveVoiceAudio.pause(); } catch(e){}
         liveVoiceAudio = null;
       }
 
       await playLiveVoiceAudio(cleanVoiceText);
 
-      if (isLiveVoiceActive) {
-        if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
-        if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
-        startLiveVoiceRecognition();
-      }
-
     } catch(err) {
       console.warn('[Live Voice] Error in turn:', err);
-      if (isLiveVoiceActive) {
-        setTimeout(startLiveVoiceRecognition, 1000);
+    } finally {
+      isFirbyBusy = false;
+      currentTurnTranscript = '';
+      if (isLiveVoiceActive && !isLiveVoiceMuted) {
+        if (lvoStatusText) lvoStatusText.textContent = 'Te escucho. Habla con naturalidad...';
+        if (lvoOrb) lvoOrb.className = 'firby-lvo-orb listening';
+        setTimeout(() => {
+          if (isLiveVoiceActive && !isFirbyBusy) {
+            safeStartRecognition();
+          }
+        }, 120);
       }
     }
   }
@@ -4151,11 +4274,11 @@
           }
           sourceNode.connect(liveAudioCtx.destination);
           currentPlayingSourceNode = sourceNode;
-
           return await new Promise((resolve) => {
             sourceNode.onended = () => {
+              try { sourceNode.disconnect(); } catch (_) {}
               currentPlayingSourceNode = null;
-              resolve(true);
+              setTimeout(() => resolve(true), 200);
             };
             sourceNode.start(0);
           });
@@ -4175,7 +4298,7 @@
         audioEl.onended = () => {
           URL.revokeObjectURL(blobUrl);
           liveVoiceAudio = null;
-          resolve(true);
+          setTimeout(() => resolve(true), 200);
         };
         audioEl.onerror = () => {
           URL.revokeObjectURL(blobUrl);
